@@ -1,12 +1,25 @@
 package models;
 
+import java.util.Date;
+
 public class Recensione {
 	private Long id;
 	private Integer stelle;
 	private String testo;
 	private Prodotto prodotto;
 	private Utente utente;
+	private Date dataInserimento;
 	
+	public Recensione(Integer stelle, String testo, Utente utente,
+			Prodotto prodotto) {
+		this.stelle = stelle;
+		this.testo = testo;
+		this.utente = utente;
+		this.prodotto = prodotto;
+		this.dataInserimento = new Date();
+		utente.aggiungiRecensione(this);
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -41,6 +54,14 @@ public class Recensione {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	public Date getDataInserimento() {
+		return dataInserimento;
+	}
+
+	public void setDataInserimento(Date dataInserimento) {
+		this.dataInserimento = dataInserimento;
 	}
 
 	@Override

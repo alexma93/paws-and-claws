@@ -139,5 +139,10 @@ public class Utente {
 			return false;
 		return true;
 	}
+
+	public void aggiungiRecensione(Recensione recensione) {
+		this.recensioni.add(recensione);
+		
+	}
 	
 }

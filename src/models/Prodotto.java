@@ -3,6 +3,7 @@ package models;
 import java.awt.Image;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Prodotto {
@@ -15,7 +16,9 @@ public class Prodotto {
 	private Integer quantita;
 	private String taglia;
 	private Specie specie;
+	private Sconto sconto;
 	private Map<String,Fornitore> fornitori;
+	private List<Recensione> recensioni;
 	private Image foto;
 	
 	public Specie getSpecie() {
@@ -109,12 +112,28 @@ public class Prodotto {
 		this.quantita = quantita;
 	}
 	
+	public Sconto getSconto() {
+		return sconto;
+	}
+
+	public void setSconto(Sconto sconto) {
+		this.sconto = sconto;
+	}
+
 	public String getTaglia() {
 		return taglia;
 	}
 	
 	public void setTaglia(String taglia) {
 		this.taglia = taglia;
+	}
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
 	}
 
 	public void addFornitore(Fornitore f) {
@@ -149,4 +168,16 @@ public class Prodotto {
 			return false;
 		return true;
 	}
+
+	public void aggiungiSconto(String descrizione, Integer percentuale) {
+		this.sconto = new Sconto(descrizione,percentuale);
+	}
+
+	public void inserisciRecensione(Integer stelle, String testo,
+			Utente utente) {
+		Recensione r = new Recensione(stelle,testo,utente,this);
+		this.recensioni.add(r);
+		
+	}
+	
 }

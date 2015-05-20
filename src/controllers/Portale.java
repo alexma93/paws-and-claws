@@ -1,10 +1,19 @@
-package models;
+package controllers;
 
 import java.awt.Image;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import models.Amministratore;
+import models.Coupon;
+import models.Fornitore;
+import models.Ordine;
+import models.Prodotto;
+import models.Specie;
+import models.Store;
+import models.Utente;
+ 
 public class Portale {
 	private Utente utenteCorrente;
 	private Ordine ordineCorrente;
@@ -134,5 +143,37 @@ public class Portale {
 	public void fineInserimento() {
 		this.store.inserisciProdotto(this.prodottoCorrente);
 		this.prodottoCorrente = null;
+	}
+	
+	//UC4 BIS
+	public void selezionaProdotto(String codice) {
+		this.prodottoCorrente = this.store.getProdotto(codice);
+	}
+	
+	public void modificaPrezzo(Integer prezzo) {
+		this.prodottoCorrente.setPrezzoDiListino(prezzo);
+	}
+	
+	public void modificaQuantita(Integer quantita) {
+		this.prodottoCorrente.setQuantita(quantita);
+	}
+	
+	public void applicaSconto(String descrizione,Integer percentuale) {
+		this.prodottoCorrente.aggiungiSconto(descrizione,percentuale);
+	}
+	
+	public void eliminaSconto() {
+		this.prodottoCorrente.setSconto(null);
+	}
+	
+	//UC6
+	public void evadiOrdine(Integer codice) {
+		this.store.evadi(codice);
+	}
+	
+	//UC7
+	//si ripete selezionaProdotto
+	public void inserisciRecensione(Integer stelle,String testo) {
+		this.prodottoCorrente.inserisciRecensione(stelle,testo,this.utenteCorrente);
 	}
 }

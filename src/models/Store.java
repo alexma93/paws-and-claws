@@ -49,6 +49,7 @@ public class Store {
 	}
 	
 	public void confermaOrdine(Ordine ordine) {
+		//TODO
 		ordine.setCodice(this.ordiniEvasi.size()+this.ordiniNonEvasi.size());
 		this.ordiniNonEvasi.put(ordine.getCodice(), ordine);
 	}
@@ -73,6 +74,12 @@ public class Store {
 		this.prodottiNuovi.remove(this.prodottiNuovi.get(0));
 		this.prodottiNuovi.add(prodotto);
 		this.catalogo.put(prodotto.getCodice(), prodotto);
+	}
+	public void evadi(Integer codice) {
+		Ordine o = this.ordiniNonEvasi.get(codice);
+		this.ordiniNonEvasi.remove(codice);
+		this.ordiniEvasi.put(codice, o);
+		o.setEvaso(true);
 	}
 	
 }
