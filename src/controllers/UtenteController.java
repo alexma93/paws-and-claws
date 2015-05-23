@@ -1,94 +1,70 @@
 package controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 
-import models.Store;
 import models.Utente;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class UtenteController {
-	private Store store;
-	private Utente utenteCorrente;
-	
 	private String nome;
 	private String cognome;
-	private String dataNascita;
-	
+	private Date dataNascita;
+
 	private String password;
 	private String email;
-	
-	private String erroreLogin;
-	
+
+	private String errore;
+
+	@ManagedProperty(value = "#{sessione}")
+	private SessionBean session;
+
 	public UtenteController() {
-		this.store = new Store();
 	}
 
 	//UC0
 	public String registraUtente() {
-		if(store.checkEmail(email)) {
-			Date data;
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy"); 
-			try {
-				
-				data = formatter.parse(dataNascita);
-				this.store=null;
-				this.utenteCorrente = new Utente(nome,cognome,data,email,password);
-				return "index.xhtml";
-			} catch (ParseException e) {
-				return "registrazione.xhtml";
-			}
+		if(session.getStore().checkEmail(email)) {
+			session.setUtente(new Utente(nome,cognome,dataNascita,email,password));
+			return "index.xhtml";
 		}
 		else {
-			// email già presente
+			this.setErrore("email già presente");
 			return "registrazione.xhtml";
 		}
-		
+
 	}
 
 	public void aggiungiIndirizzoUtente(String strada,String citta,String stato,String cap,String regione) {
-		this.utenteCorrente.aggiungiIndirizzo(strada,citta,stato,cap,regione);
+		session.getUtente().aggiungiIndirizzo(strada,citta,stato,cap,regione);
 	}
-	
+
 	public void confermaRegistrazioneUtente() {
-		this.store.confermaRegistrazioneUtente(this.utenteCorrente);
+		session.confermaRegistrazioneUtente();
 	}
-	
+
 	//UC0BIS
 	public String loginUtente() {
-		Utente u = this.store.getUtente(email);
+		Utente u = session.getStore().getUtente(email);
 		if (u==null) {
-			this.setErroreLogin("Email non valida");
-			
+			this.setErrore("Email non valida");
+			return "login.xhtml";
 		}
 		else if (u.checkPassword(password)) {
-			this.utenteCorrente = u;
+			session.setUtente(u);
+			return "login.xhtml";
 		}
 		else {
-			this.setErroreLogin("Password non valida");
+			this.setErrore("Password non valida");
 		}
 		return "index.xhtml";
 	}
-	
 
-	
-	public Store getStore() {
-		return store;
-	}
-	public void setStore(Store store) {
-		this.store = store;
-	}
-	public Utente getUtenteCorrente() {
-		return utenteCorrente;
-	}
-	public void setUtenteCorrente(Utente utenteCorrente) {
-		this.utenteCorrente = utenteCorrente;
-	}
+
 
 	public String getPassword() {
 		return password;
@@ -102,11 +78,11 @@ public class UtenteController {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getErroreLogin() {
-		return erroreLogin;
+	public String getErrore() {
+		return errore;
 	}
-	public void setErroreLogin(String erroreLogin) {
-		this.erroreLogin = erroreLogin;
+	public void setErrore(String errore) {
+		this.errore = errore;
 	}
 
 	public String getNome() {
@@ -125,11 +101,21 @@ public class UtenteController {
 		this.cognome = cognome;
 	}
 
-	public String getDataNascita() {
+	public Date getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(String dataNascita) {
+	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
 	}
+
+	public SessionBean getSession() {
+		return session;
+	}
+
+	public void setSession(SessionBean session) {
+		this.session = session;
+	}
+
+
 }

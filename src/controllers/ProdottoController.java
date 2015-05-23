@@ -17,8 +17,8 @@ public class ProdottoController {
 	private Store store;
 	private Prodotto prodottoCorrente;
 	
-	@ManagedProperty(value="#{loginController}")
-	private UtenteController login;
+	@ManagedProperty(value="#{sessione}")
+	private SessionBean session;
 
 	//UC4
 	public void inserisciNuovoProdotto(String codice,String descrizione,String nome,
@@ -89,7 +89,31 @@ public class ProdottoController {
 	//UC7
 	//si ripete selezionaProdotto
 	public void inserisciRecensione(Integer stelle,String testo) {
-		this.prodottoCorrente.inserisciRecensione(stelle,testo,this.login.getUtenteCorrente());
+		this.prodottoCorrente.inserisciRecensione(stelle,testo,this.session.getUtente());
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public Prodotto getProdottoCorrente() {
+		return prodottoCorrente;
+	}
+
+	public void setProdottoCorrente(Prodotto prodottoCorrente) {
+		this.prodottoCorrente = prodottoCorrente;
+	}
+
+	public SessionBean getSession() {
+		return session;
+	}
+
+	public void setSession(SessionBean session) {
+		this.session = session;
 	}
 	
 }

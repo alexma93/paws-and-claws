@@ -25,17 +25,7 @@
 		</h:form>
 		<h:button value="Indietro"
 				outcome="index.xhtml" />
-		<div>errore: #{utenteController.erroreLogin}</div>
-		<div>
-		email: #{utenteController.email}
-		store: #{utenteController.store.getUtente("a@b.it")}
-		password: #{utenteController.password}
-		utente : #{utenteController.utenteCorrente}
-		</div>
-		<div>
-		utente registrato: #{utenteController.utenteCorrente}
-		</div>
-
+		<div>#{utenteController.errore}</div>
 </h:body>
 
 </html>

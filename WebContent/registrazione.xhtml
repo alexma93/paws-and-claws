@@ -3,6 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 
@@ -10,9 +11,8 @@
 		<h2>Registrazione:</h2>
 		<div>
 			Cognome:
-			<h:inputText value="#{utenteController.cognome}"
-				required="true" requiredMessage="il cognome è obbligatorio"
-				id="cognome" />
+			<h:inputText value="#{utenteController.cognome}" required="true"
+				requiredMessage="il cognome è obbligatorio" id="cognome" />
 			<h:message for="cognome" />
 		</div>
 		<div>
@@ -21,35 +21,37 @@
 				requiredMessage="il nome è obbligatorio" id="nome" />
 			<h:message for="nome" />
 		</div>
-				<div>
+		<div>
 			Data di nascita:
-			<h:inputText value="#{utenteController.dataNascita}"
+			<h:inputText value="#{utenteController.dataNascita}" 
+				converterMessage="Inserire una data nel formato dd-mm-yyyy"
 				required="true" requiredMessage="la data di nascita è obbligatoria"
-				id="dataNascita" />
+				id="dataNascita">
+				<f:convertDateTime pattern="dd-mm-yyyy" />
+			</h:inputText>
 			<h:message for="dataNascita" />
 		</div>
 		<div>
 			Email:
 			<h:inputText value="#{utenteController.email}" required="true"
-				requiredMessage="L'email è obbligatoria" id="email" />
+				requiredMessage="L'email è obbligatoria"
+				validatorMessage="email non valida" id="email">
+				<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</h:inputText>
 			<h:message for="email" />
 		</div>
 		<div>
 			Password:
-			<h:inputSecret value="#{utenteController.password}"
-				required="true" requiredMessage="La password è obbligatoria"
-				id="password" />
+			<h:inputSecret value="#{utenteController.password}" required="true"
+				requiredMessage="La password è obbligatoria" id="password" />
 			<h:message for="password" />
 		</div>
 		<h:commandButton value="Submit"
 			action="#{utenteController.registraUtente}" />
 	</h:form>
-
-	<div>email: #{utenteController.email} store:
-		#{utenteController.store.getUtente("a@b.it")}
-		 password: #{utenteController.password}
-		 utente : #{utenteController.utenteCorrente}
-	</div>
+	<h:button value="Indietro" outcome="index.xhtml" />
+	<div>#{utenteController.errore}</div>
 </h:body>
 
 </html>
