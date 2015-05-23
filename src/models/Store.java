@@ -26,6 +26,10 @@ public class Store {
 		this.fornitori = new HashMap<String,Fornitore>();
 		this.specie = new HashMap<String,Specie>();
 		this.prodottiNuovi = new ArrayList<Prodotto>(50);
+		butta();
+	}
+	public void butta() {
+		confermaRegistrazioneUtente(new Utente("daniele","petrillo",null,"a@b.it","pass"));
 	}
 	public boolean checkEmail(String email) {
 		return !this.utenti.containsKey(email);

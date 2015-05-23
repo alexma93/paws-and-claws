@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+
+	<h:form>
+		<h2>Registrazione:</h2>
+		<div>
+			Cognome:
+			<h:inputText value="#{utenteController.cognome}"
+				required="true" requiredMessage="il cognome è obbligatorio"
+				id="cognome" />
+			<h:message for="cognome" />
+		</div>
+		<div>
+			Nome:
+			<h:inputText value="#{utenteController.nome}" required="true"
+				requiredMessage="il nome è obbligatorio" id="nome" />
+			<h:message for="nome" />
+		</div>
+				<div>
+			Data di nascita:
+			<h:inputText value="#{utenteController.dataNascita}"
+				required="true" requiredMessage="la data di nascita è obbligatoria"
+				id="dataNascita" />
+			<h:message for="dataNascita" />
+		</div>
+		<div>
+			Email:
+			<h:inputText value="#{utenteController.email}" required="true"
+				requiredMessage="L'email è obbligatoria" id="email" />
+			<h:message for="email" />
+		</div>
+		<div>
+			Password:
+			<h:inputSecret value="#{utenteController.password}"
+				required="true" requiredMessage="La password è obbligatoria"
+				id="password" />
+			<h:message for="password" />
+		</div>
+		<h:commandButton value="Submit"
+			action="#{utenteController.registraUtente}" />
+	</h:form>
+
+	<div>email: #{utenteController.email} store:
+		#{utenteController.store.getUtente("a@b.it")}
+		 password: #{utenteController.password}
+		 utente : #{utenteController.utenteCorrente}
+	</div>
+</h:body>
+
+</html>
