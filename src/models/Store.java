@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,8 @@ public class Store {
 		butta();
 	}
 	public void butta() {
-		confermaRegistrazioneUtente(new Utente("daniele","petrillo",null,"a@b.it","pass"));
+		confermaRegistrazioneUtente(new Utente("daniele","petrillo",new Date(),"a@b.it","pass"));
+		this.amministratori.put("alexma", new Amministratore("alexma","casetta"));
 	}
 	public boolean checkEmail(String email) {
 		return !this.utenti.containsKey(email);

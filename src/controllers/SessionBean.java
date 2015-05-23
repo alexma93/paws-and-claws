@@ -14,10 +14,27 @@ public class SessionBean {
 	private Amministratore amministratore;
 	private Store store;
 	
+	
 	public SessionBean(){
 		this.store = new Store();
 	}
+	
+	public String scollegaUtente() {
+		this.utente = null;
+		return "index.xhtml";
+	}
+	
+	public String scollegaAmministratore() {
+		this.amministratore = null;
+		return "index.xhtml";
+	}
+	
 
+	public void confermaRegistrazioneUtente() {
+		this.store.confermaRegistrazioneUtente(this.utente);
+		
+	}
+	
 	public Utente getUtente() {
 		return utente;
 	}
@@ -40,11 +57,6 @@ public class SessionBean {
 
 	public void setStore(Store store) {
 		this.store = store;
-	}
-
-	public void confermaRegistrazioneUtente() {
-		this.store.confermaRegistrazioneUtente(this.utente);
-		
 	}
 
 	

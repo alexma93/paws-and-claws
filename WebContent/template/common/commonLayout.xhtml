@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       >
 
 	<h:head>
@@ -13,10 +14,18 @@
     <h:body>
 
 	<div id="page">
-		
-		<div id="header">
-			<ui:insert name="header" >
-				<ui:include src="/template/common/commonHeader.xhtml" />
+
+		<div id="navbar">
+			<ui:insert name="navbar" >
+			<c:if test="#{sessione.utente==null and sessione.amministratore==null}">
+				<ui:include src="/template/common/navBar.xhtml" />
+			</c:if>
+			<c:if test="#{sessione.utente!=null}">
+				<ui:include src="/template/common/navBarUtente.xhtml" />
+			</c:if>
+			<c:if test="#{sessione.amministratore!=null}">
+				<ui:include src="/template/common/navBarAmministratore.xhtml" />
+			</c:if>
 			</ui:insert>
 	    </div>
 	    

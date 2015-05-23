@@ -7,25 +7,23 @@
 <h:body>
 
 		<h:form>
-			<h2>Login:</h2>
 			<div>
 				Email:
-				<h:inputText value="#{utenteController.email}" required="true"
+				<h:inputText value="#{amministratoreController.email}" required="true"
 					requiredMessage="L'email è obbligatoria" id="email" />
 				<h:message for="email" />
 			</div>
 			<div>
 				Password:
-				<h:inputSecret value="#{utenteController.password}" required="true"
+				<h:inputSecret value="#{amministratoreController.password}" required="true"
 					requiredMessage="La password è obbligatoria" id="password" />
 				<h:message for="password" />
 			</div>
 			<h:commandButton value="Submit"
-				action="#{utenteController.loginUtente}" />
+				action="#{amministratoreController.loginAmministratore}" />
 		</h:form>
 		<h:button value="Indietro"
 				outcome="index.xhtml" />
-		<div>#{utenteController.errore}</div>
 </h:body>
 
 </html>

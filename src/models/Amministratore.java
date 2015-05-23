@@ -5,6 +5,13 @@ public class Amministratore {
 	private String email;
 	private String password;
 	
+	public Amministratore() {}
+	
+	public Amministratore(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -30,7 +37,7 @@ public class Amministratore {
 	}
 
 	public boolean checkPassword(String password) {
-		return !this.password.equals(password);
+		return this.password.equals(password);
 	}
 
 	@Override
