@@ -1,36 +1,43 @@
 package controllers;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-
 import models.Amministratore;
+import models.Store;
 
-@ManagedBean
-@RequestScoped
 public class AmministratoreController {
+	private Store store;
+	private Amministratore amministratoreCorrente;
 	
-	private String email;
-	private String password;
 	private String erroreLogin;
 	
-	@ManagedProperty(value = "#{sessione}")
-	private SessionBean session;
-	
 	//UCOTRIS login amministratore
-	public void loginAmministratore() {
-		Amministratore a = session.getStore().getAmministratore(email);
+	public String loginAmministratore(String email,String password) {
+		Amministratore a = this.store.getAmministratore(email);
 		if (a==null) {
 			this.setErroreLogin("Email non valida");
 		}
 		else if (a.checkPassword(password)) {
-			session.setAmministratore(a);
+			this.amministratoreCorrente = a;
 		}
 		else {
 			this.setErroreLogin("Password non valida");
 		}
+		return "index.xhtml";
+	}
+	
+	public Amministratore getAmministratoreCorrente() {
+		return amministratoreCorrente;
+	}
+	public void setAmministratoreCorrente(Amministratore amministratoreCorrente) {
+		this.amministratoreCorrente = amministratoreCorrente;
 	}
 
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
 
 	public String getErroreLogin() {
 		return erroreLogin;
@@ -38,31 +45,5 @@ public class AmministratoreController {
 
 	public void setErroreLogin(String erroreLogin) {
 		this.erroreLogin = erroreLogin;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public SessionBean getSession() {
-		return session;
-	}
-
-
-	public void setSession(SessionBean session) {
-		this.session = session;
 	}
 }

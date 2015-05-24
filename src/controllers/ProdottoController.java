@@ -16,19 +16,25 @@ import models.Store;
 public class ProdottoController {
 	private Store store;
 	private Prodotto prodottoCorrente;
+	private String nome;
+	private String descrizione;
+	private String codice;
+	private Integer prezzoDiListino;
+	
 	
 	@ManagedProperty(value="#{sessione}")
 	private SessionBean session;
 
 	//UC4
-	public void inserisciNuovoProdotto(String codice,String descrizione,String nome,
-			Integer prezzo,Integer quantita) {
-		if(this.store.checkCodiceProdotto(codice)) {
-			this.prodottoCorrente = new Prodotto(codice,descrizione,nome,prezzo,quantita);
-		}
-		else {
+	public String inserisciNuovoProdotto() {
+	//String codice,String descrizione,String nome,Integer prezzo,Integer quantita)
+//		if(this.store.checkCodiceProdotto(codice)) {
+//		}
+//		else {
+			this.prodottoCorrente = new Prodotto(codice,descrizione,nome,prezzoDiListino,null);
 			//TODO
-		}
+//		}
+			return "aggiungiProdotto.xhtml";
 	}
 	
 	public void inserisciFornitore(String iva) {
@@ -59,9 +65,10 @@ public class ProdottoController {
 		this.prodottoCorrente.setTaglia(taglia);
 	}
 	
-	public void fineInserimento() {
-		this.store.inserisciProdotto(this.prodottoCorrente);
+	public String fineInserimento() {
+		this.session.getStore().inserisciProdotto(this.prodottoCorrente);
 		this.prodottoCorrente = null;
+		return "index.xhtml";
 	}
 	
 	//UC4 BIS
@@ -114,6 +121,38 @@ public class ProdottoController {
 
 	public void setSession(SessionBean session) {
 		this.session = session;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getCodice() {
+		return codice;
+	}
+
+	public void setCodice(String codice) {
+		this.codice = codice;
+	}
+
+	public Integer getPrezzoDiListino() {
+		return prezzoDiListino;
+	}
+
+	public void setPrezzoDiListino(Integer prezzoDiListino) {
+		this.prezzoDiListino = prezzoDiListino;
 	}
 	
 }

@@ -48,18 +48,20 @@ public class UtenteController {
 	}
 
 	//UC0BIS
-	public void loginUtente() {
+	public String loginUtente() {
 		Utente u = session.getStore().getUtente(email);
 		if (u==null) {
 			this.setErrore("Email non valida");
+			return "login.xhtml";
 		}
 		else if (u.checkPassword(password)) {
 			session.setUtente(u);
+			return "login.xhtml";
 		}
 		else {
 			this.setErrore("Password non valida");
 		}
-		
+		return "index.xhtml";
 	}
 
 
