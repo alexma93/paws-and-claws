@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+
+		<ui:define name="navbar">
+			<ui:include src="/template/common/navBar.xhtml" />
+		</ui:define>
+
+		<ui:define name="content">
+			<div class="row" style="margin-bottom: 100px;">
+				<div class="col-md-3"></div>
+				<div class="col-md-4">
+					<h:form class="form-registrazione form-horizontal" role="form">
+						<h2>Registrazione:</h2>
+						<h3>Dati Indirizzo:</h3>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="stato">Stato:
+							</label>
+							<div class="col-sm-10">
+								<h:inputText class="form-control"
+									value="#{utenteController.stato}" required="true"
+									requiredMessage="campo obbligatorio" id="stato" />
+								<h:message for="stato" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="regione">Regione:
+							</label>
+							<div class="col-sm-10">
+								<h:inputText class="form-control"
+									value="#{utenteController.regione}" required="true"
+									requiredMessage="campo obbligatorio" id="regione" />
+								<h:message for="regione" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="citta">Città:
+							</label>
+							<div class="col-sm-10">
+								<h:inputText class="form-control"
+									value="#{utenteController.citta}" required="true"
+									requiredMessage="campo obbligatorio" id="citta" />
+								<h:message for="citta" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="strada">Strada:
+							</label>
+							<div class="col-sm-10">
+								<h:inputText class="form-control"
+									value="#{utenteController.strada}" required="true"
+									requiredMessage="campo obbligatorio" id="strada" />
+								<h:message for="strada" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="cap">CAP: </label>
+							<div class="col-sm-10">
+								<h:inputText class="form-control" value="#{utenteController.cap}" required="true"
+									requiredMessage="campo obbligatorio"
+									validatorMessage="il CAP deve essere di 5 cifre" id="cap">
+									<f:validateRegex pattern="[0-9][0-9][0-9][0-9][0-9]" />
+								</h:inputText>
+								<h:message for="cap" />
+							</div>
+						</div>
+						<span class="col-sm-4" style="float:left;"></span>
+						<h:commandButton class="btn btn-default" value="Avanti"
+							action="#{utenteController.aggiungiIndirizzoUtente}" style="float:left;" />
+					</h:form>
+					<h:form>
+						<h:commandButton class="btn btn-default" value="Annulla"
+							action="#{utenteController.annullaRegistrazioneUtente}" style="float:left;" />
+					</h:form>
+					<div>#{utenteController.errore}</div>
+				</div>
+				<div class="col-md-5"></div>
+			</div>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+
+</html>

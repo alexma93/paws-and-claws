@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+
+	<h:form>
+		<div>
+			Name:
+			<h:inputText value="#{prodottoController.nome}" required="true"
+				requiredMessage="Name is mandatory" id="nome" />
+			<h:message for="nome" />
+		</div>
+		<div>
+			Code:
+			<h:inputText value="#{prodottoController.codice}" required="true"
+				requiredMessage="Code is mandatory" id="codice" />
+			<h:message for="codice" />
+		</div>
+		<div>
+			Price:
+			<h:inputText value="#{prodottoController.prezzoDiListino}"
+				required="true" requiredMessage="Price is mandatory"
+				converterMessage="Price must be a number" id="prezzoDiListino" />
+			<h:message for="prezzoDiListino" />
+		</div>
+		<div>
+			Description:
+			<h:inputTextarea value="#{prodottoController.descrizione}"
+				required="false" cols="20" rows="5" />
+		</div>
+		<div>
+			<h:commandButton value="Invia e inserisci nuovo prodotto"
+				action="#{prodottoController.createProduct}" />
+			<h:commandButton value="Invia e termina"
+				action="#{prodottoController.fineInserimento}" />
+
+		</div>
+
+		<h:button value="Indietro" outcome="index.xhtml" />
+		${prodottoController.nome}
+		${prodottoController.codice}
+		${prodottoController.prezzoDiListino}
+	</h:form>
+</h:body>
+
+</html>

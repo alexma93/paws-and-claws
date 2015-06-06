@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+</head>
+<body>
+	<ui:composition>
+		<div class="media">
+			<h:link outcome="descrizioneProdotto.xhtml">
+				<img class="media-object pull-left img-responsive"
+					src="resources/img/crocchette.jpg" />  
+				</h:link>
+			<div class="media-body">
+				<div>
+					<img class="media-object pull-left img-responsive"
+						src="resources/img/specie/${prodotto.specie.nome}.png" />
+				</div>
+
+				<br></br> <br></br>
+				<h4 class="media-heading">${prodotto.nome}</h4>
+
+				<div>
+					<label>Codice:</label> <span>${prodotto.codice}</span>
+				</div>
+				<div>
+					<label>Prezzo:</label> <span>${prodotto.prezzoDiListino}</span>
+				</div>
+				<div>
+					<label>Quantità disponibile:</label> <span>${prodotto.quantita}</span>
+				</div>
+			</div>
+		</div>
+		<c:if test="#{sessione.utente!=null}">
+			<form>
+				<h:commandButton class="btn btn-primary" role="button"
+					value="Aggiungi al carrello" outcome="#" />
+				<input type="number" min="0" max="10" />
+			</form>
+		</c:if>
+	</ui:composition>
+</body>
+</html>
