@@ -16,7 +16,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
 public class Prodotto {
-	
+	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
