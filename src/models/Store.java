@@ -29,7 +29,7 @@ public class Store {
 		this.specie = new HashMap<String,Specie>();
 		this.prodottiNuovi = new ArrayList<Prodotto>(50);
 		butta();
-	} 
+	}    
 	 
 	public void butta() {
 		confermaRegistrazioneUtente(new Utente("daniele","petrillo",new Date(),"a@b.it","pass"));
