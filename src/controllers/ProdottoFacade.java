@@ -18,6 +18,6 @@ public class ProdottoFacade {
 	public Prodotto createProduct(String nome, String codice, Float prezzoDiListino, String descrizione) {
 		Prodotto product = new Prodotto(codice,descrizione,nome,prezzoDiListino,null);
 		em.persist(product);
-		return product;
+		return product; 
 	}
 }
