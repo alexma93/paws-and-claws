@@ -140,7 +140,7 @@ public class ProdottoController {
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
-
+ 
 	public String getNome() {
 		return nome;
 	}
