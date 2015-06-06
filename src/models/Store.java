@@ -30,7 +30,7 @@ public class Store {
 		this.prodottiNuovi = new ArrayList<Prodotto>(50);
 		butta();
 	} 
-	
+	 
 	public void butta() {
 		confermaRegistrazioneUtente(new Utente("daniele","petrillo",new Date(),"a@b.it","pass"));
 		this.amministratori.put("alexma", new Amministratore("alexma","casetta"));
