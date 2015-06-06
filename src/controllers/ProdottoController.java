@@ -168,7 +168,7 @@ public class ProdottoController {
 	public Float getPrezzoDiListino() {
 		return prezzoDiListino;
 	}
-
+ 
 	public void setPrezzoDiListino(Float prezzoDiListino) {
 		this.prezzoDiListino = prezzoDiListino;
 	}
