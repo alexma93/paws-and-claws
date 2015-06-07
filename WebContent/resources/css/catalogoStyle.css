@@ -46,14 +46,16 @@
 	border-radius: 20px;
 }
 
-.ui-slider-horizontal .ui-slider-handle {
-	top: -.9em;
+.ui-spinner-input {
+	width: 96%;
 }
 
-.ui-state-default,
-.ui-widget-content .ui-state-default {
-	border: 1px solid #f9f9f9;
-	background: #ff8000;
+.ui-spinner {
+	width: 30%;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	top: -.9em;
 }
 
 .ui-slider-horizontal .ui-slider-handle {
@@ -62,6 +64,8 @@
 
 .ui-slider .ui-slider-handle {
 	cursor: pointer;
+		border: 1px solid #f9f9f9;
+	background: #ff8000;
 }
 
 .ui-slider a,
@@ -86,4 +90,5 @@
     background-color: #ff8000;
     border-color: #ff8000;
 }
+
 

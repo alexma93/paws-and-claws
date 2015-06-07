@@ -40,7 +40,7 @@ public class Store {
 		this.inserisciProdotto(new Prodotto("001","lungo","guinzaglio",6F,20));
 		this.inserisciProdotto(new Prodotto("003","piccola","ciotola",1F,30));
 		this.inserisciProdotto(new Prodotto("002","sonoro","osso di gomma",0.5F,100));
-		for(int i=0; i<50;i++)
+		for(int i=0; i<51;i++)
 		this.inserisciProdotto(new Prodotto("004"+i,"appetitose","crocchette",9.5F,6));
 	}
 	public boolean checkEmail(String email) {

@@ -9,10 +9,10 @@ import javax.persistence.PersistenceContext;
 
 import models.Prodotto;
 
-@Stateless(name="pFacade")
+//@Stateless(name="pFacade")
 public class ProdottoFacade {
 	
-    @PersistenceContext(unitName = "model-unit")
+  //  @PersistenceContext(unitName = "model-unit")
 	private EntityManager em;
 
 	public Prodotto createProduct(String nome, String codice, Float prezzoDiListino, String descrizione) {

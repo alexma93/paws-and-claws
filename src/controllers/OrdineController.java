@@ -1,28 +1,36 @@
 package controllers;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import models.Coupon;
 import models.Ordine;
 import models.Prodotto;
-import models.Store;
-import models.Utente;
 
+@ManagedBean
+@SessionScoped
 public class OrdineController {
 	private Ordine ordineCorrente;
-	private Store store;
-	private Utente utenteCorrente;
+	private Integer quantita;
 	
-	public OrdineController() {
-		this.ordineCorrente = new Ordine();
-	}
+	@ManagedProperty(value = "#{sessione}")
+	private SessionBean session;
+
 	//UC2
-	
-	public void aggiungiProdottoOrdine(String codice,Integer quantita) {
-		Prodotto p = this.store.getProdotto(codice);
+	public String aggiungiProdottoOrdine() {
+		if(ordineCorrente==null)
+			ordineCorrente = new Ordine();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
+		Prodotto p = this.session.getStore().getProdotto(codice);
 		this.ordineCorrente.aggiungiProdotto(p,quantita);
+		return "index.xhtml";
 	}
-	
+
 	public void aggiungiCoupon(String codice) {
-		Coupon c = this.store.getSingoloCoupon(codice);
+		Coupon c = this.session.getStore().getSingoloCoupon(codice);
 		if(c==null) {
 			//TODO
 		}
@@ -30,15 +38,39 @@ public class OrdineController {
 			this.ordineCorrente.aggiungiCoupon(c);
 		}
 	}
-	
+
 	public void terminaOrdine() {
-		this.utenteCorrente.confermaOrdine(this.ordineCorrente);
-		this.store.confermaOrdine(this.ordineCorrente);
+		this.session.getUtente().confermaOrdine(this.ordineCorrente);
+		this.session.getStore().confermaOrdine(this.ordineCorrente);
 		this.ordineCorrente = null;
 	}
-	
+
 	//UC6
 	public void evadiOrdine(Integer codice) {
-		this.store.evadi(codice);
+		this.session.getStore().evadi(codice);
+	}
+
+	public Ordine getOrdineCorrente() {
+		return ordineCorrente;
+	}
+
+	public void setOrdineCorrente(Ordine ordineCorrente) {
+		this.ordineCorrente = ordineCorrente;
+	}
+
+	public SessionBean getSession() {
+		return session;
+	}
+
+	public void setSession(SessionBean session) {
+		this.session = session;
+	}
+
+	public Integer getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(Integer quantita) {
+		this.quantita = quantita;
 	}
 }

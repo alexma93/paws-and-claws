@@ -21,7 +21,33 @@ public class Ordine {
 		this.evaso = false;
 		this.righe = new LinkedList<RigaOrdine>();
 	}
-	
+
+	public boolean contiene(Prodotto p) {
+		boolean contiene = false;
+		for(RigaOrdine r: righe)
+			if(r.stessoProdotto(p))
+				contiene = true;
+		return contiene;
+	}
+	public void aggiungiProdotto(Prodotto prodotto, Integer quantita) {
+		if(!this.contiene(prodotto))
+			this.righe.add(new RigaOrdine(prodotto,quantita));
+		else {
+			this.modificaQuantita(prodotto,quantita);
+		}
+		this.prezzoTotale += prodotto.getPrezzoDiListino()*quantita;
+	}
+
+	private void modificaQuantita(Prodotto prodotto, Integer quantita) {
+		for(RigaOrdine r:righe)
+			if(r.stessoProdotto(prodotto))
+				r.setQuantita(r.getQuantita()+quantita);
+	}
+
+	public void aggiungiCoupon(Coupon c) {
+		this.coupon = c;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -94,15 +120,6 @@ public class Ordine {
 		this.codice = codice;
 	}
 	
-
-	public void aggiungiProdotto(Prodotto prodotto, Integer quantita) {
-		this.righe.add(new RigaOrdine(prodotto,quantita));
-		this.prezzoTotale += prodotto.getPrezzoDiListino()*quantita;
-	}
-
-	public void aggiungiCoupon(Coupon c) {
-		this.coupon = c;
-	}
 
 	@Override
 	public int hashCode() {

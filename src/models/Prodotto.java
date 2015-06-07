@@ -39,6 +39,8 @@ public class Prodotto {
 	private Map<String,Fornitore> fornitori;
 	private List<Recensione> recensioni;
 	private Image foto;
+	
+	private Integer votoMedio;
 
 	public Prodotto(){}
 	
@@ -51,6 +53,7 @@ public class Prodotto {
 		this.dataInserimento = new Date();
 		this.quantita = quantita;
 		this.fornitori = new HashMap<String,Fornitore>();
+		this.votoMedio = 0;
 	}
 
 	public void aggiungiSconto(String descrizione, Integer percentuale) {
@@ -199,6 +202,14 @@ public class Prodotto {
 		} else if (!codice.equals(other.codice))
 			return false;
 		return true;
+	}
+
+	public Integer getVotoMedio() {
+		return votoMedio;
+	}
+
+	public void setVotoMedio(Integer votoMedio) {
+		this.votoMedio = votoMedio;
 	}
 	
 }

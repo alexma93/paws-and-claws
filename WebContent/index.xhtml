@@ -4,15 +4,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	<head>
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:p="http://primefaces.org/ui">
+	<h:head>
 	<title>Paws-and-Claws</title>
-	</head>
+	</h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 
 		<ui:define name="content">
+
 			<h2>${sessione.amministratore.email}</h2>
+				<h:form>
+		<h:outputLabel for="basic" value="Basic Spinner: " />
+		<p:spinner id="basic" value="#" />
+	</h:form>
+			<ui:repeat var="r" value="#{ordineController.ordineCorrente.righe}">
+			<h2>${r.prodotto.nome}</h2>
+			<h3>${r.quantita}</h3>
+			
+			</ui:repeat>
 		</ui:define>
 
 	</ui:composition>

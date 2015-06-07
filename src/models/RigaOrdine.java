@@ -12,7 +12,10 @@ public class RigaOrdine {
 		this.quantita = quantita;
 		this.prezzoUnitario = prodotto.getPrezzoDiListino();
 	}
-
+	
+	public boolean stessoProdotto(Prodotto p) {
+		return this.prodotto.getCodice().equals(p.getCodice());
+	}
 	public Long getId() {
 		return id;
 	}

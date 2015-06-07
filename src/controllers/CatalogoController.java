@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
@@ -14,17 +16,22 @@ import models.Store;
 public class CatalogoController {
 	private Map<String,Prodotto> catalogoCorrente;
 	private Integer size;
+	private Prodotto prodottoCorrente;
+	private List<Prodotto> catalogo;
 	
 	public CatalogoController() {
 		this.catalogoCorrente = (new Store()).getCatalogo();
 		this.size = this.catalogoCorrente.size();
+		this.catalogo = new ArrayList<>(this.catalogoCorrente.values());
 	}
 
-	public Prodotto getProdotto() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		String codice = fc.getExternalContext().getRequestParameterMap().get("prodotto");
-		return this.catalogoCorrente.get(codice);
-	}
+	
+//	public String visualizzaProdotto() {
+//		/*FacesContext fc = FacesContext.getCurrentInstance();
+//		String codice = fc.getExternalContext().getRequestParameterMap().get("prodotto");
+//		this.prodottoCorrente = this.catalogoCorrente.get(codice);*/
+//		return "index.xhtml";
+//	}
 	public Map<String, Prodotto> getCatalogoCorrente() {
 		return catalogoCorrente;
 	}
@@ -41,5 +48,26 @@ public class CatalogoController {
 	public void setSize(Integer size) {
 		this.size = size;
 	}
-	
+
+
+	public Prodotto getProdottoCorrente() {
+		return prodottoCorrente;
+	}
+
+
+	public void setProdottoCorrente(Prodotto prodottoCorrente) {
+		this.prodottoCorrente = prodottoCorrente;
+	}
+
+
+	public List<Prodotto> getCatalogo() {
+		return catalogo;
+	}
+
+
+	public void setCatalogo(List<Prodotto> catalogo) {
+		this.catalogo = catalogo;
+	}
+
+
 }
