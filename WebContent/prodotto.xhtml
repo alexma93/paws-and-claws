@@ -41,26 +41,9 @@
 				</div>
 				<div>
 					<label>Voto medio:</label>
-					<c:if test="${prodotto.votoMedio==0}">
-						<span class="glyphicon glyphicon-ban-circle"></span>
-					</c:if>
-
-					<c:if test="${prodotto.votoMedio>0}">
-						<span class="glyphicon glyphicon-star"></span>
-					</c:if>
-					<c:if test="${prodotto.votoMedio>1}">
-						<span class="glyphicon glyphicon-star"></span>
-					</c:if>
-					<c:if test="${prodotto.votoMedio>2}">
-						<span class="glyphicon glyphicon-star"></span>
-					</c:if>
-					<c:if test="${prodotto.votoMedio>3}">
-						<span class="glyphicon glyphicon-star"></span>
-					</c:if>
-					<c:if test="${prodotto.votoMedio>4}">
-						<span class="glyphicon glyphicon-star"></span>
-					</c:if>
-
+					<h:form>
+					<p:rating value="#{prodotto.votoMedio}" readonly="true" />
+					</h:form>
 				</div>
 
 			</div>
