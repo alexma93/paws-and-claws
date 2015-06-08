@@ -5,7 +5,10 @@ import java.awt.Image;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,17 +21,15 @@ import models.Specie;
 import models.Store;
 
 @ManagedBean
-@SessionScoped
 public class ProdottoController {
 	@ManagedProperty(value="#{param.id}")
 	private Store store;
 	private Prodotto prodottoCorrente;
-	private List<Prodotto> prodotti;
+	private Map<String,Prodotto> prodotti;
 	private String nome;
 	private String descrizione;
 	private String codice;
 	private Float prezzoDiListino;
-	
 	
 	@ManagedProperty(value="#{sessione}")
 	private SessionBean session;
@@ -43,6 +44,11 @@ public class ProdottoController {
 	
 	//UC4
 	public String inserisciNuovoProdotto() {
+		if(this.prodotti==null){
+			this.prodotti = new HashMap<>();
+		}
+		Prodotto p = new Prodotto(codice,descrizione,nome,prezzoDiListino,null);
+		this.prodotti.put(p.getCodice(), p);
 		//String codice,String descrizione,String nome,Integer prezzo,Integer quantita)
 //		if(this.store.checkCodiceProdotto(codice)) {
 //		}
@@ -171,6 +177,22 @@ public class ProdottoController {
  
 	public void setPrezzoDiListino(Float prezzoDiListino) {
 		this.prezzoDiListino = prezzoDiListino;
+	}
+
+	public Map<String, Prodotto> getProdotti() {
+		return prodotti;
+	}
+
+	public void setProdotti(Map<String, Prodotto> prodotti) {
+		this.prodotti = prodotti;
+	}
+
+	public ProdottoFacade getProdottoFacade() {
+		return prodottoFacade;
+	}
+
+	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
+		this.prodottoFacade = prodottoFacade;
 	}
 	
 }
