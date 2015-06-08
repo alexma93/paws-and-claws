@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<title>Prova</title>
+</head>
+<h:body>
+
+	<ui:composition template="template/common/commonLayout.xhtml">
+
+		<ui:define name="content">
+			<div>${sessione.store.getProdotto("002").nome}</div>
+			<div>${sessione.store.getProdotto("001").descrizione}</div>
+			<div>${sessione.store.getProdotto("001").codice}</div>
+			<div>${sessione.store.getProdotto("001").prezzoDiListino}</div>
+			<div>${sessione.store.getProdotto("001").quantita}</div>
+			<h:form id="form" enctype="multipart/form-data">
+				<h:inputFile id="file" value="#{bean.file}" 
+				validator="#{bean.validateFile}" />
+				<h:commandButton value="Upload" action="#{bean.upload}" />
+			</h:form>
+			<div>${bean.fileContent}</div>
+			
+		</ui:define>
+
+
+
+
+	</ui:composition>
+
+</h:body>
+
+</html>
