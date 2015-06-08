@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	padding-top: 70px;
+}
+/* serve in una thumbnail a separare le righe con uno spazio
+
+.row:not(:first-child){
+  margin-top:10px;
+}*/

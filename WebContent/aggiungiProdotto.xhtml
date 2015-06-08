@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+
+		<ui:define name="content">
+			<div class="container">
+				<div class="row" style="margin-bottom: 100px;">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						<h3>Inserire dettagli prodotto:</h3>
+						<h:form role="form">
+							<div class="form-group">
+								<label for="nome">Nome:</label>
+								<h:inputText class="form-control"
+									value="#{prodottoController.nome}" required="true"
+									requiredMessage="Il nome è obbligatorio" id="nome" />
+								<h:message for="nome" />
+							</div>
+							<div class="form-group">
+								<label for="codice">Codice:</label>
+								<h:inputText class="form-control"
+									value="#{prodottoController.codice}" required="true"
+									requiredMessage="Il codice è obbligatorio" id="codice" />
+								<h:message for="codice" />
+							</div>
+							<div class="form-group">
+								<label for="prezzo">Prezzo:</label>
+								<h:inputText class="form-control"
+									value="#{prodottoController.prezzoDiListino}" required="true"
+									requiredMessage="Il prezzo è obbligatorio"
+									converterMessage="Price must be a number" id="prezzoDiListino" />
+								<h:message for="prezzoDiListino" />
+							</div>
+							<div class="form-group">
+								<label for="desc">Descrizione:</label>
+								<h:inputTextarea class="form-control"
+									value="#{prodottoController.descrizione}" required="false"
+									cols="20" rows="5" />
+							</div>
+							<h:commandButton class="btn btn-success" value="Submit"
+								action="#{prodottoController.inserisciNuovoProdotto}" />
+							<h:button class="btn btn-primary" value="Home"
+								outcome="index.xhtml" />
+						</h:form>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+
+
+
+				<ui:repeat var="p" value="#{prodottoController.prodotti}"
+					offset="${param.pagina*12}">
+					<div class="col-md-4">
+						<ui:insert name="prodotto">
+							<ui:include src="prodotto.xhtml">
+								<ui:param name="prodotto" value="${p}" />
+							</ui:include>
+						</ui:insert>
+					</div>
+				</ui:repeat>
+
+
+
+
+
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

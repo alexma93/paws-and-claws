@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>Catalogo</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<div class="row prima-row">
+				<!-- FILTRO DI RICERCA -->
+				<div class="ricerca-catalogo col-md-3" style="padding-left: 27px;">
+					<h2>Ricerca</h2>
+					<h:form>
+						<h4>A quale specie sei interessato?</h4>
+						<div class="radio-inline">
+							<label><input type="radio" name="optradio" />Tutte</label>
+						</div>
+						<div class="radio-inline">
+							<label><input type="radio" name="optradio" />Cani</label>
+						</div>
+						<div class="radio-inline">
+							<label><input type="radio" name="optradio" />Gatti</label>
+						</div>
+						<br></br>
+						<div class="radio-inline">
+							<label><input type="radio" name="optradio" />Pesci</label>
+						</div>
+						<div class="radio-inline">
+							<label><input type="radio" name="optradio" />Rettili</label>
+						</div>
+						<div class="radio-inline">
+							<label><input type="radio" name="optradio" />Uccelli</label>
+						</div>
+
+						<div class="price-slider">
+							<h4>Prezzo massimo:</h4>
+							<br></br>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-10">
+								<div id="slider"></div>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<div>
+							<h4>Valutazione minima:</h4>
+							<input id="input-1" class="rating" size="sm" data-min="0"
+								data-max="5" data-step="1" />
+						</div>
+						<h:commandButton class="btn btn-arancione" value="Submit"
+							action="#" />
+					</h:form>
+					<br></br>
+					<h:form>
+						<h3>Cerca nel catalogo:</h3>
+						<div class="row">
+							<span class="col-md-8"> <h:inputText class="form-control"
+									value="" required="true" requiredMessage="Inserire una parola"
+									id="parola" />
+							</span> <span class="col-md-3"> <h:commandButton
+									class="btn btn-arancione" value="Cerca" action="#" />
+							</span> <span class="col-md-1"></span>
+						</div>
+					</h:form>
+
+				</div>
+
+
+
+				<!--  CATALOGO -->
+				<div class="col-md-9">
+					<div class="row ">
+						<h3 class="col-md-9">Pagina: ${param.pagina+1}</h3>
+						<div class="ordinamento dropdown pull-right col-md-2">
+							<button class="btn btn-primary dropdown-toggle" type="button"
+								data-toggle="dropdown">
+								Ordina per <span class="caret"></span>
+							</button>
+							<!--  stile inserito in linea, per sovrascrivere tutti gli altri -->
+							<ul class="dropdown-menu" style="right: 42px;">
+								<li><a href="#">nome</a></li>
+								<li><a href="#">prezzo</a></li>
+								<li><a href="#">data</a></li>
+								<li><a href="#">valutazione</a></li>
+							</ul>
+						</div>
+						<div class="col-md-1"></div>
+
+					</div>
+<<<<<<< HEAD
+							<c:if
+								test="${catalogoController.size-(param.pagina*12)>=12}">
+								<ui:repeat var="p" value="#{catalogoController.catalogo}"
+									offset="${param.pagina*12}" size="12">
+									<div class="col-md-4">
+											<ui:include src="prodotto.xhtml">
+												<ui:param name="prodotto" value="${p}" />
+											</ui:include>
+									</div>
+								</ui:repeat>
+							</c:if>
+							<c:if
+								test="${12>catalogoController.size-param.pagina*12}">
+								<ui:repeat var="p" value="#{catalogoController.catalogo}"
+									offset="${param.pagina*12}">
+									<div class="col-md-4">
+										<ui:insert name="prodotto">
+											<ui:include src="prodotto.xhtml">
+												<ui:param name="prodotto" value="${p}" />
+											</ui:include>
+										</ui:insert>
+									</div>
+								</ui:repeat>
+							</c:if>
+							<div class="col-md-12">
+					<ul class="pager">
+						<c:if test="${param.pagina>0}">
+							<li class="previous"><a
+								href="catalogo.xhtml?pagina=${param.pagina-1}"> <span
+									class="glyphicon glyphicon-chevron-left"></span>
+							</a></li>
+						</c:if>
+						<c:if test="${param.pagina==null or catalogoController.size/12>(param.pagina+1)}">
+							<li class="next"><a
+								href="catalogo.xhtml?pagina=${param.pagina+1}"><span
+									class="glyphicon glyphicon-chevron-right"></span> </a></li>
+						</c:if>
+					</ul>
+=======
+					<c:if test="${catalogoController.size-(param.pagina*12)>=12}">
+						<ui:repeat var="p" value="#{catalogoController.catalogo}"
+							offset="${param.pagina*12}" size="12">
+							<div class="col-md-4">
+								<ui:include src="prodotto.xhtml">
+									<ui:param name="prodotto" value="${p}" />
+								</ui:include>
+							</div>
+						</ui:repeat>
+					</c:if>
+					<c:if test="${12>catalogoController.size-param.pagina*12}">
+						<ui:repeat var="p" value="#{catalogoController.catalogo}"
+							offset="${param.pagina*12}">
+							<div class="col-md-4">
+								<ui:include src="prodotto.xhtml">
+									<ui:param name="prodotto" value="${p}" />
+								</ui:include>
+							</div>
+						</ui:repeat>
+					</c:if>
+					<div class="col-md-12">
+						<ul class="pager">
+							<c:if test="${param.pagina>0}">
+								<li class="previous"><a
+									href="catalogo.xhtml?pagina=${param.pagina-1}"> <span
+										class="glyphicon glyphicon-chevron-left"></span>
+								</a></li>
+							</c:if>
+							<c:if
+								test="${param.pagina==null or catalogoController.size/12>(param.pagina+1)}">
+								<li class="next"><a
+									href="catalogo.xhtml?pagina=${param.pagina+1}"><span
+										class="glyphicon glyphicon-chevron-right"></span> </a></li>
+							</c:if>
+						</ul>
+>>>>>>> branch 'master' of https://github.com/alexma93/paws-and-claws
+					</div>
+				</div>
+			</div>
+
+
+
+			<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+			<script src="js/barra-prezzi.js"></script>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
