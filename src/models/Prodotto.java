@@ -1,6 +1,7 @@
 package models;
 
 import java.awt.Image;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.servlet.http.Part;
 
 @Entity
 @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
@@ -31,6 +33,9 @@ public class Prodotto {
 	@Column(nullable = false)
 	private String codice;
 	
+	@Column(nullable = false)
+	private Part foto;
+	
 	private Date dataInserimento;
 	private Integer quantita;
 	private String taglia;
@@ -38,14 +43,14 @@ public class Prodotto {
 	private Sconto sconto;
 	private Map<String,Fornitore> fornitori;
 	private List<Recensione> recensioni;
-	private Image foto;
+	
 	
 	private Integer votoMedio;
 
 	public Prodotto(){}
 	
 	public Prodotto(String codice, String descrizione, String nome,
-			Float prezzo, Integer quantita) {
+			Float prezzo, Integer quantita, Part foto) {
 		this.codice = codice;
 		this.descrizione = descrizione;
 		this.nome = nome;
@@ -54,6 +59,7 @@ public class Prodotto {
 		this.quantita = quantita;
 		this.fornitori = new HashMap<String,Fornitore>();
 		this.votoMedio = 0;
+		this.foto = foto;
 	}
 
 	public void aggiungiSconto(String descrizione, Integer percentuale) {
@@ -151,7 +157,7 @@ public class Prodotto {
 		this.fornitori.put(f.getIva(),f);
 	}
 
-	public void setImmagine(Image immagine) {
+	public void setImmagine(Part immagine) {
 		this.foto = immagine;
 	}
 
@@ -171,11 +177,11 @@ public class Prodotto {
 		this.fornitori = fornitori;
 	}
 
-	public Image getFoto() {
+	public Part getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Image foto) {
+	public void setFoto(Part foto) {
 		this.foto = foto;
 	}
 	

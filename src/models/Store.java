@@ -34,14 +34,14 @@ public class Store {
 	public void butta() {
 		confermaRegistrazioneUtente(new Utente("daniele","petrillo",new Date(),"a@b.it","pass"));
 		this.amministratori.put("alexma", new Amministratore("alexma","casetta"));
-		Prodotto p = new Prodotto("000","gialla","pannocchia",5F,6);
+		Prodotto p = new Prodotto("000","gialla","pannocchia",5F,6,null);
 		this.inserisciProdotto(p);
 		p.setSpecie(new Specie("gatto"));
-		this.inserisciProdotto(new Prodotto("001","lungo","guinzaglio",6F,20));
-		this.inserisciProdotto(new Prodotto("003","piccola","ciotola",1F,30));
-		this.inserisciProdotto(new Prodotto("002","sonoro","osso di gomma",0.5F,100));
+		this.inserisciProdotto(new Prodotto("001","lungo","guinzaglio",6F,20,null));
+		this.inserisciProdotto(new Prodotto("003","piccola","ciotola",1F,30,null));
+		this.inserisciProdotto(new Prodotto("002","sonoro","osso di gomma",0.5F,100,null));
 		for(int i=0; i<51;i++)
-		this.inserisciProdotto(new Prodotto("004"+i,"appetitose","crocchette",9.5F,6));
+		this.inserisciProdotto(new Prodotto("004"+i,"appetitose","crocchette",9.5F,6,null));
 	}
 	public boolean checkEmail(String email) {
 		return !this.utenti.containsKey(email);

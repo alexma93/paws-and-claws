@@ -2,17 +2,36 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 
 		<ui:define name="content">
 			<div class="container">
+
 				<div class="row" style="margin-bottom: 100px;">
-					<div class="col-md-3"></div>
-					<div class="col-md-6">
+					<!-- form inserimento dati prodotto -->
+					<div class="col-md-3">
 						<h3>Inserire dettagli prodotto:</h3>
-						<h:form role="form">
+						<!-- <h:form role="form" enctype="multipart/form-data">  
+						<h:form action="upload.asp" method="post" enctype="multipart/form-data">-->
+						<h:form id="form" enctype="multipart/form-data">
+
+							<div class="fileupload fileupload-new" data-provides="fileupload">
+								<div class="fileupload-preview thumbnail"
+									style="width: 200px; height: 150px;"></div>
+								<div>
+									<span class="btn btn-default btn-file"> <span
+										class="fileupload-new">Select image</span> <span
+										class="fileupload-exists">Change</span> <input type="file"
+										value="#{prodottoController.foto}"></input>
+									</span> <a href="#" class="btn fileupload-exists"
+										data-dismiss="fileupload">Remove </a>
+								</div>
+							</div>
+
 							<div class="form-group">
 								<label for="nome">Nome:</label>
 								<h:inputText class="form-control"
@@ -47,27 +66,69 @@
 								outcome="index.xhtml" />
 						</h:form>
 					</div>
-					<div class="col-md-3"></div>
+					<!-- elenco prodotti inseriti -->
+					<div class="col-md-9">
+						<div class="row ">
+							<h3 class="col-md-9">Pagina: ${param.pagina+1}</h3>
+							<div class="ordinamento dropdown pull-right col-md-2">
+								<button class="btn btn-primary dropdown-toggle" type="button"
+									data-toggle="dropdown">
+									Ordina per <span class="caret"></span>
+								</button>
+								<!--  stile inserito in linea, per sovrascrivere tutti gli altri -->
+								<ul class="dropdown-menu" style="right: 42px;">
+									<li><a href="#">nome</a></li>
+									<li><a href="#">prezzo</a></li>
+									<li><a href="#">data</a></li>
+									<li><a href="#">valutazione</a></li>
+								</ul>
+							</div>
+							<div class="col-md-1"></div>
+
+						</div>
+						<c:if test="${prodottoController.size-(param.pagina*12)>=12}">
+							<ui:repeat var="p" value="#{prodottoController.prodotti}"
+								offset="${param.pagina*12}" size="12">
+								<div class="col-md-4">
+									<ui:param name="prodotto" value="${p}" />
+									<label>Codice:</label> <span>${prodotto.codice}</span> <label>foto:</label>
+									<span>${prodotto.foto}</span>
+								</div>
+							</ui:repeat>
+						</c:if>
+						<c:if test="${12>prodottoController.size-param.pagina*12}">
+							<ui:repeat var="p" value="#{prodottoController.prodotti}"
+								offset="${param.pagina*12}">
+								<div class="col-md-4">
+									<ui:param name="prodotto" value="${p}" />
+									<label>Codice:</label> <span>${prodotto.codice}</span> <label>foto:</label>
+									<span>${prodotto.foto}</span>
+								</div>
+							</ui:repeat>
+						</c:if>
+						<div class="col-md-12">
+							<ul class="pager">
+								<c:if test="${param.pagina>0}">
+									<li class="previous"><a
+										href="aggiungiProdotto.xhtml?pagina=${param.pagina-1}"> <span
+											class="glyphicon glyphicon-chevron-left"></span>
+									</a></li>
+								</c:if>
+								<c:if
+									test="${param.pagina==null or prodottoController.size/12>(param.pagina+1)}">
+									<li class="next"><a
+										href="aggiungiProdotto.xhtml?pagina=${param.pagina+1}"><span
+											class="glyphicon glyphicon-chevron-right"></span> </a></li>
+								</c:if>
+							</ul>
+						</div>
+
+
+					</div>
 				</div>
 
-
-
-				<ui:repeat var="p" value="#{prodottoController.prodotti}"
-					offset="${param.pagina*12}">
-					<div class="col-md-4">
-						<ui:insert name="prodotto">
-							<ui:include src="prodotto.xhtml">
-								<ui:param name="prodotto" value="${p}" />
-							</ui:include>
-						</ui:insert>
-					</div>
-				</ui:repeat>
-
-
-
-
-
 			</div>
+			<script src="js/upload.js"></script>
 		</ui:define>
 	</ui:composition>
 </h:body>
