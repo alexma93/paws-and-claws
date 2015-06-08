@@ -18,10 +18,6 @@ public class OrdineController {
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
 
-	
-	public OrdineController() {
-		this.quantita = 1;
-	}
 	//UC2
 	public String aggiungiProdottoOrdine() {
 		if(ordineCorrente==null)
@@ -30,8 +26,7 @@ public class OrdineController {
 		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
 		Prodotto p = this.session.getStore().getProdotto(codice);
 		this.ordineCorrente.aggiungiProdotto(p,quantita);
-		this.quantita = 1;
-		return "carrello.xhtml";
+		return "index.xhtml";
 	}
 
 	public void aggiungiCoupon(String codice) {

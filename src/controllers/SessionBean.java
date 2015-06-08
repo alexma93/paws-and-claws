@@ -17,7 +17,6 @@ public class SessionBean {
 	
 	public SessionBean(){
 		this.store = new Store();
-		this.utente = new Utente();
 	}
 	
 	public String scollegaUtente() {

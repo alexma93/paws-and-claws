@@ -31,6 +31,7 @@ public class ProdottoController {
 	private String codice;
 	private Float prezzoDiListino;
 	
+
 	@ManagedProperty(value="#{sessione}")
 	private SessionBean session;
 	
@@ -178,21 +179,12 @@ public class ProdottoController {
 	public void setPrezzoDiListino(Float prezzoDiListino) {
 		this.prezzoDiListino = prezzoDiListino;
 	}
-
 	public Map<String, Prodotto> getProdotti() {
 		return prodotti;
 	}
 
 	public void setProdotti(Map<String, Prodotto> prodotti) {
 		this.prodotti = prodotti;
-	}
-
-	public ProdottoFacade getProdottoFacade() {
-		return prodottoFacade;
-	}
-
-	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
-		this.prodottoFacade = prodottoFacade;
 	}
 	
 }

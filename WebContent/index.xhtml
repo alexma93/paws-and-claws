@@ -5,10 +5,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-		xmlns:p="http://primefaces.org/ui">
-	<h:head>
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
 	<title>Paws-and-Claws</title>
-	</h:head>
+</h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 
@@ -16,7 +16,8 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-3" style="margin-top: 50px;">
 				<c:if test="#{sessione.amministratore!=null}">
-					<h3>Menu Amministratore:</h3><h2>${sessione.amministratore.email}</h2>
+					<h3>Menu Amministratore:</h3>
+					<h2>${sessione.amministratore.email}</h2>
 					<h:button class="btn btn-primary" value="Aggiungi prodotto"
 						outcome="aggiungiProdotto.xhtml" />
 				</c:if>
