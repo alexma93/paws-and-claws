@@ -11,6 +11,7 @@
 	<ui:composition template="template/common/commonLayout.xhtml">
 
 		<ui:define name="content">
+<<<<<<< HEAD
 			<div class="row" style="margin-bottom: 100px;">
 				<div class="col-md-4"></div>
 				<div class="col-md-3" style="margin-top: 50px;">
@@ -38,6 +39,35 @@
 				<div class="col-md-5"></div>
 			</div>
 
+=======
+		<div class="row" style="margin-bottom: 100px;">
+		<div class="col-md-4"></div>
+		<div class="col-md-3" style="margin-top: 50px;">
+			<h3>Accesso amministratore:</h3>
+				<h:form role="form">
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<h:inputText class="form-control"
+							value="#{amministratoreController.email}" required="true"
+							requiredMessage="L'email è obbligatoria" id="email" />
+						<h:message for="email" />
+					</div>
+					<div class="form-group">
+						<label for="pwd">Password:</label>
+						<h:inputSecret class="form-control"
+							value="#{amministratoreController.password}" required="true"
+							requiredMessage="La password è obbligatoria" id="password" />
+						<h:message for="password" />
+					</div>
+					<h:commandButton class="btn btn-success" value="Submit"
+						action="#{amministratoreController.loginAmministratore}" />
+				</h:form>
+				<div>#{amministratoreController.erroreLogin}</div>
+			</div>
+		<div class="col-md-5"></div>
+		</div>
+			
+>>>>>>> branch 'master' of https://github.com/alexma93/paws-and-claws
 		</ui:define>
 
 	</ui:composition>

@@ -16,7 +16,8 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-3" style="margin-top: 50px;">
 				<c:if test="#{sessione.amministratore!=null}">
-					<h3>Menu Amministratore:</h3><h2>${sessione.amministratore.email}</h2>
+					<h3>Menu Amministratore:</h3>
+					<h2>${sessione.amministratore.email}</h2>
 					<h:button class="btn btn-primary" value="Aggiungi prodotto"
 						outcome="aggiungiProdotto.xhtml" />
 				</c:if>
