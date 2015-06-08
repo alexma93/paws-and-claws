@@ -8,56 +8,59 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Paws-and-Claws</title>
+
 </h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
-			<div class="row prima-row">
-				<h2 class="titolo-carrello">Carrello</h2>
-				<div class="row">
-				<div class="col-md-3"></div>
-				<h3 class="col-md-4">Prodotti acquistati</h3>
-				<h3 class="col-md-4">Prezzo x Quantità = </h3>
-				<h3 class="col-md-2">Prezzo finale </h3>
-				</div>
-				<ui:repeat var="r" value="#{ordineController.ordineCorrente.righe}">
-					<div class="col-md-2"></div>
-					<div class="media col-md-4">
-						<img class="media-object pull-left img-responsive"
-							src="resources/img/crocchette.jpg" />
-						<div class="media-body">
-							<div>
-								<img class="media-object pull-left img-responsive"
-									src="resources/img/specie/${r.prodotto.specie.nome}.png" />
-							</div>
-
-							<br></br> <br></br>
-							<h4 class="media-heading">${r.prodotto.nome}</h4>
-
-							<div>
-								<label>Codice:</label> <span>${r.prodotto.codice}</span>
-							</div>
-							<div>
-								<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
-							</div>
-							<div>
-								<label>Voto medio:</label>
-								<h:form>
-									<p:rating value="#{r.prodotto.votoMedio}" readonly="true" />
-								</h:form>
-							</div>
-
+		<div class="prima-row">
+			<h2 class="titolo-carrello">Carrello</h2>
+			<table class="mia-table" style="width: 100%">
+			<tr>
+			<th class="mio-th">Prodotti acquistati</th>
+			<th class="mio-th">Prezzo x Quantità =</th>
+			<th class="mio-th">Prezzo finale</th>
+			</tr>
+			<ui:repeat var="r" value="#{ordineController.ordineCorrente.righe}">
+			<tr>
+				<td class="media">
+					<img class="media-object pull-left img-responsive"
+						src="resources/img/crocchette.jpg" />
+					<div class="media-body">
+						<div>
+							<img class="media-object pull-left img-responsive"
+								src="resources/img/specie/${r.prodotto.specie.nome}.png" />
 						</div>
+
+						<br></br> <br></br>
+						<h4 class="media-heading">${r.prodotto.nome}</h4>
+
+						<div>
+							<label>Codice:</label> <span>${r.prodotto.codice}</span>
+						</div>
+						<div>
+							<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
+						</div>
+						<div>
+							<label>Voto medio:</label>
+							<h:form>
+								<p:rating value="#{r.prodotto.votoMedio}" readonly="true" />
+							</h:form>
+						</div>
+
 					</div>
-					<div class="cl-md-3">${r.prodotto.prezzoDiListino} X ${r.quantita}</div>
-					<div class="col-md-1">${r.prodotto.prezzoDiListino*r.quantita}</div>
-
-				</ui:repeat>
-			</div>
-
-			<div class="row">Totale:
+				</td>
+				<td>${r.prodotto.prezzoDiListino} X
+					${r.quantita}</td>
+				<td>${r.prodotto.prezzoDiListino*r.quantita}</td>
+			</tr>
+			</ui:repeat>
+			</table>
+			<div>Totale:
 				${ordineController.ordineCorrente.prezzoTotale}</div>
+					</div>
 		</ui:define>
+	
 	</ui:composition>
 
 </h:body>
