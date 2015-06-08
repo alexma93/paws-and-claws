@@ -93,44 +93,41 @@
 						<div class="col-md-1"></div>
 
 					</div>
-							<c:if
-								test="${catalogoController.size-(param.pagina*12)>=12}">
-								<ui:repeat var="p" value="#{catalogoController.catalogo}"
-									offset="${param.pagina*12}" size="12">
-									<div class="col-md-4">
-											<ui:include src="prodotto.xhtml">
-												<ui:param name="prodotto" value="${p}" />
-											</ui:include>
-									</div>
-								</ui:repeat>
+					<c:if test="${catalogoController.size-(param.pagina*12)>=12}">
+						<ui:repeat var="p" value="#{catalogoController.catalogo}"
+							offset="${param.pagina*12}" size="12">
+							<div class="col-md-4">
+								<ui:include src="prodotto.xhtml">
+									<ui:param name="prodotto" value="${p}" />
+								</ui:include>
+							</div>
+						</ui:repeat>
+					</c:if>
+					<c:if test="${12>catalogoController.size-param.pagina*12}">
+						<ui:repeat var="p" value="#{catalogoController.catalogo}"
+							offset="${param.pagina*12}">
+							<div class="col-md-4">
+								<ui:include src="prodotto.xhtml">
+									<ui:param name="prodotto" value="${p}" />
+								</ui:include>
+							</div>
+						</ui:repeat>
+					</c:if>
+					<div class="col-md-12">
+						<ul class="pager">
+							<c:if test="${param.pagina>0}">
+								<li class="previous"><a
+									href="catalogo.xhtml?pagina=${param.pagina-1}"> <span
+										class="glyphicon glyphicon-chevron-left"></span>
+								</a></li>
 							</c:if>
 							<c:if
-								test="${12>catalogoController.size-param.pagina*12}">
-								<ui:repeat var="p" value="#{catalogoController.catalogo}"
-									offset="${param.pagina*12}">
-									<div class="col-md-4">
-										<ui:insert name="prodotto">
-											<ui:include src="prodotto.xhtml">
-												<ui:param name="prodotto" value="${p}" />
-											</ui:include>
-										</ui:insert>
-									</div>
-								</ui:repeat>
+								test="${param.pagina==null or catalogoController.size/12>(param.pagina+1)}">
+								<li class="next"><a
+									href="catalogo.xhtml?pagina=${param.pagina+1}"><span
+										class="glyphicon glyphicon-chevron-right"></span> </a></li>
 							</c:if>
-							<div class="col-md-12">
-					<ul class="pager">
-						<c:if test="${param.pagina>0}">
-							<li class="previous"><a
-								href="catalogo.xhtml?pagina=${param.pagina-1}"> <span
-									class="glyphicon glyphicon-chevron-left"></span>
-							</a></li>
-						</c:if>
-						<c:if test="${param.pagina==null or catalogoController.size/12>(param.pagina+1)}">
-							<li class="next"><a
-								href="catalogo.xhtml?pagina=${param.pagina+1}"><span
-									class="glyphicon glyphicon-chevron-right"></span> </a></li>
-						</c:if>
-					</ul>
+						</ul>
 					</div>
 				</div>
 			</div>
