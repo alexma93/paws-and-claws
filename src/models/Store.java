@@ -42,6 +42,8 @@ public class Store {
 		this.inserisciProdotto(new Prodotto("002","sonoro","osso di gomma",0.5F,100,null));
 		for(int i=0; i<51;i++)
 		this.inserisciProdotto(new Prodotto("004"+i,"appetitose","crocchette",9.5F,6,null));
+		Coupon c = new Coupon("abc",20);
+		this.coupon.put("abc", c);
 	}
 	public boolean checkEmail(String email) {
 		return !this.utenti.containsKey(email);

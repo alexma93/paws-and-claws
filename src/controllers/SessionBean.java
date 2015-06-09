@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import models.Amministratore;
+import models.Ordine;
 import models.Store;
 import models.Utente;
 
@@ -13,11 +14,21 @@ public class SessionBean {
 	private Utente utente;
 	private Amministratore amministratore;
 	private Store store;
-	
+	/*è inserito qui e non in OrdineController perchè se cambio utente 
+	 * durante la stessa sessione rimarrebbe lo stesso ordine*/
+	private Ordine ordineCorrente;
 	
 	public SessionBean(){
 		this.store = new Store();
+		
+		/* TODO togliere*/
 		this.utente = new Utente();
+	}
+	
+	public void terminaOrdine() {
+		store.confermaOrdine(this.ordineCorrente);
+		utente.confermaOrdine(this.ordineCorrente);
+		this.ordineCorrente = null;
 	}
 	
 	public String scollegaUtente() {
@@ -59,6 +70,16 @@ public class SessionBean {
 	public void setStore(Store store) {
 		this.store = store;
 	}
+	
+
+	public Ordine getOrdineCorrente() {
+		return ordineCorrente;
+	}
+
+	public void setOrdineCorrente(Ordine ordineCorrente) {
+		this.ordineCorrente = ordineCorrente;
+	}
+
 
 	
 }

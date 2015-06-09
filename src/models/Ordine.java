@@ -20,6 +20,8 @@ public class Ordine {
 		this.prezzoTotale = 0.;
 		this.evaso = false;
 		this.righe = new LinkedList<RigaOrdine>();
+		this.dataApertura = new Date();
+		//TODO codice
 	}
 
 	public boolean contiene(Prodotto p) {

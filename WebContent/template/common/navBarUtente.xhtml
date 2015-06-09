@@ -27,10 +27,11 @@
 		<!--  Elementi della barra -->
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-					<li class="btn-group">
-					<a style="display:inline;" href="catalogo.xhtml">Catalogo</a>
-					<button type="button" class="btn-link dropdown-toggle" style="margin-top:11px;"
-						data-toggle="dropdown">
+				<li><a class="casella" href="ordini.xhtml">Ordini</a></li>
+				<li class="btn-group"><a style="display: inline;"
+					href="catalogo.xhtml">Catalogo</a>
+					<button type="button" class="btn-link dropdown-toggle"
+						style="margin-top: 15px;" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
@@ -39,12 +40,15 @@
 						<li><a href="#">Pesci</a></li>
 						<li><a href="#">Rettili</a></li>
 						<li><a href="#">Uccelli</a></li>
-					</ul>
-				</li>
+					</ul></li>
 
 				<li><a>${sessione.utente.nome} ${sessione.utente.cognome}</a></li>
-				<li style="margin-top:11px;"><h:form>
-						<h:commandButton class="btn-link" action="#{sessione.scollegaUtente}" value="Esci"/>
+				<li><a class="casella" href="carrello.xhtml"><span
+						class="glyphicon glyphicon-shopping-cart"></span></a></li>
+
+				<li style="margin-top: 15px;"><h:form>
+						<h:commandButton class="btn-link"
+							action="#{sessione.scollegaUtente}" value="Esci" />
 					</h:form></li>
 				<li class="active"><a href="index.xhtml">Home</a></li>
 			</ul>

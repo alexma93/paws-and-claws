@@ -7,60 +7,104 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Paws-and-Claws</title>
+
 
 </h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
-		<div class="prima-row">
-			<h2 class="titolo-carrello">Carrello</h2>
-			<table class="mia-table" style="width: 100%">
-			<tr>
-			<th class="mio-th">Prodotti acquistati</th>
-			<th class="mio-th">Prezzo x Quantità =</th>
-			<th class="mio-th">Prezzo finale</th>
-			</tr>
-			<ui:repeat var="r" value="#{ordineController.ordineCorrente.righe}">
-			<tr>
-				<td class="media">
-					<img class="media-object pull-left img-responsive"
-						src="resources/img/crocchette.jpg" />
-					<div class="media-body">
-						<div>
-							<img class="media-object pull-left img-responsive"
-								src="resources/img/specie/${r.prodotto.specie.nome}.png" />
-						</div>
+			<div class="prima-row carrello">
+				<div class="carrello-table">
+					<h2 class="titolo-carrello col-md-7 col-md-offset-5">Carrello</h2>
+					<table class="mia-table" style="width: 100%">
+						<tr>
+							<th class="mio-th">Prodotti acquistati</th>
+							<th class="mio-th">Prezzo x Quantità</th>
+							<th class="mio-th">Prezzo finale</th>
+						</tr>
+						<ui:repeat var="r" value="#{sessione.ordineCorrente.righe}">
+							<tr>
+								<td class="media"><img
+									class="media-object pull-left img-responsive"
+									src="resources/img/crocchette.jpg" />
+									<div class="media-body prodotto-carrello">
+										<div class="icona-p-carrello">
+											<img class="media-object pull-left img-responsive"
+												src="resources/img/specie/${r.prodotto.specie.nome}.png" />
+										</div>
+										<h4 class="media-heading">${r.prodotto.nome}</h4>
 
-						<br></br> <br></br>
-						<h4 class="media-heading">${r.prodotto.nome}</h4>
+										<div>
+											<label>Codice:</label> <span>${r.prodotto.codice}</span>
+										</div>
+										<div>
+											<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
+										</div>
+										<div>
+											<label>Voto medio:</label>
+											<h:form>
+												<p:rating value="#{r.prodotto.votoMedio}" readonly="true" />
+											</h:form>
+										</div>
 
-						<div>
-							<label>Codice:</label> <span>${r.prodotto.codice}</span>
-						</div>
-						<div>
-							<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
-						</div>
-						<div>
-							<label>Voto medio:</label>
-							<h:form>
-								<p:rating value="#{r.prodotto.votoMedio}" readonly="true" />
-							</h:form>
-						</div>
+									</div></td>
+								<td>${r.prodotto.prezzoDiListino} X ${r.quantita}</td>
+								<td>${r.prodotto.prezzoDiListino*r.quantita}</td>
+							</tr>
+						</ui:repeat>
 
-					</div>
-				</td>
-				<td>${r.prodotto.prezzoDiListino} X
-					${r.quantita}</td>
-				<td>${r.prodotto.prezzoDiListino*r.quantita}</td>
-			</tr>
-			</ui:repeat>
-			</table>
-			<div>Totale:
-				${ordineController.ordineCorrente.prezzoTotale}</div>
-					</div>
+						<c:if test="#{sessione.ordineCorrente.coupon!=null}">
+							<tr>
+								<td><label class="totale-carrello"><del>Totale:</del></label></td>
+								<td></td>
+								<td><label class="totale-carrello"><del>${sessione.ordineCorrente.prezzoTotale}</del></label></td>
+							</tr>
+						</c:if>
+						<c:if test="#{sessione.ordineCorrente.coupon==null}">
+							<tr>
+								<td><label class="totale-carrello">Totale:</label></td>
+								<td></td>
+								<td><label class="totale-carrello">${sessione.ordineCorrente.prezzoTotale}</label></td>
+							</tr>
+						</c:if>
+						<c:if test="#{sessione.ordineCorrente.coupon!=null}">
+							<tr>
+								<td><label class="totale-carrello">Totale scontato:
+										${sessione.ordineCorrente.coupon.percentuale}%</label></td>
+								<td></td>
+								<td><label class="totale-carrello">
+										${sessione.ordineCorrente.prezzoTotale*(100-sessione.ordineCorrente.coupon.percentuale)/100}</label></td>
+							</tr>
+						</c:if>
+					</table>
+				</div>
+				
+				<c:if test="${sessione.ordineCorrente!=null}">
+				<c:if test="${sessione.ordineCorrente.coupon==null}">
+				<div class="coupon-form">
+					<h:form class="form-inline" role="form">
+						<div class="form-group">
+							<label for="coupon">Coupon: </label>
+							<h:inputText class="form-control"
+								value="#{ordineController.codiceCoupon}" required="true"
+								requiredMessage="  Inserire un codice" id="coupon" />
+						</div>
+						<h:commandButton class="btn btn-success" value="Submit"
+							action="#{ordineController.aggiungiCoupon}" />
+						<h:message for="coupon" />
+					</h:form>
+					<div>#{ordineController.erroreCoupon}</div>
+				</div>
+				</c:if>
+				<h:form role="form">
+					<h:commandButton class="btn btn-success terminazione-bottone" value="Termina ordine"
+						action="#{ordineController.terminaOrdine}" />
+					<h:message for="coupon" />
+				</h:form>
+				</c:if>
+			</div>
 		</ui:define>
-	
+
 	</ui:composition>
 
 </h:body>

@@ -2,7 +2,7 @@ package controllers;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import models.Coupon;
@@ -10,52 +10,48 @@ import models.Ordine;
 import models.Prodotto;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class OrdineController {
-	private Ordine ordineCorrente;
 	private Integer quantita;
+	private String codiceCoupon;
+	private String erroreCoupon;
 	
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
 
+	public OrdineController() {
+		this.quantita = 1;
+	}
 	//UC2
 	public String aggiungiProdottoOrdine() {
-		if(ordineCorrente==null)
-			ordineCorrente = new Ordine();
+		if(session.getOrdineCorrente()==null)
+			session.setOrdineCorrente(new Ordine());
 		FacesContext fc = FacesContext.getCurrentInstance();
 		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
 		Prodotto p = this.session.getStore().getProdotto(codice);
-		this.ordineCorrente.aggiungiProdotto(p,quantita);
-		return "index.xhtml";
+		session.getOrdineCorrente().aggiungiProdotto(p,quantita);
+		this.quantita = 1;
+		return "carrello.xhtml";
 	}
 
-	public void aggiungiCoupon(String codice) {
-		Coupon c = this.session.getStore().getSingoloCoupon(codice);
+	public String aggiungiCoupon() {
+		Coupon c = session.getStore().getSingoloCoupon(codiceCoupon);
 		if(c==null) {
-			//TODO
+			this.setErroreCoupon("coupon non valido");
 		}
 		else {
-			this.ordineCorrente.aggiungiCoupon(c);
+			session.getOrdineCorrente().aggiungiCoupon(c);
 		}
+		return "carrello.xhtml";
 	}
 
 	public void terminaOrdine() {
-		this.session.getUtente().confermaOrdine(this.ordineCorrente);
-		this.session.getStore().confermaOrdine(this.ordineCorrente);
-		this.ordineCorrente = null;
+		session.terminaOrdine();
 	}
 
 	//UC6
 	public void evadiOrdine(Integer codice) {
 		this.session.getStore().evadi(codice);
-	}
-
-	public Ordine getOrdineCorrente() {
-		return ordineCorrente;
-	}
-
-	public void setOrdineCorrente(Ordine ordineCorrente) {
-		this.ordineCorrente = ordineCorrente;
 	}
 
 	public SessionBean getSession() {
@@ -72,5 +68,17 @@ public class OrdineController {
 
 	public void setQuantita(Integer quantita) {
 		this.quantita = quantita;
+	}
+	public String getCodiceCoupon() {
+		return codiceCoupon;
+	}
+	public void setCodiceCoupon(String codiceCoupon) {
+		this.codiceCoupon = codiceCoupon;
+	}
+	public String getErroreCoupon() {
+		return erroreCoupon;
+	}
+	public void setErroreCoupon(String erroreCoupon) {
+		this.erroreCoupon = erroreCoupon;
 	}
 }

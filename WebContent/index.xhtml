@@ -18,20 +18,8 @@
 				<c:if test="#{sessione.amministratore!=null}">
 					<h3>Menu Amministratore:</h3>
 					<h2>${sessione.amministratore.email}</h2>
-					<h:button class="btn btn-primary" value="Aggiungi prodotto"
-						outcome="aggiungiProdotto.xhtml" />
-				</c:if>
-			</div>
-			<div class="col-md-5"></div>
-			<h:form>
-				<h:outputLabel for="basic" value="Basic Spinner: " />
-				<p:spinner id="basic" value="#" />
-			</h:form>
-			<ui:repeat var="r" value="#{ordineController.ordineCorrente.righe}">
-				<h2>${r.prodotto.nome}</h2>
-				<h3>${r.quantita}</h3>
-
-			</ui:repeat>
+					</c:if>
+					</div>
 		</ui:define>
 
 	</ui:composition>

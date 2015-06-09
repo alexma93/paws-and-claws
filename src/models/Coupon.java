@@ -5,6 +5,13 @@ public class Coupon {
 	private String codice;
 	private Integer percentuale;
 	
+	public Coupon() {
+		
+	}
+	public Coupon(String codice,Integer percentuale) {
+		this.codice = codice;
+		this.percentuale = percentuale;
+	}
 	public Long getId() {
 		return id;
 	}
