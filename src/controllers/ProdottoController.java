@@ -27,7 +27,6 @@ import javax.servlet.http.Part;
 
 import models.Fornitore;
 import models.Prodotto;
-import models.Specie;
 import models.Store;
 
 @ManagedBean
@@ -51,7 +50,7 @@ public class ProdottoController {
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 
-	public String createProduct() {
+	private String createProduct() {
 		this.prodottoCorrente = prodottoFacade.createProduct(nome, codice, prezzoDiListino, descrizione, foto);
 		return "aggiungiProdotto.xhtml";
 	}
@@ -96,7 +95,7 @@ public class ProdottoController {
 //			this.prodottoCorrente = new Prodotto(codice,descrizione,nome,prezzoDiListino,null);
 			//TODO
 //		}
-		createProduct();
+		this.createProduct();
 		
 		return "aggiungiProdotto.xhtml";
 	}
@@ -113,20 +112,6 @@ public class ProdottoController {
 	
 	public void inserisciFoto(Part immagine) {
 		this.prodottoCorrente.setImmagine(immagine);
-	}
-	
-	public void impostaSpecie(String specie) {
-		Specie s = this.store.getSpecie(specie);
-		if(s==null) {
-			//TODO
-		}
-		else {
-			this.prodottoCorrente.setSpecie(s);
-		}
-	}
-	
-	public void impostaTaglia(String taglia) {
-		this.prodottoCorrente.setTaglia(taglia);
 	}
 	
 	public String fineInserimento() {

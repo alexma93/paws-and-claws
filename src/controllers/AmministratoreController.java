@@ -1,5 +1,6 @@
 package controllers;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -17,9 +18,12 @@ public class AmministratoreController {
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
 	
+	@EJB(beanName="aFacade")
+	private AmministratoreFacade amministratoreFacade;
+	
 	//UCOTRIS login amministratore
 	public String loginAmministratore() {
-		Amministratore a = session.getStore().getAmministratore(email);
+		Amministratore a = amministratoreFacade.getAmministratore(email);
 		if (a==null) {
 			this.setErroreLogin("Email non valida");
 			return "loginAmministratore.xhtml";

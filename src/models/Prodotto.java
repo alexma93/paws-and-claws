@@ -38,8 +38,7 @@ public class Prodotto {
 	
 	private Date dataInserimento;
 	private Integer quantita;
-	private String taglia;
-	private Specie specie;
+	private String specie;
 	private Sconto sconto;
 	private Map<String,Fornitore> fornitori;
 	private List<Recensione> recensioni;
@@ -137,14 +136,6 @@ public class Prodotto {
 		this.sconto = sconto;
 	}
 
-	public String getTaglia() {
-		return taglia;
-	}
-	
-	public void setTaglia(String taglia) {
-		this.taglia = taglia;
-	}
-
 	public List<Recensione> getRecensioni() {
 		return recensioni;
 	}
@@ -161,11 +152,11 @@ public class Prodotto {
 		this.foto = immagine;
 	}
 
-	public Specie getSpecie() {
+	public String getSpecie() {
 		return specie;
 	}
 
-	public void setSpecie(Specie specie) {
+	public void setSpecie(String specie) {
 		this.specie = specie;
 	}
 

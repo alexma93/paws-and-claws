@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.Date;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -28,14 +29,17 @@ public class UtenteController {
 
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
+	
+	@EJB(beanName="uFacade")
+	private UtenteFacade utenteFacade;
 
 	public UtenteController() {
 	}
 
 	//UC0
 	public String registraUtente() {
-		if(session.getStore().checkEmail(email)) {
-			session.setUtente(new Utente(nome,cognome,dataNascita,email,password));
+		if(utenteFacade.checkEmail(email)) {
+			session.setUtente(utenteFacade.createUtente(nome,cognome,dataNascita,email,password));
 			return "registraIndirizzo.xhtml";
 		}
 		else {
@@ -53,6 +57,7 @@ public class UtenteController {
 
 	public String confermaRegistrazioneUtente() {
 		session.confermaRegistrazioneUtente();
+		utenteFacade.confermaUtente(session.getUtente());
 		return "index.xhtml";
 	}
 
@@ -63,7 +68,7 @@ public class UtenteController {
 
 	//UC0BIS
 	public String loginUtente() {
-		Utente u = session.getStore().getUtente(email);
+		Utente u = utenteFacade.getUtente(email);
 		if (u==null) {
 			this.setErrore("Email non valida");
 		}
@@ -75,7 +80,6 @@ public class UtenteController {
 		}
 		return "index.xhtml";
 	}
-
 
 
 	public String getPassword() {
@@ -167,6 +171,14 @@ public class UtenteController {
 
 	public void setCap(String cap) {
 		this.cap = cap;
+	}
+
+	public UtenteFacade getUtenteFacade() {
+		return utenteFacade;
+	}
+
+	public void setUtenteFacade(UtenteFacade utenteFacade) {
+		this.utenteFacade = utenteFacade;
 	}
 
 

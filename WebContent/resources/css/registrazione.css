@@ -1,3 +1,16 @@
 .form-registazione {
 	display: inline;
 }
+
+.registrazione-td {
+	font-size: 15px;
+}
+
+.conferma-r-form {
+	padding-left: 300px;
+	padding-top: 20px;
+}
+
+.indirizzo-table {
+	padding-top: 20px;
+}

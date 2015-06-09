@@ -6,15 +6,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class Utente {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Column(nullable=false,unique=true)
 	private String email;
+	@Column(nullable=false)
 	private String password;
+	@Column(nullable=false)
 	private String nome;
+	@Column(nullable=false)
 	private String cognome;
+	@Temporal (TemporalType.DATE)
 	private Date dataNascita;
+	@Temporal (TemporalType.DATE)
 	private Date dataRegistrazione;
+	
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
+	
 	private List<Recensione> recensioni;
 	private Map<Long,Ordine> ordini;
 	
@@ -25,10 +49,10 @@ public class Utente {
 			String password) {
 		this.nome = nome;
 		this.cognome = cognome;
-		this.dataNascita = data;
-		this.dataRegistrazione = new Date();
 		this.email = email;
 		this.password = password;
+		this.dataNascita = data;
+		this.dataRegistrazione = new Date();
 		this.recensioni = new ArrayList<Recensione>();
 		this.ordini = new HashMap<Long,Ordine>();
 	}
@@ -115,6 +139,10 @@ public class Utente {
 		this.ordini.put(ordine.getId(), ordine);
 	}
 
+	public void aggiungiRecensione(Recensione recensione) {
+		this.recensioni.add(recensione);
+		
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -140,9 +168,5 @@ public class Utente {
 		return true;
 	}
 
-	public void aggiungiRecensione(Recensione recensione) {
-		this.recensioni.add(recensione);
-		
-	}
 	
 }

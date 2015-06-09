@@ -6,69 +6,86 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
-	<h2>Riepilogo:</h2>
-	<h3>Utente:</h3>
-	<table class="table">
-		<thead></thead>
-		<tbody>
-			<tr>
-				<td>Nome</td>
-				<td>${sessione.utente.nome}</td>
-			</tr>
-			<tr>
-				<td>Cognome</td>
-				<td>${sessione.utente.cognome}</td>
-			</tr>
-			<tr>
-				<td>Data di nascita</td>
-				<td><h:outputText value="#{sessione.utente.dataNascita}">
-						<f:convertDateTime pattern="dd-MM-yyyy" />
-					</h:outputText></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td>${sessione.utente.email}</td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td>${sessione.utente.password}</td>
-			</tr>
-		</tbody>
-	</table>
-	<h3>Indirizzo:</h3>
-	<table class="table">
-		<thead></thead>
-		<tbody>
-			<tr>
-				<td>Stato</td>
-				<td>${sessione.utente.indirizzo.stato}</td>
-			</tr>
-			<tr>
-				<td>Regione</td>
-				<td>${sessione.utente.indirizzo.regione}</td>
-			</tr>
-			<tr>
-				<td>Città</td>
-				<td>${sessione.utente.indirizzo.citta}</td>
-			</tr>
-			<tr>
-				<td>Strada</td>
-				<td>${sessione.utente.indirizzo.strada}</td>
-			</tr>
-			<tr>
-				<td>CAP</td>
-				<td>${sessione.utente.indirizzo.cap}</td>
-			</tr>
-		</tbody>
-	</table>
-	<h:form>
-		<h:commandButton value="Annulla"
-			action="#{utenteController.annullaRegistrazioneUtente}" />
-		<h:commandButton value="Registra"
-			action="#{utenteController.confermaRegistrazioneUtente}" />
-	</h:form>
+	<ui:composition template="template/common/commonLayout.xhtml">
 
-	<div>#{utenteController.errore}</div>
+		<ui:define name="content">
+			<div class="prima-row carrello">
+				<div class="carrello-table">
+					<h2 class="titolo-carrello col-md-8 col-md-offset-4">Riepilogo</h2>
+					<table class="mia-table" style="width: 100%">
+						<thead></thead>
+						<tbody>
+							<tr>
+								<td>Dati Utente</td>
+								<td>Inseriti</td>
+							</tr>
+							<tr>
+								<td>Nome</td>
+								<td>${sessione.utente.nome}</td>
+							</tr>
+							<tr>
+								<td>Cognome</td>
+								<td>${sessione.utente.cognome}</td>
+							</tr>
+							<tr>
+								<td>Data di nascita</td>
+								<td><h:outputText value="#{sessione.utente.dataNascita}">
+										<f:convertDateTime pattern="dd-MM-yyyy" />
+									</h:outputText></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>${sessione.utente.email}</td>
+							</tr>
+							<tr>
+								<td>Password</td>
+								<td>${sessione.utente.password}</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+			<div class="carrello-table indirizzo-table">
+					<table class="mia-table" style="width: 100%">
+						<thead></thead>
+						<tbody>
+							<tr>
+								<td>Dati Indirizzo</td>
+								<td>Inseriti</td>
+							</tr>
+							<tr>
+								<td class="registrazione-td">Stato</td>
+								<td class="registrazione-td">${sessione.utente.indirizzo.stato}</td>
+							</tr>
+							<tr>
+								<td class="registrazione-td">Regione</td>
+								<td class="registrazione-td">${sessione.utente.indirizzo.regione}</td>
+							</tr>
+							<tr>
+								<td class="registrazione-td">Città</td>
+								<td class="registrazione-td">${sessione.utente.indirizzo.citta}</td>
+							</tr>
+							<tr>
+								<td class="registrazione-td">Strada</td>
+								<td class="registrazione-td">${sessione.utente.indirizzo.strada}</td>
+							</tr>
+							<tr>
+								<td class="registrazione-td">CAP</td>
+								<td class="registrazione-td">${sessione.utente.indirizzo.cap}</td>
+							</tr>
+						</tbody>
+					</table>
+					<h:form class="conferma-r-form">
+						<h:commandButton class="btn btn-success" value="Annulla"
+							action="#{utenteController.annullaRegistrazioneUtente}" />
+						<h:commandButton class="btn btn-success" value="Registra"
+							action="#{utenteController.confermaRegistrazioneUtente}" />
+					</h:form>
+				</div>
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
 </h:body>
 
 </html>

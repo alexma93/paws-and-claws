@@ -15,7 +15,7 @@ public class Store {
 	private Map<Integer,Ordine> ordiniEvasi;
 	private Map<String,Amministratore> amministratori;
 	private Map<String,Fornitore> fornitori;
-	private Map<String,Specie> specie;
+	private List<String> specie;
 	private List<Prodotto> prodottiNuovi;
 	
 	public Store() {
@@ -26,7 +26,7 @@ public class Store {
 		this.ordiniNonEvasi = new HashMap<Integer,Ordine>();
 		this.amministratori = new HashMap<String,Amministratore>();
 		this.fornitori = new HashMap<String,Fornitore>();
-		this.specie = new HashMap<String,Specie>();
+		this.specie = new ArrayList<String>();
 		this.prodottiNuovi = new ArrayList<Prodotto>(50);
 		butta();
 	}  
@@ -36,7 +36,7 @@ public class Store {
 		this.amministratori.put("alexma", new Amministratore("alexma","casetta"));
 		Prodotto p = new Prodotto("000","gialla","pannocchia",5F,6,null);
 		this.inserisciProdotto(p);
-		p.setSpecie(new Specie("gatto"));
+		p.setSpecie("gatto");
 		this.inserisciProdotto(new Prodotto("001","lungo","guinzaglio",6F,20,null));
 		this.inserisciProdotto(new Prodotto("003","piccola","ciotola",1F,30,null));
 		this.inserisciProdotto(new Prodotto("002","sonoro","osso di gomma",0.5F,100,null));
@@ -84,10 +84,6 @@ public class Store {
 	
 	public Fornitore getFornitore(String iva) {
 		return this.fornitori.get(iva);
-	}
-
-	public Specie getSpecie(String specie) {
-		return this.specie.get(specie);
 	}
 	
 	public Utente getUtente(String email) {
@@ -159,20 +155,20 @@ public class Store {
 		this.fornitori = fornitori;
 	}
 
-	public Map<String, Specie> getSpecie() {
-		return specie;
-	}
-
-	public void setSpecie(Map<String, Specie> specie) {
-		this.specie = specie;
-	}
-
 	public List<Prodotto> getProdottiNuovi() {
 		return prodottiNuovi;
 	}
 
 	public void setProdottiNuovi(List<Prodotto> prodottiNuovi) {
 		this.prodottiNuovi = prodottiNuovi;
+	}
+
+	public List<String> getSpecie() {
+		return specie;
+	}
+
+	public void setSpecie(List<String> specie) {
+		this.specie = specie;
 	}
 	
 }

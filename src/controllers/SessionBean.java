@@ -21,8 +21,6 @@ public class SessionBean {
 	public SessionBean(){
 		this.store = new Store();
 		
-		/* TODO togliere*/
-		this.utente = new Utente();
 	}
 	
 	public void terminaOrdine() {
