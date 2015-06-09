@@ -115,7 +115,7 @@
 									</a></li>
 								</c:if>
 								<c:if
-									test="${param.pagina==null or prodottoController.size/12>(param.pagina+1)}">
+									test="${param.pagina==null or prodottoController.size/12>=(param.pagina+1)}">
 									<li class="next"><a
 										href="aggiungiProdotto.xhtml?pagina=${param.pagina+1}"><span
 											class="glyphicon glyphicon-chevron-right"></span> </a></li>

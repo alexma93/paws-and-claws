@@ -27,11 +27,11 @@
 		<!--  Elementi della barra -->
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="casella" href="ordini.xhtml">Ordini</a></li>
+				<li><a href="ordini.xhtml">Ordini</a></li>
 				<li class="btn-group"><a style="display: inline;"
 					href="catalogo.xhtml">Catalogo</a>
 					<button type="button" class="btn-link dropdown-toggle"
-						style="margin-top: 15px;" data-toggle="dropdown">
+						style="margin-top: 12px;" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
@@ -43,10 +43,10 @@
 					</ul></li>
 
 				<li><a>${sessione.utente.nome} ${sessione.utente.cognome}</a></li>
-				<li><a class="casella" href="carrello.xhtml"><span
+				<li><a href="carrello.xhtml"><span
 						class="glyphicon glyphicon-shopping-cart"></span></a></li>
 
-				<li style="margin-top: 15px;"><h:form>
+				<li style="margin-top: 12px;"><h:form>
 						<h:commandButton class="btn-link"
 							action="#{sessione.scollegaUtente}" value="Esci" />
 					</h:form></li>

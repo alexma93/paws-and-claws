@@ -26,6 +26,7 @@ public class AmministratoreController {
 		}
 		else if (a.checkPassword(password)) {
 			session.setAmministratore(a);
+			session.setUtente(null);
 			return "index.xhtml";
 		}
 		else {
