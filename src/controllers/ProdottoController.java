@@ -54,8 +54,6 @@ public class ProdottoController {
 	
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
-
-
 	////////////////////////////////prova file////////////////////////////////
 	public String upload() {
 		try {
@@ -82,6 +80,21 @@ public class ProdottoController {
 	//////////////////////////////////////////////////////////////////////////
 	
 	//UC4
+	private String createProduct() {
+		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
+									 prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
+									 prodottoCorrente.getQuantita(), prodottoCorrente.getSpecie(),
+									 prodottoCorrente.getFoto());
+		return "aggiungiProdotto.xhtml";
+	}
+	public String confermaProdotti() {
+		for(Prodotto p : this.prodotti) {
+			this.prodottoCorrente = p;
+			this.createProduct();
+		}
+		this.prodotti = null;
+		return "aggiungiProdotto.xhtml";
+	}
 	public String inserisciNuovoProdotto() {
 		if(this.prodotti==null){
 			this.prodotti = new LinkedList<>();
@@ -253,7 +266,4 @@ public class ProdottoController {
 		this.specie = specie;
 	}
 
-	
-	
-	
 }
