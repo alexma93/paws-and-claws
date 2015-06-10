@@ -57,6 +57,11 @@
 					action="#{ordineController.aggiungiProdottoOrdine}">
 					<f:param name="codice" value="#{prodotto.codice}" />
 				</h:commandButton>
+				<h:commandButton class="btn btn-primary" role="button"
+					value="Ins Rece"
+					action="#{recensioneController.iniziaRecensione}">
+					<f:param name="codice" value="#{prodotto.codice}" />
+				</h:commandButton>
 				<p:spinner id="basic" value="#{ordineController.quantita}" min="1"
 					max="10" />
 

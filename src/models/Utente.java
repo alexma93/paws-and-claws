@@ -41,7 +41,7 @@ public class Utente {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
 	
-@OneToMany(mappedBy = "utente")
+	@OneToMany(mappedBy = "utente")
 	private List<Ordine> ordini;
 	
 	private List<Recensione> recensioni;
@@ -58,7 +58,7 @@ public class Utente {
 		this.dataNascita = data;
 		this.dataRegistrazione = new Date();
 		this.recensioni = new ArrayList<Recensione>();
-		this.ordini = new ArrayList<Ordine>();
+//		this.ordini = new ArrayList<Ordine>();
 	}
 	
 	public Long getId() {

@@ -38,7 +38,6 @@ public class ProdottoController {
 	private String descrizione;
 	private String codice;
 	private Integer quantita;
-	
 	private String specie;
 	
 	private Store store;
@@ -99,11 +98,16 @@ public class ProdottoController {
 		if(this.prodotti==null){
 			this.prodotti = new LinkedList<>();
 		}
-		if(this.store.checkCodiceProdotto(codice)) {
+//		if(this.store.checkCodiceProdotto(codice)) {
 			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, foto);
 			this.prodotti.add(p);
 			this.size=prodotti.size();
-		}
+//		}
+		this.nome = null;
+		this.prezzoDiListino = null;
+		this.descrizione = null;
+		this.codice = null;
+		this.quantita = null;
 		return "aggiungiProdotto.xhtml";
 	}
 	
