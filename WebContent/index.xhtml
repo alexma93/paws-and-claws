@@ -10,22 +10,32 @@
 </h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
-
 		<ui:define name="content">
+
 			<div class="col-md-4"></div>
 			<div class="col-md-3" style="margin-top: 50px;">
 				<c:if test="#{sessione.utente!=null}">
-				<h3>${sessione.utente.nome}</h3>
-				<ui:repeat var="o" value="${sessione.utente.ordini}">
-					<h3>${o}</h3>
+					<h3>${sessione.utente.nome}</h3>
+					<ui:repeat var="o" value="${sessione.utente.ordini}">
+						<h3>${o}</h3>
 					${sessione.utente.cognome}
 					</ui:repeat>
-					</c:if>
-					</div>
+				</c:if>
+			</div>
+
+
+
+			<h:form>
+				<h:commandButton class="btn btn-success" value="evadi ordinee"
+					action="#{ordineController.getOrdiniNonEvasiDB}" />
+			</h:form>
+
+
+
+
+
+
 		</ui:define>
-
 	</ui:composition>
-
 </h:body>
-
 </html>

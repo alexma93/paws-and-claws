@@ -1,11 +1,15 @@
 package models;
 
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 @Stateless(name="oFacade")
 public class OrdineFacade {
@@ -38,5 +42,24 @@ public class OrdineFacade {
 
 	public void aggiungiCoupon(Ordine ordine, Coupon coupon) {
 		ordine.setCoupon(coupon);
+	}
+	
+	public void evadiOrdine() {
+
+	}
+	
+	public List<Ordine> getOrdiniNonEvasi() {
+		List<Ordine> ordiniNonEvasi = (List<Ordine>)em.createQuery("SELECT o FROM Ordine o WHERE o.evaso=false").getResultList();
+		return ordiniNonEvasi;
+	}
+	public Ordine getOrdine(String codice) {
+		Query ricercaOrdine = this.em.createQuery("SELECT o FROM Ordine o WHERE o.codice = :codice");
+		ricercaOrdine.setParameter("codice", codice);
+		try {
+			Ordine o = (Ordine) ricercaOrdine.getSingleResult();
+			return o;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

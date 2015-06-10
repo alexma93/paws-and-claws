@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+		<ui:define name="content">
+
+
+			<!-- elenco ordini non evasi -->
+			<div class="col-md-9">
+				<div class="row ">
+					<h3 class="col-md-9">Pagina: ${param.pagina+1}</h3>
+					<div class="ordinamento dropdown pull-right col-md-2">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							data-toggle="dropdown">
+							Ordina per <span class="caret"></span>
+						</button>
+						<!--  stile inserito in linea, per sovrascrivere tutti gli altri -->
+						<ul class="dropdown-menu" style="right: 42px;">
+							<li><a href="#">nome</a></li>
+							<li><a href="#">prezzo</a></li>
+							<li><a href="#">data</a></li>
+							<li><a href="#">valutazione</a></li>
+						</ul>
+					</div>
+					<div class="col-md-1"></div>
+
+				</div>
+				<c:if test="${ordineController.size-(param.pagina*12)>=12}">
+					<ui:repeat var="o" value="#{ordineController.ordiniNonEvasi}"
+						offset="${param.pagina*12}" size="12">
+						<div class="col-md-4">
+							<ui:param name="ordine" value="${o}" />
+							<label>Codice:</label> <span>${ordine.codice}</span>
+							<h:form>
+								<h:commandButton class="btn btn-success"
+									value="evadi"
+									action="#{ordineController.evadiOrdine}" />
+							</h:form>
+						</div>
+					</ui:repeat>
+				</c:if>
+				<c:if test="${12>ordineController.size-param.pagina*12}">
+					<ui:repeat var="o" value="#{ordineController.ordiniNonEvasi}"
+						offset="${param.pagina*12}">
+						<div class="col-md-4">
+							<ui:param name="ordine" value="${o}" />
+							<label>Codice:</label> <span>${ordine.codice}</span>
+						</div>
+					</ui:repeat>
+				</c:if>
+				<div class="col-md-12">
+					<ul class="pager">
+						<c:if test="${param.pagina>0}">
+							<li class="previous"><a
+								href="evasioneOrdine.xhtml?pagina=${param.pagina-1}"> <span
+									class="glyphicon glyphicon-chevron-left"></span>
+							</a></li>
+						</c:if>
+						<c:if
+							test="${(param.pagina==null and 12>=ordineController.size) or ordineController.size/12>(param.pagina+1)}">
+							<li class="next"><a
+								href="evasioneOrdine.xhtml?pagina=${param.pagina+1}"><span
+									class="glyphicon glyphicon-chevron-right"></span> </a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
