@@ -33,13 +33,17 @@ import models.Store;
 @ManagedBean
 @SessionScoped
 public class ProdottoController {
+	private String nome;
+	private Float prezzoDiListino;
+	private String descrizione;
+	private String codice;
+	private Integer quantita;
+	
+	private String specie;
+	
 	private Store store;
 	private Prodotto prodottoCorrente;
 	private List<Prodotto> prodotti;
-	private String nome;
-	private String descrizione;
-	private String codice;
-	private Float prezzoDiListino;
 	private Integer size;
 	private Part foto;
 	private String fileContent;
@@ -51,10 +55,6 @@ public class ProdottoController {
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 
-	private String createProduct() {
-		this.prodottoCorrente = prodottoFacade.createProduct(nome, codice, prezzoDiListino, descrizione, foto);
-		return "aggiungiProdotto.xhtml";
-	}
 	
 	////////////////////////////////prova file////////////////////////////////
 	public String upload() {
@@ -82,22 +82,30 @@ public class ProdottoController {
 	//////////////////////////////////////////////////////////////////////////
 	
 	//UC4
+	private String createProduct() {
+		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
+									 prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
+									 prodottoCorrente.getQuantita(), prodottoCorrente.getSpecie(),
+									 prodottoCorrente.getFoto());
+		return "aggiungiProdotto.xhtml";
+	}
+	public String confermaProdotti() {
+		for(Prodotto p : this.prodotti) {
+			this.prodottoCorrente = p;
+			this.createProduct();
+		}
+		this.prodotti = null;
+		return "aggiungiProdotto.xhtml";
+	}
 	public String inserisciNuovoProdotto() {
 		if(this.prodotti==null){
 			this.prodotti = new LinkedList<>();
 		}
-		Prodotto p = new Prodotto(codice,descrizione,nome,prezzoDiListino,null,foto);
-		this.prodotti.add(p);
-		this.size=prodotti.size();
-		//String codice,String descrizione,String nome,Integer prezzo,Integer quantita)
-//		if(this.store.checkCodiceProdotto(codice)) {
-//		}
-//		else {
-//			this.prodottoCorrente = new Prodotto(codice,descrizione,nome,prezzoDiListino,null);
-			//TODO
-//		}
-		this.createProduct();
-		
+		if(this.store.checkCodiceProdotto(codice)) {
+			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, foto);
+			this.prodotti.add(p);
+			this.size=prodotti.size();
+		}
 		return "aggiungiProdotto.xhtml";
 	}
 	
@@ -243,7 +251,22 @@ public class ProdottoController {
 	public void setFileContent(String fileContent) {
 		this.fileContent = fileContent;
 	}
-	
-	
+
+	public Integer getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(Integer quantita) {
+		this.quantita = quantita;
+	}
+
+	public String getSpecie() {
+		return specie;
+	}
+
+	public void setSpecie(String specie) {
+		this.specie = specie;
+	}
+
 	
 }

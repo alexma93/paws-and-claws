@@ -2,6 +2,10 @@ package models;
 
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Fornitore {
 	private Long id;
 	private String nome;
@@ -9,6 +13,8 @@ public class Fornitore {
 	private String telefono;
 	private String email;
 	private Indirizzo indirizzo;
+	
+	@ManyToMany
 	private Map<String,Prodotto> prodotti;
 	
 	public String getIva() {
