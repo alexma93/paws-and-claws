@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Date;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -20,7 +22,6 @@ public class SessionBean {
 	
 	public SessionBean(){
 		this.store = new Store();
-		
 	}
 	
 	public void terminaOrdine() {
@@ -39,11 +40,6 @@ public class SessionBean {
 		return "index.xhtml";
 	}
 	
-
-	public void confermaRegistrazioneUtente() {
-		this.store.confermaRegistrazioneUtente(this.utente);
-		
-	}
 	
 	public Utente getUtente() {
 		return utente;

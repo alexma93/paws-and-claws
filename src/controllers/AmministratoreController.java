@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import models.Amministratore;
+import models.AmministratoreFacade;
  
 @ManagedBean
 @RequestScoped

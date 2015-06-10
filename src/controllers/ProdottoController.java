@@ -27,6 +27,7 @@ import javax.servlet.http.Part;
 
 import models.Fornitore;
 import models.Prodotto;
+import models.ProdottoFacade;
 import models.Store;
 
 @ManagedBean

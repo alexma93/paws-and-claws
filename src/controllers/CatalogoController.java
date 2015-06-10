@@ -25,13 +25,7 @@ public class CatalogoController {
 		this.catalogo = new ArrayList<>(this.catalogoCorrente.values());
 	}
 
-	
-//	public String visualizzaProdotto() {
-//		/*FacesContext fc = FacesContext.getCurrentInstance();
-//		String codice = fc.getExternalContext().getRequestParameterMap().get("prodotto");
-//		this.prodottoCorrente = this.catalogoCorrente.get(codice);*/
-//		return "index.xhtml";
-//	}
+
 	public Map<String, Prodotto> getCatalogoCorrente() {
 		return catalogoCorrente;
 	}

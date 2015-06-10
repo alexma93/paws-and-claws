@@ -32,7 +32,6 @@ public class Store {
 	}  
 
 	public void butta() {
-		confermaRegistrazioneUtente(new Utente("daniele","petrillo",new Date(),"a@b.it","pass"));
 		this.amministratori.put("alexma", new Amministratore("alexma","casetta"));
 		Prodotto p = new Prodotto("000","gialla","pannocchia",5F,6,null);
 		this.inserisciProdotto(p);

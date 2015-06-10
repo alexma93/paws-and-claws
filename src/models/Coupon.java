@@ -1,17 +1,30 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Coupon {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable=false)
 	private String codice;
+	@Column
 	private Integer percentuale;
 	
 	public Coupon() {
 		
 	}
+	
 	public Coupon(String codice,Integer percentuale) {
 		this.codice = codice;
 		this.percentuale = percentuale;
 	}
+	
 	public Long getId() {
 		return id;
 	}

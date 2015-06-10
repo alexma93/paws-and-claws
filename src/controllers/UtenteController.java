@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import models.Utente;
+import models.UtenteFacade;
 
 @ManagedBean
 @RequestScoped
@@ -56,7 +57,6 @@ public class UtenteController {
 	}
 
 	public String confermaRegistrazioneUtente() {
-		session.confermaRegistrazioneUtente();
 		utenteFacade.confermaUtente(session.getUtente());
 		return "index.xhtml";
 	}

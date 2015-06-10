@@ -4,24 +4,54 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class Ordine {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column
 	private Double prezzoTotale;
+	@Column
 	private Boolean evaso;
+	@Temporal (TemporalType.DATE)
 	private Date dataApertura;
+	@Temporal (TemporalType.DATE)
 	private Date dataChiusura;
+	@Temporal (TemporalType.DATE)
 	private Date dataEvasione;
-	private List<RigaOrdine> righe;
-	private Coupon coupon;
-	private Integer codice;
 	
-	public Ordine() {
+	@Column
+	private Integer codice;
+	@OneToOne
+	private Utente utente;
+	
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	@JoinColumn(name = "ordine_id")
+	private List<RigaOrdine> righe;
+	@OneToOne
+	private Coupon coupon;
+	
+	public Ordine(Utente utente) {
 		this.prezzoTotale = 0.;
 		this.evaso = false;
 		this.righe = new LinkedList<RigaOrdine>();
 		this.dataApertura = new Date();
-		//TODO codice
+		this.utente = utente;
+		//il codice alla fine
 	}
 
 	public boolean contiene(Prodotto p) {
@@ -40,7 +70,7 @@ public class Ordine {
 		this.prezzoTotale += prodotto.getPrezzoDiListino()*quantita;
 	}
 
-	private void modificaQuantita(Prodotto prodotto, Integer quantita) {
+	public void modificaQuantita(Prodotto prodotto, Integer quantita) {
 		for(RigaOrdine r:righe)
 			if(r.stessoProdotto(prodotto))
 				r.setQuantita(r.getQuantita()+quantita);

@@ -5,11 +5,13 @@
 	<persistence-unit name="model-unit" transaction-type="JTA">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 		<jta-data-source>java:openejb/Resource/PostgreSQL Database</jta-data-source>
- 	<!--  	<non-jta-data-source>PostgreSQL Database</non-jta-data-source> -->
+		<!-- <non-jta-data-source>PostgreSQL Database</non-jta-data-source> -->
 		<class>model.Prodotto</class>
 		<class>model.Utente</class>
 		<class>model.Indirizzo</class>
 		<class>model.Amministratore</class>
+		<class>model.Ordine</class>
+		<class>model.RigaOrdine</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>

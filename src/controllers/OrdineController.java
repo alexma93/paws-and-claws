@@ -1,13 +1,16 @@
 package controllers;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import models.Coupon;
-import models.Ordine;
+import models.CouponFacade;
+import models.OrdineFacade;
 import models.Prodotto;
+import models.ProdottoFacade;
 
 @ManagedBean
 @RequestScoped
@@ -18,6 +21,15 @@ public class OrdineController {
 	
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
+	
+	@EJB(beanName="pFacade")
+	private ProdottoFacade prodottoFacade;
+	
+	@EJB(beanName="oFacade")
+	private OrdineFacade ordineFacade;
+	
+	@EJB(beanName="couponFacade")
+	private CouponFacade couponFacade;
 
 	public OrdineController() {
 		this.quantita = 1;
@@ -25,28 +37,29 @@ public class OrdineController {
 	//UC2
 	public String aggiungiProdottoOrdine() {
 		if(session.getOrdineCorrente()==null)
-			session.setOrdineCorrente(new Ordine());
+			session.setOrdineCorrente(ordineFacade.createOrdine(session.getUtente()));
 		FacesContext fc = FacesContext.getCurrentInstance();
 		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
-		Prodotto p = this.session.getStore().getProdotto(codice);
-		session.getOrdineCorrente().aggiungiProdotto(p,quantita);
+		Prodotto p = prodottoFacade.getProdotto(codice);
+		ordineFacade.aggiungiProdotto(session.getOrdineCorrente(),p,quantita);
 		this.quantita = 1;
 		return "carrello.xhtml";
 	}
 
 	public String aggiungiCoupon() {
-		Coupon c = session.getStore().getSingoloCoupon(codiceCoupon);
+		Coupon c = couponFacade.getCoupon(codiceCoupon);
 		if(c==null) {
 			this.setErroreCoupon("coupon non valido");
 		}
 		else {
-			session.getOrdineCorrente().aggiungiCoupon(c);
+			ordineFacade.aggiungiCoupon(session.getOrdineCorrente(),c);
 		}
 		return "carrello.xhtml";
 	}
 
-	public void terminaOrdine() {
-		session.terminaOrdine();
+	public String terminaOrdine() {
+		ordineFacade.terminaOrdine(session.getOrdineCorrente());
+		return "index.xhtml";
 	}
 
 	//UC6

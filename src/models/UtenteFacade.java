@@ -1,4 +1,4 @@
-package controllers;
+package models;
 
 import java.util.Date;
 
@@ -8,8 +8,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import models.Utente;
 
 @Stateless(name="uFacade")
 public class UtenteFacade {

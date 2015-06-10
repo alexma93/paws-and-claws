@@ -1,11 +1,26 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class RigaOrdine {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column
 	private Float prezzoUnitario;
+	@Column
 	private Integer quantita;
+	@Column
 	private Prodotto prodotto;
+	
+	public RigaOrdine() {
+	}
 	
 	public RigaOrdine(Prodotto prodotto, Integer quantita) {
 		this.prodotto = prodotto;
@@ -48,31 +63,6 @@ public class RigaOrdine {
 		this.prodotto = prodotto;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((prodotto == null) ? 0 : prodotto.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RigaOrdine other = (RigaOrdine) obj;
-		if (prodotto == null) {
-			if (other.prodotto != null)
-				return false;
-		} else if (!prodotto.equals(other.prodotto))
-			return false;
-		return true;
-	}
 	
 	
 }

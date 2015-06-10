@@ -1,4 +1,4 @@
-package controllers;
+package models;
 
 import javax.ejb.Stateless;
 
@@ -10,9 +10,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.Part;
-
-import models.Prodotto;
 
 @Stateless(name="pFacade")
 public class ProdottoFacade {
@@ -24,5 +23,16 @@ public class ProdottoFacade {
 		Prodotto product = new Prodotto(codice,descrizione,nome,prezzoDiListino,null,foto);
 		em.persist(product);
 		return product;  
+	}
+
+	public Prodotto getProdotto(String codice) {
+		Query ricercaProdotto = this.em.createQuery("SELECT p FROM Prodotto p WHERE p.codice = :codice");
+		ricercaProdotto.setParameter("codice", codice);
+		try {
+			Prodotto p = (Prodotto) ricercaProdotto.getSingleResult();
+			return p;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

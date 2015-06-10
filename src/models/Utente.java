@@ -143,6 +143,18 @@ public class Utente {
 		this.recensioni.add(recensione);
 		
 	}
+	public Map<Long, Ordine> getOrdini() {
+		return ordini;
+	}
+
+	public void setOrdini(Map<Long, Ordine> ordini) {
+		this.ordini = ordini;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
