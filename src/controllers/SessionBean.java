@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.Date;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -9,6 +10,7 @@ import models.Amministratore;
 import models.Ordine;
 import models.Store;
 import models.Utente;
+import models.UtenteFacade;
 
 @ManagedBean(name="sessione")
 @SessionScoped
@@ -20,18 +22,21 @@ public class SessionBean {
 	 * durante la stessa sessione rimarrebbe lo stesso ordine*/
 	private Ordine ordineCorrente;
 	
+	@EJB(beanName="uFacade")
+	private UtenteFacade utenteFacade;
+	
 	public SessionBean(){
 		this.store = new Store();
 	}
 	
 	public void terminaOrdine() {
-		store.confermaOrdine(this.ordineCorrente);
-		utente.confermaOrdine(this.ordineCorrente);
+		utenteFacade.confermaOrdine(this.utente,this.ordineCorrente);
 		this.ordineCorrente = null;
 	}
 	
 	public String scollegaUtente() {
 		this.utente = null;
+		this.ordineCorrente = null;
 		return "index.xhtml";
 	}
 	

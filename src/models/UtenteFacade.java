@@ -46,4 +46,8 @@ public class UtenteFacade {
 			return null;
 		}
 	}
+
+	public void confermaOrdine(Utente utente, Ordine ordine) {
+		//utente.getOrdini().put(ordine.getCodice(), ordine);
+	}
 }

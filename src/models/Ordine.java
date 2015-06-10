@@ -7,11 +7,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -36,7 +36,7 @@ public class Ordine {
 	
 	@Column
 	private Integer codice;
-	@OneToOne
+	@ManyToOne
 	private Utente utente;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
@@ -152,6 +152,14 @@ public class Ordine {
 		this.codice = codice;
 	}
 	
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
 
 	@Override
 	public int hashCode() {

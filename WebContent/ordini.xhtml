@@ -10,18 +10,13 @@
 </h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
-
 		<ui:define name="content">
-			<div class="col-md-4"></div>
-			<div class="col-md-3" style="margin-top: 50px;">
-				<c:if test="#{sessione.utente!=null}">
-				<h3>${sessione.utente.nome}</h3>
-				<ui:repeat var="o" value="${sessione.utente.ordini}">
-					<h3>${o}</h3>
-					${sessione.utente.cognome}
-					</ui:repeat>
-					</c:if>
-					</div>
+			<div class="prima-row carrello">
+				<div class="carrello-table">
+					<h2 class="titolo-carrello col-md-7 col-md-offset-5">Ordini effettuati</h2>
+
+				</div>
+			</div>
 		</ui:define>
 
 	</ui:composition>

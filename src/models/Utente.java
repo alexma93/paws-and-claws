@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,8 +41,10 @@ public class Utente {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
 	
+@OneToMany(mappedBy = "utente")
+	private List<Ordine> ordini;
+	
 	private List<Recensione> recensioni;
-	private Map<Long,Ordine> ordini;
 	
 	public Utente() {
 	}
@@ -54,7 +58,7 @@ public class Utente {
 		this.dataNascita = data;
 		this.dataRegistrazione = new Date();
 		this.recensioni = new ArrayList<Recensione>();
-		this.ordini = new HashMap<Long,Ordine>();
+		this.ordini = new ArrayList<Ordine>();
 	}
 	
 	public Long getId() {
@@ -125,6 +129,14 @@ public class Utente {
 		this.recensioni = recensioni;
 	}
 
+	public List<Ordine> getOrdini() {
+		return ordini;
+	}
+
+	public void setOrdini(List<Ordine> ordini) {
+		this.ordini = ordini;
+	}
+
 	public void aggiungiIndirizzo(String strada, String citta, String stato,
 			String cap, String regione) {
 		this.indirizzo = new Indirizzo(strada,citta,stato,cap,regione);
@@ -135,20 +147,9 @@ public class Utente {
 		return this.password.equals(password);
 	}
 
-	public void confermaOrdine(Ordine ordine) {
-		this.ordini.put(ordine.getId(), ordine);
-	}
-
 	public void aggiungiRecensione(Recensione recensione) {
 		this.recensioni.add(recensione);
 		
-	}
-	public Map<Long, Ordine> getOrdini() {
-		return ordini;
-	}
-
-	public void setOrdini(Map<Long, Ordine> ordini) {
-		this.ordini = ordini;
 	}
 
 	public void setId(Long id) {

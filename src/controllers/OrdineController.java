@@ -11,6 +11,7 @@ import models.CouponFacade;
 import models.OrdineFacade;
 import models.Prodotto;
 import models.ProdottoFacade;
+import models.UtenteFacade;
 
 @ManagedBean
 @RequestScoped
@@ -58,7 +59,9 @@ public class OrdineController {
 	}
 
 	public String terminaOrdine() {
+		
 		ordineFacade.terminaOrdine(session.getOrdineCorrente());
+		session.terminaOrdine();
 		return "index.xhtml";
 	}
 

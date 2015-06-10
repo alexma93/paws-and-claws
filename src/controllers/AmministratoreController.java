@@ -31,7 +31,7 @@ public class AmministratoreController {
 		}
 		else if (a.checkPassword(password)) {
 			session.setAmministratore(a);
-			session.setUtente(null);
+			session.scollegaUtente();
 			return "index.xhtml";
 		}
 		else {
