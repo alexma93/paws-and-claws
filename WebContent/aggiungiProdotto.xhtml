@@ -71,17 +71,14 @@
 								<h:message for="quantita" />
 							</div>
 							<div class="form-group">
-								<h:form>
-									<h:selectOneMenu id="specie" accesskey="a"
+									<h:selectOneMenu styleClass="form-control" id="specie" accesskey="a"
 										value="#{prodottoController.specie}">
 										<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
 										<f:selectItem itemValue="Gatto" itemLabel="Gatto" />
 										<f:selectItem itemValue="Cane" itemLabel="Cane" />
 										<f:selectItem itemValue="Rettile" itemLabel="Rettile" />
 									</h:selectOneMenu>
-								</h:form>
 							</div>
-
 							<div class="row">
 								<h:commandButton class="btn btn-success" value="Inserisci"
 									action="#{prodottoController.inserisciNuovoProdotto}" />
@@ -156,6 +153,11 @@
 
 			</div>
 			<script src="js/upload.js"></script>
+			<script>$('.selectpicker').selectpicker();</script>
+			<script> $('.selectpicker').selectpicker({
+			      style: 'btn-info',
+			      size: 4
+			  });</script>
 		</ui:define>
 	</ui:composition>
 </h:body>
