@@ -4,16 +4,26 @@ import java.awt.Image;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.servlet.http.Part;
+
+import org.primefaces.component.link.Link;
 
 @Entity
 @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
@@ -25,6 +35,8 @@ public class Prodotto {
 	
 	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private Float prezzoDiListino;
 	
 	@Column(length = 2000)
@@ -33,21 +45,51 @@ public class Prodotto {
 	@Column(nullable = false)
 	private String codice;
 	
-	@Column(nullable = false)
-	private Part foto;
-	
+	@Temporal (TemporalType.DATE)
 	private Date dataInserimento;
+	
+	@Column
 	private Integer quantita;
+	
+	@Column
 	private String specie;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Sconto sconto;
+	
+	@ManyToMany
 	private Map<String,Fornitore> fornitori;
+	
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	@JoinColumn(name = "recensione_id")
 	private List<Recensione> recensioni;
 	
-	
+	@Column
 	private Integer votoMedio;
+	
+	@Column(nullable = false)
+	private Part foto;
 
 	public Prodotto(){}
 	
+	public Prodotto(String nome, Float prezzoDiListino, String descrizione,
+			String codice, Integer quantita, String specie, Sconto sconto,
+			Integer votoMedio, Part foto) {
+		this.nome = nome;
+		this.prezzoDiListino = prezzoDiListino;
+		this.descrizione = descrizione;
+		this.codice = codice;
+		this.quantita = quantita;
+		this.specie = specie;
+		this.sconto = sconto;
+		this.votoMedio = votoMedio;
+		this.foto = foto;
+		this.dataInserimento = new Date();
+		this.fornitori = new HashMap<String,Fornitore>();
+		this.recensioni = new LinkedList<>();
+		this.votoMedio = 0;
+	}
+
 	public Prodotto(String codice, String descrizione, String nome,
 			Float prezzo, Integer quantita, Part foto) {
 		this.codice = codice;

@@ -32,6 +32,9 @@
 								</div>
 							</div>
 
+							${prodottoController.nome}
+							${prodottoController.codice}
+							${prodottoController.specie}
 							<div class="form-group">
 								<label for="nome">Nome:</label>
 								<h:inputText class="form-control"
@@ -51,7 +54,7 @@
 								<h:inputText class="form-control"
 									value="#{prodottoController.prezzoDiListino}" required="true"
 									requiredMessage="Il prezzo è obbligatorio"
-									converterMessage="Price must be a number" id="prezzoDiListino" />
+									converterMessage="Deve essere un numero!" id="prezzoDiListino" />
 								<h:message for="prezzoDiListino" />
 							</div>
 							<div class="form-group">
@@ -60,8 +63,32 @@
 									value="#{prodottoController.descrizione}" required="false"
 									cols="20" rows="5" />
 							</div>
-							<h:commandButton class="btn btn-success" value="Submit"
-								action="#{prodottoController.inserisciNuovoProdotto}" />
+							<div class="form-group">
+								<label for="quantita">Quantità:</label>
+								<h:inputText class="form-control"
+									value="#{prodottoController.quantita}" required="true"
+									requiredMessage="La quantità è obbligatoria" id="quantita" />
+								<h:message for="quantita" />
+							</div>
+							<div class="form-group">
+								<h:form>
+									<h:selectOneMenu id="specie" accesskey="a"
+										value="#{prodottoController.specie}">
+										<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+										<f:selectItem itemValue="Gatto" itemLabel="Gatto" />
+										<f:selectItem itemValue="Cane" itemLabel="Cane" />
+										<f:selectItem itemValue="Rettile" itemLabel="Rettile" />
+									</h:selectOneMenu>
+								</h:form>
+							</div>
+
+							<div class="row">
+								<h:commandButton class="btn btn-success" value="Inserisci"
+									action="#{prodottoController.inserisciNuovoProdotto}" />
+								<h:commandButton class="btn btn-success"
+									value="Conferma e termina"
+									action="#{prodottoController.confermaProdotti}" />
+							</div>
 							<h:button class="btn btn-primary" value="Home"
 								outcome="index.xhtml" />
 						</h:form>
