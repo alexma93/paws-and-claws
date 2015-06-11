@@ -37,6 +37,10 @@ public class OrdineController {
 	@EJB(beanName="couponFacade")
 	private CouponFacade couponFacade;
 
+	@EJB(beanName="uFacade")
+	private UtenteFacade utenteFacade;
+
+	
 	public OrdineController() {
 		this.quantita = 1;
 	}

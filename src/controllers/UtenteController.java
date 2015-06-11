@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import models.Ordine;
 import models.Utente;
@@ -35,6 +36,8 @@ public class UtenteController {
 	
 	@EJB(beanName="uFacade")
 	private UtenteFacade utenteFacade;
+	
+	private Utente utenteVisualizzato;
 
 	public UtenteController() {
 	}
@@ -83,7 +86,14 @@ public class UtenteController {
 
 		return "index.xhtml";
 	}
-
+	
+	//UC5
+	public String visualizzaUtente() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		String email = fc.getExternalContext().getRequestParameterMap().get("email");
+		setUtenteVisualizzato(utenteFacade.getUtente(email));
+		return "mostraUtente.xhtml";
+	}
 
 	public String getPassword() {
 		return password;
@@ -182,6 +192,14 @@ public class UtenteController {
 
 	public void setUtenteFacade(UtenteFacade utenteFacade) {
 		this.utenteFacade = utenteFacade;
+	}
+
+	public Utente getUtenteVisualizzato() {
+		return utenteVisualizzato;
+	}
+
+	public void setUtenteVisualizzato(Utente utenteVisualizzato) {
+		this.utenteVisualizzato = utenteVisualizzato;
 	}
 
 

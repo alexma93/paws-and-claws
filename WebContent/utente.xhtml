@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+	<link href="resources/css/utenteStyle.css" rel="stylesheet"
+		media="screen" />
+</h:head>
+<body>
+	<ui:composition>
+	
+					<table class="mia-table" style="width: 100%">
+						<thead></thead>
+						<tbody>
+							<tr>
+								<td>Dati Utente</td>
+								<td>Inseriti</td>
+							</tr>
+							<tr>
+								<td>Nome</td>
+								<td>${utente.nome}</td>
+							</tr>
+							<tr>
+								<td>Cognome</td>
+								<td>${utente.cognome}</td>
+							</tr>
+							<tr>
+								<td>Data di nascita</td>
+								<td><h:outputText value="#{sessione.utente.dataNascita}">
+										<f:convertDateTime pattern="dd-MM-yyyy" />
+									</h:outputText></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>${utente.email}</td>
+							</tr>
+							<c:if test="${mostraPassword==1}">
+							<tr>
+								<td>Password</td>
+								<td>${sessione.utente.password}</td>
+							</tr>
+							</c:if>
+						</tbody>
+					</table>
+					
+			<div class="utente-table indirizzo-table">
+					<table class="mia-table" style="width: 100%">
+						<thead></thead>
+						<tbody>
+							<tr>
+								<td>Dati Indirizzo</td>
+								<td>Inseriti</td>
+							</tr>
+							<tr>
+								<td>Stato</td>
+								<td>${sessione.utente.indirizzo.stato}</td>
+							</tr>
+							<tr>
+								<td>Regione</td>
+								<td>${sessione.utente.indirizzo.regione}</td>
+							</tr>
+							<tr>
+								<td>Città</td>
+								<td>${sessione.utente.indirizzo.citta}</td>
+							</tr>
+							<tr>
+								<td>Strada</td>
+								<td>${sessione.utente.indirizzo.strada}</td>
+							</tr>
+							<tr>
+								<td>CAP</td>
+								<td>${sessione.utente.indirizzo.cap}</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+	</ui:composition>
+</body>
+</html>

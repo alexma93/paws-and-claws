@@ -10,71 +10,15 @@
 
 		<ui:define name="content">
 			<div class="prima-row carrello">
-				<div class="carrello-table">
+				<div class="utente-table">
 					<h2 class="titolo-carrello col-md-8 col-md-offset-4">Riepilogo</h2>
-					<table class="mia-table" style="width: 100%">
-						<thead></thead>
-						<tbody>
-							<tr>
-								<td>Dati Utente</td>
-								<td>Inseriti</td>
-							</tr>
-							<tr>
-								<td>Nome</td>
-								<td>${sessione.utente.nome}</td>
-							</tr>
-							<tr>
-								<td>Cognome</td>
-								<td>${sessione.utente.cognome}</td>
-							</tr>
-							<tr>
-								<td>Data di nascita</td>
-								<td><h:outputText value="#{sessione.utente.dataNascita}">
-										<f:convertDateTime pattern="dd-MM-yyyy" />
-									</h:outputText></td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td>${sessione.utente.email}</td>
-							</tr>
-							<tr>
-								<td>Password</td>
-								<td>${sessione.utente.password}</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
-			<div class="carrello-table indirizzo-table">
-					<table class="mia-table" style="width: 100%">
-						<thead></thead>
-						<tbody>
-							<tr>
-								<td>Dati Indirizzo</td>
-								<td>Inseriti</td>
-							</tr>
-							<tr>
-								<td class="registrazione-td">Stato</td>
-								<td class="registrazione-td">${sessione.utente.indirizzo.stato}</td>
-							</tr>
-							<tr>
-								<td class="registrazione-td">Regione</td>
-								<td class="registrazione-td">${sessione.utente.indirizzo.regione}</td>
-							</tr>
-							<tr>
-								<td class="registrazione-td">Città</td>
-								<td class="registrazione-td">${sessione.utente.indirizzo.citta}</td>
-							</tr>
-							<tr>
-								<td class="registrazione-td">Strada</td>
-								<td class="registrazione-td">${sessione.utente.indirizzo.strada}</td>
-							</tr>
-							<tr>
-								<td class="registrazione-td">CAP</td>
-								<td class="registrazione-td">${sessione.utente.indirizzo.cap}</td>
-							</tr>
-						</tbody>
-					</table>
-					
+					<ui:include src="utente.xhtml">
+						<ui:param name="utente"
+							value="${utenteController.utenteVisualizzato}" />
+							<ui:param name="mostraPassword"
+							value="1" />
+					</ui:include>
+
 					<h:form class="conferma-r-form">
 						<h:commandButton class="btn btn-success" value="Annulla"
 							action="#{utenteController.annullaRegistrazioneUtente}" />
