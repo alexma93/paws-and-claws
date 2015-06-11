@@ -24,13 +24,15 @@
 				</c:if>
 			</div>
 
-
 			<o:graphicImage value="#{prodottoController.content}" dataURI="true"
-			width="600" rendered="#{not empty prodottoController.content}" />
-			<h2>prova: " ${prodottoController.content}</h2>
+				width="600" rendered="#{not empty prodottoController.content}" />
 			<h:form>
 				<h:commandButton class="btn btn-success" value="evadi ordinee"
 					action="#{ordineController.getOrdiniNonEvasiDB}" />
+			</h:form>
+			<h:form>
+				<h:commandButton class="btn btn-success" value="prova"
+					action="#{prodottoController.provaImmagine}" />
 			</h:form>
 
 

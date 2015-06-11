@@ -75,10 +75,10 @@
 							<div class="form-group">
 								<h:selectOneMenu styleClass="form-control" id="specie"
 									accesskey="a" value="#{prodottoController.specie}">
-									<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
-									<f:selectItem itemValue="Gatto" itemLabel="Gatto" />
-									<f:selectItem itemValue="Cane" itemLabel="Cane" />
-									<f:selectItem itemValue="Rettile" itemLabel="Rettile" />
+									<f:selectItem itemValue="#{null}" itemLabel="seleziona" />
+									<f:selectItem itemValue="gatto" itemLabel="Gatto" />
+									<f:selectItem itemValue="cane" itemLabel="Cane" />
+									<f:selectItem itemValue="rettile" itemLabel="Rettile" />
 								</h:selectOneMenu>
 							</div>
 							<div class="row">
@@ -118,9 +118,9 @@
 							<ui:repeat var="p" value="#{prodottoController.prodotti}"
 								offset="${param.pagina*12}" size="12">
 								<div class="col-md-4">
-									<ui:param name="prodotto" value="${p}" />
-									<label>Codice:</label> <span>${prodotto.codice}</span> <label>foto:</label>
-									<span>${prodotto.foto}</span>
+									<ui:include src="prodottoAggiungiProdotto.xhtml">
+										<ui:param name="prodotto" value="${p}" />
+									</ui:include>
 								</div>
 							</ui:repeat>
 						</c:if>
@@ -128,9 +128,9 @@
 							<ui:repeat var="p" value="#{prodottoController.prodotti}"
 								offset="${param.pagina*12}">
 								<div class="col-md-4">
-									<ui:param name="prodotto" value="${p}" />
-									<label>Codice:</label> <span>${prodotto.codice}</span> <label>foto:</label>
-									<span>${prodotto.foto}</span>
+									<ui:include src="prodottoAggiungiProdotto.xhtml">
+										<ui:param name="prodotto" value="${p}" />
+									</ui:include>
 								</div>
 							</ui:repeat>
 						</c:if>

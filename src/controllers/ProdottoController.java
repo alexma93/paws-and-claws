@@ -43,7 +43,6 @@ public class ProdottoController {
 	private Prodotto prodottoCorrente;
 	private List<Prodotto> prodotti;
 	private Integer size;
-	private Part foto;
 	
     private Part file;
     private byte[] content;
@@ -56,6 +55,11 @@ public class ProdottoController {
 	private ProdottoFacade prodottoFacade;
 	
 	//UC4
+	public String provaImmagine() {
+		this.prodottoCorrente = prodottoFacade.getProdotto("000");
+		this.content = this.prodottoCorrente.getFoto();
+		return "index.xhtml";
+	}
 	private String createProduct() {
 		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
 									 prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
@@ -75,8 +79,12 @@ public class ProdottoController {
 		if(this.prodotti==null){
 			this.prodotti = new LinkedList<>();
 		}
+		try {
+			content = Utils.toByteArray(file.getInputStream());
+		} catch (IOException e) {
+		}
 //		if(this.store.checkCodiceProdotto(codice)) {
-			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, foto);
+			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, content);
 			this.prodotti.add(p);
 			this.size=prodotti.size();
 //		}
@@ -85,10 +93,9 @@ public class ProdottoController {
 		this.descrizione = null;
 		this.codice = null;
 		this.quantita = null;
-		try {
-			content = Utils.toByteArray(file.getInputStream());
-		} catch (IOException e) {
-		}
+		this.file = null;
+		this.specie = "seleziona";
+
 		return "aggiungiProdotto.xhtml";
 	}
 	
@@ -102,7 +109,7 @@ public class ProdottoController {
 		}
 	}
 	
-	public void inserisciFoto(Part immagine) {
+	public void inserisciFoto(byte[] immagine) {
 		this.prodottoCorrente.setImmagine(immagine);
 	}
 	

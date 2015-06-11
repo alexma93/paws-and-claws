@@ -20,7 +20,7 @@ public class ProdottoFacade {
 	private EntityManager em;
     
 	public Prodotto createProduct(String nome, Float prezzoDiListino, String descrizione, String codice, Integer quantita,
-									String specie, Part foto) {
+									String specie, byte[] foto) {
 		Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, foto);
 		em.persist(p);
 		return p;  

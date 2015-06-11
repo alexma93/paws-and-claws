@@ -8,13 +8,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -67,14 +70,14 @@ public class Prodotto {
 	@Column
 	private Integer votoMedio;
 	
-	@Column(nullable = false)
-	private Part foto;
+	@Column
+	private byte[] foto;
 
 	public Prodotto(){}
 	
 	public Prodotto(String nome, Float prezzoDiListino, String descrizione,
 			String codice, Integer quantita, String specie, Sconto sconto,
-			Integer votoMedio, Part foto) {
+			Integer votoMedio, byte[] foto) {
 		this.nome = nome;
 		this.prezzoDiListino = prezzoDiListino;
 		this.descrizione = descrizione;
@@ -91,7 +94,7 @@ public class Prodotto {
 	}
 
 	public Prodotto(String codice, String descrizione, String nome,
-			Float prezzo, Integer quantita, Part foto) {
+			Float prezzo, Integer quantita, byte[] foto) {
 		this.codice = codice;
 		this.descrizione = descrizione;
 		this.nome = nome;
@@ -190,7 +193,7 @@ public class Prodotto {
 		this.fornitori.put(f.getIva(),f);
 	}
 
-	public void setImmagine(Part immagine) {
+	public void setImmagine(byte[] immagine) {
 		this.foto = immagine;
 	}
 
@@ -210,11 +213,11 @@ public class Prodotto {
 		this.fornitori = fornitori;
 	}
 
-	public Part getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Part foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 	
