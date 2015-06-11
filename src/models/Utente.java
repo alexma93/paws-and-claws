@@ -58,7 +58,7 @@ public class Utente {
 		this.dataNascita = data;
 		this.dataRegistrazione = new Date();
 		this.recensioni = new ArrayList<Recensione>();
-		this.ordini = new ArrayList<Ordine>();
+//		this.ordini = new ArrayList<Ordine>();
 	}
 	
 	public Long getId() {

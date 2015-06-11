@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -8,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import models.Coupon;
 import models.CouponFacade;
+import models.Ordine;
 import models.OrdineFacade;
 import models.Prodotto;
 import models.ProdottoFacade;
@@ -19,6 +22,8 @@ public class OrdineController {
 	private Integer quantita;
 	private String codiceCoupon;
 	private String erroreCoupon;
+	private List<Ordine> ordiniNonEvasi;
+	private Integer size;
 	
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
@@ -66,8 +71,13 @@ public class OrdineController {
 	}
 
 	//UC6
-	public void evadiOrdine(Integer codice) {
-		this.session.getStore().evadi(codice);
+	public String getOrdiniNonEvasiDB() {
+		this.ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
+		return "evasioneOrdine.xhtml";
+	}
+	public String evadiOrdine() {
+//		this.session.getStore().evadi(codice);
+		return "index.xhtml";
 	}
 
 	public SessionBean getSession() {
@@ -97,4 +107,36 @@ public class OrdineController {
 	public void setErroreCoupon(String erroreCoupon) {
 		this.erroreCoupon = erroreCoupon;
 	}
+	public Integer getSize() {
+		return size;
+	}
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+	public ProdottoFacade getProdottoFacade() {
+		return prodottoFacade;
+	}
+	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
+		this.prodottoFacade = prodottoFacade;
+	}
+	public OrdineFacade getOrdineFacade() {
+		return ordineFacade;
+	}
+	public void setOrdineFacade(OrdineFacade ordineFacade) {
+		this.ordineFacade = ordineFacade;
+	}
+	public CouponFacade getCouponFacade() {
+		return couponFacade;
+	}
+	public void setCouponFacade(CouponFacade couponFacade) {
+		this.couponFacade = couponFacade;
+	}
+	public List<Ordine> getOrdiniNonEvasi() {
+		return ordiniNonEvasi;
+	}
+	public void setOrdiniNonEvasi(List<Ordine> ordiniNonEvasi) {
+		this.ordiniNonEvasi = ordiniNonEvasi;
+	}
+	
+	
 }
