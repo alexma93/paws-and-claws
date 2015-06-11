@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+</h:head>
+<body>
+	<ui:composition>
+		<div class="media">
+			<div class="media-object pull-left img-responsive">
+				 
+				<o:graphicImage value="#{prodotto.foto}" dataURI="true" width="100"
+					rendered="#{not empty prodotto.foto}" />
+			</div>
+			<f:param name="codice" value="#{prodotto.codice}" />
+			<div class="media-body">
+				<div class="icona-prodotto">
+					<img class="media-object pull-left img-responsive"
+						src="resources/img/specie/${prodotto.specie}.png" />
+				</div>
+				<div>
+					<h4 class="media-heading">${prodotto.nome}</h4>
+				</div>
+				<div>
+					<label>Codice:</label> <span>${prodotto.codice}</span>
+				</div>
+				<div>
+					<label>Prezzo:</label> <span>${prodotto.prezzoDiListino}</span>
+				</div>
+				<div>
+					<label>Quantità disp. :</label> <span>${prodotto.quantita}</span>
+				</div>
+				<div>
+					<button type="button" class="btn btn-default" data-container="body"
+						data-toggle="popover" data-placement="bottom"
+						data-content="${prodotto.descrizione}" data-original-title=""
+						title="">
+						Descrizione <span class="glyphicon glyphicon-circle-arrow-down"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/popover.js"></script>
+	</ui:composition>
+</body>
+</html>
