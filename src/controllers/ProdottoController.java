@@ -25,6 +25,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.Part;
 
+import org.omnifaces.util.Utils;
+
 import models.Fornitore;
 import models.Prodotto;
 import models.ProdottoFacade;
@@ -38,53 +40,45 @@ public class ProdottoController {
 	private String descrizione;
 	private String codice;
 	private Integer quantita;
-	
+
 	private String specie;
-	
+
 	private Store store;
 	private Prodotto prodottoCorrente;
 	private List<Prodotto> prodotti;
 	private Integer size;
 	private Part foto;
-	private String fileContent;
 	
+	private Part file;
+	private byte[] content;
+
 
 	@ManagedProperty(value="#{sessione}")
 	private SessionBean session;
-	
+
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 	////////////////////////////////prova file////////////////////////////////
-	public String upload() {
-		try {
-			setFileContent(new Scanner(foto.getInputStream())
-			.useDelimiter("\\A").next());
-		} catch (IOException e) {
-			// Error handling
-		}
+	public String upload() throws IOException {
+		content =  Utils.toByteArray(file.getInputStream());
 		return "aggiungiProdotto.xhtml";
 	}
-	public String validateFile(FacesContext ctx,
-			UIComponent comp,
-			Object value) {
-		List<FacesMessage> msgs = new ArrayList<FacesMessage>();
-		Part file = (Part)value;
-		if (!"text/plain".equals(file.getContentType())) {
-			msgs.add(new FacesMessage("not a text file"));
-		}
-		if (!msgs.isEmpty()) {
-			throw new ValidatorException(msgs);
-		}
-		return "aggiungiProdotto.xhtml";
-	}
-	//////////////////////////////////////////////////////////////////////////
 	
+
+	//////////////////////////////////////////////////////////////////////////
+
 	//UC4
 	private String createProduct() {
+		try {
+			this.upload();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
-									 prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
-									 prodottoCorrente.getQuantita(), prodottoCorrente.getSpecie(),
-									 prodottoCorrente.getFoto());
+				prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
+				prodottoCorrente.getQuantita(), prodottoCorrente.getSpecie(),
+				prodottoCorrente.getFoto());
 		return "aggiungiProdotto.xhtml";
 	}
 	public String confermaProdotti() {
@@ -106,7 +100,7 @@ public class ProdottoController {
 		}
 		return "aggiungiProdotto.xhtml";
 	}
-	
+
 	public void inserisciFornitore(String iva) {
 		Fornitore f = this.store.getFornitore(iva);
 		if(f==null) {
@@ -116,39 +110,39 @@ public class ProdottoController {
 			this.prodottoCorrente.addFornitore(f);
 		}
 	}
-	
+
 	public void inserisciFoto(Part immagine) {
 		this.prodottoCorrente.setImmagine(immagine);
 	}
-	
+
 	public String fineInserimento() {
 		this.session.getStore().inserisciProdotto(this.prodottoCorrente);
 		this.prodottoCorrente = null;
 		return "index.xhtml";
 	}
-	
+
 	//UC4 BIS
 	public void selezionaProdotto(String codice) {
 		this.prodottoCorrente = this.store.getProdotto(codice);
 	}
-	
+
 	public void modificaPrezzo(Float prezzo) {
 		this.prodottoCorrente.setPrezzoDiListino(prezzo);
 	}
-	
+
 	public void modificaQuantita(Integer quantita) {
 		this.prodottoCorrente.setQuantita(quantita);
 	}
-	
+
 	public void applicaSconto(String descrizione,Integer percentuale) {
 		this.prodottoCorrente.aggiungiSconto(descrizione,percentuale);
 	}
-	
+
 	public void eliminaSconto() {
 		this.prodottoCorrente.setSconto(null);
 	}
-	
-	
+
+
 	//UC7
 	//si ripete selezionaProdotto
 	public void inserisciRecensione(Integer stelle,String testo) {
@@ -178,7 +172,7 @@ public class ProdottoController {
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
- 
+
 	public String getNome() {
 		return nome;
 	}
@@ -206,17 +200,17 @@ public class ProdottoController {
 	public Float getPrezzoDiListino() {
 		return prezzoDiListino;
 	}
- 
+
 	public void setPrezzoDiListino(Float prezzoDiListino) {
 		this.prezzoDiListino = prezzoDiListino;
 	}
-//	public Map<String, Prodotto> getProdotti() {
-//		return prodotti;
-//	}
-//
-//	public void setProdotti(Map<String, Prodotto> prodotti) {
-//		this.prodotti = prodotti;
-//	}
+	//	public Map<String, Prodotto> getProdotti() {
+	//		return prodotti;
+	//	}
+	//
+	//	public void setProdotti(Map<String, Prodotto> prodotti) {
+	//		this.prodotti = prodotti;
+	//	}
 
 	public List<Prodotto> getProdotti() {
 		return prodotti;
@@ -242,14 +236,6 @@ public class ProdottoController {
 		this.foto = foto;
 	}
 
-	public String getFileContent() {
-		return fileContent;
-	}
-
-	public void setFileContent(String fileContent) {
-		this.fileContent = fileContent;
-	}
-
 	public Integer getQuantita() {
 		return quantita;
 	}
@@ -264,6 +250,18 @@ public class ProdottoController {
 
 	public void setSpecie(String specie) {
 		this.specie = specie;
+	}
+	public Part getFile() {
+		return file;
+	}
+	public void setFile(Part file) {
+		this.file = file;
+	}
+	public byte[] getContent() {
+		return content;
+	}
+	public void setContent(byte[] content) {
+		this.content = content;
 	}
 
 }

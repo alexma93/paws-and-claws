@@ -1,4 +1,5 @@
-package controllers;
+package prova;
+
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,8 +15,6 @@ import java.io.OutputStream;
 public class Bean {
   private Part file;
   private String fileContent;
-  private String image;
-  private OutputStream outputStream;
  
 
 
@@ -29,23 +28,6 @@ public void upload() {
   }
  
 
-
-  public String getImage() {
-	return image;
-}
-
-public void setImage(String image) {
-	this.image = image;
-}
-
-public OutputStream getOutputStream() {
-	return outputStream;
-}
-
-public void setOutputStream(OutputStream outputStream) {
-	this.outputStream = outputStream;
-}
-  
   public Part getFile() {
     return file;
   }

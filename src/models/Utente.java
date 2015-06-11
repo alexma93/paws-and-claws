@@ -41,7 +41,7 @@ public class Utente {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
 	
-@OneToMany(mappedBy = "utente")
+	@OneToMany(mappedBy = "utente")
 	private List<Ordine> ordini;
 	
 	private List<Recensione> recensioni;

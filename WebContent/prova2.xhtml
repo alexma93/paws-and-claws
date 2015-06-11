@@ -10,17 +10,14 @@
 <title>Prova</title>
 </head>
 <h:body>
+<h:graphicImage name="resources/img/logo.png"></h:graphicImage>
+
 	<h:form enctype="multipart/form-data">
-		<h:panelGrid columns="3">
-			<o:outputLabel for="file" value="Image" />
-			<h:inputFile id="file" value="#{uploadImageBean.file}">
-				<f:attribute name="maxSize" value="1048576" />
-				<f:attribute name="matchType" value="^image/.*$" />
-			</h:inputFile>
-			<h:message for="file" />
-		</h:panelGrid>
+
 		<o:graphicImage value="#{uploadImageBean.content}" dataURI="true"
 			width="600" rendered="#{not empty uploadImageBean.content}" />
+			<h2>prova: " #{uploadImageBean.content}</h2>
+
 	</h:form>
 </h:body>
 
