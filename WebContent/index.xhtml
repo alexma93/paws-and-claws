@@ -17,6 +17,7 @@
 			<div class="col-md-3" style="margin-top: 50px;">
 				<c:if test="#{sessione.utente!=null}">
 					<h3>${sessione.utente.nome}</h3>
+					<h4>${sessione.utente.ordini==null}</h4>
 					<ui:repeat var="o" value="${sessione.utente.ordini}">
 						<h3>${o}</h3>
 					${sessione.utente.cognome}

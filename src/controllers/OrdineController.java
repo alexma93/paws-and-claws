@@ -76,7 +76,7 @@ public class OrdineController {
 		return "evasioneOrdine.xhtml";
 	}
 	public String evadiOrdine() {
-//		this.session.getStore().evadi(codice);
+		this.session.getStore().evadi(session.getOrdineCorrente().getCodice());
 		return "index.xhtml";
 	}
 

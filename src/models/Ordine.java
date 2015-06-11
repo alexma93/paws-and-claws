@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +24,7 @@ public class Ordine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	//prezzo senza coupon
 	@Column
 	private Double prezzoTotale;
 	@Column
@@ -39,7 +41,7 @@ public class Ordine {
 	@ManyToOne
 	private Utente utente;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch=FetchType.EAGER)
 	@JoinColumn(name = "ordine_id")
 	private List<RigaOrdine> righe;
 	@OneToOne

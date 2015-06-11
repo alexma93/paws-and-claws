@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 
@@ -8,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 
 @Stateless(name="uFacade")
 public class UtenteFacade {
@@ -48,6 +51,7 @@ public class UtenteFacade {
 	}
 
 	public void confermaOrdine(Utente utente, Ordine ordine) {
-		//utente.getOrdini().put(ordine.getCodice(), ordine);
+		utente.getOrdini().add(ordine);
 	}
+
 }

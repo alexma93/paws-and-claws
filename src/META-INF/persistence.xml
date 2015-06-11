@@ -12,6 +12,7 @@
 		<class>model.Amministratore</class>
 		<class>model.Ordine</class>
 		<class>model.RigaOrdine</class>
+		<class>prova.Prova</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>

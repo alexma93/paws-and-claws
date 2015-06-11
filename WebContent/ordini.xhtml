@@ -12,11 +12,83 @@
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
 			<div class="prima-row carrello">
-				<div class="carrello-table">
-					<h2 class="titolo-carrello col-md-7 col-md-offset-5">Ordini effettuati</h2>
+				<h2 class="titolo-ordini">Ordini effettuati</h2>
+				<p:accordionPanel value="#{sessione.utente.ordini}" var="o">
+					<p:tab>
+						<f:facet name="title">
+							<h:outputText value="Ordine del "></h:outputText>
+							<h:outputText value="#{o.dataChiusura}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+							<h:outputText value=" - €#{o.prezzoTotale}   "></h:outputText>
+							<h:outputText value="Non " style="font-style:italic" rendered="#{not o.evaso}"></h:outputText>
+							<h:outputText value="Evaso" style="font-style:italic"></h:outputText>
+							
+						</f:facet>
 
-				</div>
+						<h:panelGrid columns="2" cellpadding="5">
+							<ui:repeat var="r" value="#{o.righe}">
+								<div class="row">
+								<div class="media col-md-8">
+									<img class="media-object pull-left img-responsive"
+										src="resources/img/crocchette.jpg" />
+									<div class="media-body prodotto-carrello">
+										<div class="icona-p-carrello">
+											<img class="media-object pull-left img-responsive"
+												src="resources/img/specie/${r.prodotto.specie}.png" />
+										</div>
+										<h4 class="media-heading">${r.prodotto.nome}</h4>
+
+										<div>
+											<label>Codice:</label> <span>${r.prodotto.codice}</span>
+										</div>
+										<div>
+											<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
+										</div>
+										<div>
+											<button type="button" class="btn btn-default"
+												data-container="body" data-toggle="popover"
+												data-placement="bottom"
+												data-content="${r.prodotto.descrizione}"
+												data-original-title="" title="">
+												Descrizione <span
+													class="glyphicon glyphicon-circle-arrow-down"></span>
+											</button>
+										</div>
+										<div>
+											<label>Voto medio:</label>
+											<h:form>
+												<p:rating value="#{r.prodotto.votoMedio}" readonly="true" />
+											</h:form>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div>
+										<strong>Prezzo</strong> = ${r.prodotto.prezzoDiListino}
+									</div>
+									<div>
+										<strong>Quantità</strong> = ${r.quantita}
+									</div>
+									<div>
+										<strong>Totale</strong> = ${r.prodotto.prezzoDiListino*r.quantita}
+									</div>
+								</div>
+								</div>
+								<hr></hr>
+							</ui:repeat>
+							<div class="row">
+							<h:outputText rendered="#{o.coupon!=null}">
+							<div class="col-md-6">
+							<h3>Coupon:  ${o.coupon.codice}	</h3> </div>
+							<div class="col-md-6"><h3>Sconto: %${o.coupon.percentuale}</h3></div></h:outputText>
+							</div>
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
 			</div>
+
+			<script src="js/popover.js"></script>
 		</ui:define>
 
 	</ui:composition>

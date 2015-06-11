@@ -15,9 +15,10 @@
 	<h:form enctype="multipart/form-data">
 
 		<o:graphicImage value="#{uploadImageBean.content}" dataURI="true"
-			width="600" rendered="#{not empty uploadImageBean.content}" />
-			<h2>prova: " #{uploadImageBean.content}</h2>
-
+			width="600" />
+			<h3>prova:${uploadImageBean.p.nome} </h3>
+<o:graphicImage value="#{uploadImageBean.p.content}" dataURI="true"
+			width="600"  />
 	</h:form>
 </h:body>
 

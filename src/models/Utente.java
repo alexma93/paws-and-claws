@@ -9,10 +9,10 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -41,11 +41,11 @@ public class Utente {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
 	
-	@OneToMany(mappedBy = "utente")
+	@OneToMany(mappedBy = "utente",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Ordine> ordini;
 	
 	private List<Recensione> recensioni;
-	
+
 	public Utente() {
 	}
 	
@@ -58,7 +58,7 @@ public class Utente {
 		this.dataNascita = data;
 		this.dataRegistrazione = new Date();
 		this.recensioni = new ArrayList<Recensione>();
-//		this.ordini = new ArrayList<Ordine>();
+		this.ordini = new ArrayList<Ordine>();
 	}
 	
 	public Long getId() {
