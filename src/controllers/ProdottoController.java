@@ -17,13 +17,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.Part;
+
+import org.omnifaces.util.Utils;
 
 import models.Fornitore;
 import models.Prodotto;
@@ -45,7 +44,9 @@ public class ProdottoController {
 	private List<Prodotto> prodotti;
 	private Integer size;
 	private Part foto;
-	private String fileContent;
+	
+    private Part file;
+    private byte[] content;
 	
 
 	@ManagedProperty(value="#{sessione}")
@@ -53,30 +54,6 @@ public class ProdottoController {
 	
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
-	////////////////////////////////prova file////////////////////////////////
-	public String upload() {
-		try {
-			setFileContent(new Scanner(foto.getInputStream())
-			.useDelimiter("\\A").next());
-		} catch (IOException e) {
-			// Error handling
-		}
-		return "aggiungiProdotto.xhtml";
-	}
-	public String validateFile(FacesContext ctx,
-			UIComponent comp,
-			Object value) {
-		List<FacesMessage> msgs = new ArrayList<FacesMessage>();
-		Part file = (Part)value;
-		if (!"text/plain".equals(file.getContentType())) {
-			msgs.add(new FacesMessage("not a text file"));
-		}
-		if (!msgs.isEmpty()) {
-			throw new ValidatorException(msgs);
-		}
-		return "aggiungiProdotto.xhtml";
-	}
-	//////////////////////////////////////////////////////////////////////////
 	
 	//UC4
 	private String createProduct() {
@@ -108,6 +85,10 @@ public class ProdottoController {
 		this.descrizione = null;
 		this.codice = null;
 		this.quantita = null;
+		try {
+			content = Utils.toByteArray(file.getInputStream());
+		} catch (IOException e) {
+		}
 		return "aggiungiProdotto.xhtml";
 	}
 	
@@ -238,21 +219,6 @@ public class ProdottoController {
 		this.size = size;
 	}
 
-	public Part getFoto() {
-		return foto;
-	}
-
-	public void setFoto(Part foto) {
-		this.foto = foto;
-	}
-
-	public String getFileContent() {
-		return fileContent;
-	}
-
-	public void setFileContent(String fileContent) {
-		this.fileContent = fileContent;
-	}
 
 	public Integer getQuantita() {
 		return quantita;
@@ -268,6 +234,18 @@ public class ProdottoController {
 
 	public void setSpecie(String specie) {
 		this.specie = specie;
+	}
+	public byte[] getContent() {
+		return content;
+	}
+	public void setContent(byte[] content) {
+		this.content = content;
+	}
+	public Part getFile() {
+		return file;
+	}
+	public void setFile(Part file) {
+		this.file = file;
 	}
 
 }

@@ -21,6 +21,8 @@
 		</h:panelGrid>
 		<o:graphicImage value="#{uploadImageBean.content}" dataURI="true"
 			width="600" rendered="#{not empty uploadImageBean.content}" />
+		<h:commandButton value="Submit"
+				action="#{uploadImageBean.vai}"></h:commandButton>
 	</h:form>
 </h:body>
 
