@@ -14,21 +14,21 @@ import javax.persistence.TypedQuery;
 @Stateless(name="oFacade")
 public class OrdineFacade {
 
-	 @PersistenceContext(unitName = "model-unit")
-		private EntityManager em;
-	 
-	 public Ordine createOrdine(Utente utente) {
-		 Ordine o = new Ordine(utente);
-		 return o;
-	 }
-	 
-	 public void terminaOrdine(Ordine o) {
-		 Query codiceOrdine = this.em.createQuery("SELECT COUNT(o) FROM Ordine o");
-		 Integer codice = ((Long) codiceOrdine.getSingleResult()).intValue();
-		 o.setCodice(codice);
-		 o.setDataChiusura(new Date());
-		 em.persist(o);
-	 }
+	@PersistenceContext(unitName = "model-unit")
+	private EntityManager em;
+
+	public Ordine createOrdine(Utente utente) {
+		Ordine o = new Ordine(utente);
+		return o;
+	}
+
+	public void terminaOrdine(Ordine o) {
+		Query codiceOrdine = this.em.createQuery("SELECT COUNT(o) FROM Ordine o");
+		Integer codice = ((Long) codiceOrdine.getSingleResult()).intValue();
+		o.setCodice(codice);
+		o.setDataChiusura(new Date());
+		em.persist(o);
+	}
 
 	public void aggiungiProdotto(Ordine ordine, Prodotto prodotto,
 			Integer quantita) {
@@ -43,11 +43,13 @@ public class OrdineFacade {
 	public void aggiungiCoupon(Ordine ordine, Coupon coupon) {
 		ordine.setCoupon(coupon);
 	}
-	
-	public void evadiOrdine() {
 
+	public void evadiOrdine(Integer codiceOrdine) {
+		Query query = this.em.createQuery(
+				"UPDATE Ordine o SET o.evaso = true WHERE o.codice = :codice");
+		query.setParameter("codice",codiceOrdine).executeUpdate();
 	}
-	
+
 	public List<Ordine> getOrdiniNonEvasi() {
 		List<Ordine> ordiniNonEvasi = (List<Ordine>)em.createQuery("SELECT o FROM Ordine o WHERE o.evaso=false").getResultList();
 		return ordiniNonEvasi;

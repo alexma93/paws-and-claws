@@ -5,77 +5,107 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 <h:head>
 </h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
 
+			<div class="prima-row ordini">
+				<h2 class="titolo-ordini">Ordini non evasi</h2>
+				<p:accordionPanel value="#{ordineController.ordiniNonEvasi}" var="o">
+					<p:tab>
+						<f:facet name="title">
+							<h:outputText value="Ordine del "></h:outputText>
+							<h:outputText value="#{o.dataChiusura}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+							<h:outputText value=" - €#{o.prezzoTotale}   "></h:outputText>
+							<h:outputText value="Non " style="font-style:italic"
+								rendered="#{not o.evaso}"></h:outputText>
+							<h:outputText value="Evaso" style="font-style:italic"></h:outputText>
 
-			<!-- elenco ordini non evasi -->
-			<div class="col-md-9">
-				<div class="row ">
-					<h3 class="col-md-9">Pagina: ${param.pagina+1}</h3>
-					<div class="ordinamento dropdown pull-right col-md-2">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							data-toggle="dropdown">
-							Ordina per <span class="caret"></span>
-						</button>
-						<!--  stile inserito in linea, per sovrascrivere tutti gli altri -->
-						<ul class="dropdown-menu" style="right: 42px;">
-							<li><a href="#">nome</a></li>
-							<li><a href="#">prezzo</a></li>
-							<li><a href="#">data</a></li>
-							<li><a href="#">valutazione</a></li>
-						</ul>
-					</div>
-					<div class="col-md-1"></div>
+						</f:facet>
+						<h:panelGrid columns="2" cellpadding="5">
+							<ui:repeat var="r" value="#{o.righe}">
+								<div class="row">
+									<div class="media col-md-8">
+										<div class="media-object pull-left img-responsive">
+											<o:graphicImage value="#{r.prodotto.foto}" dataURI="true"
+												width="100" rendered="#{not empty r.prodotto.foto}" />
+										</div>
+										<div class="media-body prodotto-carrello">
+											<div class="icona-p-carrello">
+												<img class="media-object pull-left img-responsive"
+													src="resources/img/specie/${r.prodotto.specie}.png" />
+											</div>
+											<h4 class="media-heading">${r.prodotto.nome}</h4>
 
-				</div>
-				<c:if test="${ordineController.size-(param.pagina*12)>=12}">
-					<ui:repeat var="o" value="#{ordineController.ordiniNonEvasi}"
-						offset="${param.pagina*12}" size="12">
-						<div class="col-md-4">
-							<ui:param name="ordine" value="${o}" />
-							<label>Codice:</label> <span>${ordine.codice}</span>
-							<h:form>
-								<h:commandButton class="btn btn-success"
-									value="evadi"
-									action="#{ordineController.evadiOrdine}" />
-							</h:form>
-						</div>
-					</ui:repeat>
-				</c:if>
-				<c:if test="${12>ordineController.size-param.pagina*12}">
-					<ui:repeat var="o" value="#{ordineController.ordiniNonEvasi}"
-						offset="${param.pagina*12}">
-						<div class="col-md-4">
-							<ui:param name="ordine" value="${o}" />
-							<label>Codice:</label> <span>${ordine.codice}</span>
-						</div>
-					</ui:repeat>
-				</c:if>
-				<div class="col-md-12">
-					<ul class="pager">
-						<c:if test="${param.pagina>0}">
-							<li class="previous"><a
-								href="evasioneOrdine.xhtml?pagina=${param.pagina-1}"> <span
-									class="glyphicon glyphicon-chevron-left"></span>
-							</a></li>
-						</c:if>
-						<c:if
-							test="${(param.pagina==null and 12>=ordineController.size) or ordineController.size/12>(param.pagina+1)}">
-							<li class="next"><a
-								href="evasioneOrdine.xhtml?pagina=${param.pagina+1}"><span
-									class="glyphicon glyphicon-chevron-right"></span> </a></li>
-						</c:if>
-					</ul>
-				</div>
+											<div>
+												<label>Codice:</label> <span>${r.prodotto.codice}</span>
+											</div>
+											<div>
+												<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
+											</div>
+											<div>
+												<button type="button" class="btn btn-default"
+													data-container="body" data-toggle="popover"
+													data-placement="bottom"
+													data-content="${r.prodotto.descrizione}"
+													data-original-title="" title="">
+													Descrizione <span
+														class="glyphicon glyphicon-circle-arrow-down"></span>
+												</button>
+											</div>
+											<div>
+												<label>Voto medio:</label>
+												<h:form>
+													<p:rating value="#{r.prodotto.votoMedio}" readonly="true" />
+												</h:form>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div>
+											<strong>Prezzo</strong> = ${r.prodotto.prezzoDiListino}
+										</div>
+										<div>
+											<strong>Quantità</strong> = ${r.quantita}
+										</div>
+										<div>
+											<strong>Totale</strong> =
+											${r.prodotto.prezzoDiListino*r.quantita}
+										</div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<h:form>
+											<h:commandButton class="btn btn-primary" role="button"
+												value="Evadi" action="#{ordineController.evadiOrdine}">
+												<f:param name="codice" value="#{o.codice}" />
+											</h:commandButton>
+											${o.codice}
+										</h:form>
+									</div>
+								</div>
+								<hr></hr>
+							</ui:repeat>
+							<div class="row">
+								<h:outputText rendered="#{o.coupon!=null}">
+									<div class="col-md-6">
+										<h3>Coupon: ${o.coupon.codice}</h3>
+									</div>
+									<div class="col-md-6">
+										<h3>Sconto: %${o.coupon.percentuale}</h3>
+									</div>
+								</h:outputText>
+							</div>
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
 			</div>
-
-
-
 		</ui:define>
 	</ui:composition>
 </h:body>

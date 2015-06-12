@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import models.Coupon;
@@ -80,7 +81,10 @@ public class OrdineController {
 		return "evasioneOrdine.xhtml";
 	}
 	public String evadiOrdine() {
-		this.session.getStore().evadi(session.getOrdineCorrente().getCodice());
+		FacesContext fc = FacesContext.getCurrentInstance();
+		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
+		Integer i = Integer.parseInt(codice);
+		ordineFacade.evadiOrdine(i);
 		return "index.xhtml";
 	}
 

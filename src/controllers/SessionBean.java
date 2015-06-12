@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
