@@ -79,7 +79,4 @@ public class SessionBean {
 	public void setOrdineCorrente(Ordine ordineCorrente) {
 		this.ordineCorrente = ordineCorrente;
 	}
-
-
-	
 }

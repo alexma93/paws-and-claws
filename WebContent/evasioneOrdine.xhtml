@@ -13,8 +13,8 @@
 		<ui:define name="content">
 
 			<div class="prima-row ordini">
-				<h2 class="titolo-ordini">Ordini non evasi</h2>
-				<p:accordionPanel value="#{ordineController.ordiniNonEvasi}" var="o">
+				<h2 class="titolo-ordini">Ordini non evasi:</h2>
+				<p:accordionPanel value="#{evasione.ordiniNonEvasi}" var="o">
 					<p:tab>
 						<f:facet name="title">
 							<h:outputText value="Ordine del "></h:outputText>

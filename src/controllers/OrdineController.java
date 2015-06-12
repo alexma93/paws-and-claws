@@ -23,11 +23,14 @@ public class OrdineController {
 	private Integer quantita;
 	private String codiceCoupon;
 	private String erroreCoupon;
-	private List<Ordine> ordiniNonEvasi;
+//	private List<Ordine> ordiniNonEvasi;
 	private Integer size;
 	
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
+	
+	@ManagedProperty(value = "#{evasione}")
+	private EvasioneController evasione;
 	
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
@@ -77,15 +80,22 @@ public class OrdineController {
 
 	//UC6
 	public String getOrdiniNonEvasiDB() {
-		this.ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
+		List<Ordine> ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
+		this.evasione.setOrdiniNonEvasi(ordiniNonEvasi);
 		return "evasioneOrdine.xhtml";
+	}
+	private void setOrdiniNonEvasi() {
+		List<Ordine> ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
+		this.evasione.setOrdiniNonEvasi(ordiniNonEvasi);
 	}
 	public String evadiOrdine() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
 		Integer i = Integer.parseInt(codice);
 		ordineFacade.evadiOrdine(i);
-		return "index.xhtml";
+		setOrdiniNonEvasi();
+		
+		return "evasioneOrdine.xhtml";
 	}
 
 	public SessionBean getSession() {
@@ -139,12 +149,14 @@ public class OrdineController {
 	public void setCouponFacade(CouponFacade couponFacade) {
 		this.couponFacade = couponFacade;
 	}
-	public List<Ordine> getOrdiniNonEvasi() {
-		return ordiniNonEvasi;
+	public EvasioneController getEvasione() {
+		return evasione;
 	}
-	public void setOrdiniNonEvasi(List<Ordine> ordiniNonEvasi) {
-		this.ordiniNonEvasi = ordiniNonEvasi;
+	public void setEvasione(EvasioneController evasione) {
+		this.evasione = evasione;
 	}
+	
+
 	
 	
 }
