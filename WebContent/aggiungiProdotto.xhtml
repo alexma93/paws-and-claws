@@ -76,7 +76,6 @@
 							<div class="form-group">
 								<h:selectOneMenu styleClass="form-control" id="specie"
 									accesskey="a" value="#{prodottoController.specie}">
-									<f:selectItem itemValue="#{null}" itemLabel="seleziona" />
 									<f:selectItem itemValue="gatto" itemLabel="Gatto" />
 									<f:selectItem itemValue="cane" itemLabel="Cane" />
 									<f:selectItem itemValue="rettile" itemLabel="Rettile" />
@@ -117,44 +116,13 @@
 							<div class="col-md-1"></div>
 
 						</div>
-						<c:if test="${prodottoController.size-(param.pagina*12)>=12}">
-							<ui:repeat var="p" value="#{prodottoController.prodotti}"
-								offset="${param.pagina*12}" size="12">
+							<ui:repeat var="p" value="#{prodottoController.prodotti}">
 								<div class="col-md-4">
 									<ui:include src="prodottoAggiungiProdotto.xhtml">
 										<ui:param name="prodotto" value="${p}" />
 									</ui:include>
 								</div>
 							</ui:repeat>
-						</c:if>
-						<c:if test="${12>prodottoController.size-param.pagina*12}">
-							<ui:repeat var="p" value="#{prodottoController.prodotti}"
-								offset="${param.pagina*12}">
-								<div class="col-md-4">
-									<ui:include src="prodottoAggiungiProdotto.xhtml">
-										<ui:param name="prodotto" value="${p}" />
-									</ui:include>
-								</div>
-							</ui:repeat>
-						</c:if>
-						<div class="col-md-12">
-							<ul class="pager">
-								<c:if test="${param.pagina>0}">
-									<li class="previous"><a
-										href="aggiungiProdotto.xhtml?pagina=${param.pagina-1}"> <span
-											class="glyphicon glyphicon-chevron-left"></span>
-									</a></li>
-								</c:if>
-								<c:if
-									test="${(param.pagina!=null and 12>=prodottoController.size) or prodottoController.size/12>(param.pagina+1)}">
-									<li class="next"><a
-										href="aggiungiProdotto.xhtml?pagina=${param.pagina+1}"><span
-											class="glyphicon glyphicon-chevron-right"></span> </a></li>
-								</c:if>
-							</ul>
-						</div>
-
-
 					</div>
 				</div>
 
