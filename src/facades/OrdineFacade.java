@@ -1,8 +1,6 @@
-package models;
+package facades;
 
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -11,6 +9,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import models.Coupon;
+import models.Ordine;
+import models.Prodotto;
+import models.RigaOrdine;
+import models.Utente;
+
 @Stateless(name="oFacade")
 public class OrdineFacade {
 
@@ -18,8 +22,7 @@ public class OrdineFacade {
 	private EntityManager em;
 
 	public Ordine createOrdine(Utente utente) {
-		Ordine o = new Ordine(utente);
-		return o;
+		return new Ordine(utente);
 	}
 
 	public void terminaOrdine(Ordine o) {
@@ -44,14 +47,21 @@ public class OrdineFacade {
 		ordine.setCoupon(coupon);
 	}
 
-	public void evadiOrdine(Integer codiceOrdine) {
+	public boolean evadiOrdine(Integer codiceOrdine) {
 		Query query = this.em.createQuery(
-				"UPDATE Ordine o SET o.evaso = true WHERE o.codice = :codice");
-		query.setParameter("codice",codiceOrdine).executeUpdate();
+				"SELECT o FROM Ordine o WHERE o.codice = :codice");
+		query.setParameter("codice",codiceOrdine);
+		Ordine o = (Ordine) query.getSingleResult();
+		if (o.evadibile()) {
+			o.evadi();
+			return true;
+		}
+		else return false;
 	}
 
 	public List<Ordine> getOrdiniNonEvasi() {
-		List<Ordine> ordiniNonEvasi = (List<Ordine>)em.createQuery("SELECT o FROM Ordine o WHERE o.evaso=false").getResultList();
+		TypedQuery<Ordine> result = this.em.createNamedQuery("ordine.findNonEvasi",Ordine.class);
+		List<Ordine> ordiniNonEvasi = result.getResultList();
 		return ordiniNonEvasi;
 	}
 	public Ordine getOrdine(String codice) {

@@ -1,4 +1,4 @@
-package models;
+package facades;
 
 import javax.ejb.Stateless;
 
@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import models.Prodotto;
 import comparator.ProdottoComparator;
 
 @Stateless(name="pFacade")
@@ -20,7 +21,7 @@ public class ProdottoFacade {
 
 	public Prodotto createProduct(String nome, Float prezzoDiListino, String descrizione, String codice, Integer quantita,
 			String specie, byte[] foto) {
-		Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, foto);
+		Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, 0, foto);
 		em.persist(p);
 		return p;  
 	}

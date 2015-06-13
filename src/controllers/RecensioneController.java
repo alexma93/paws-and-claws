@@ -1,17 +1,13 @@
 package controllers;
 
-import java.util.Date;
-import java.util.LinkedList;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import facades.ProdottoFacade;
 import models.Prodotto;
-import models.ProdottoFacade;
-import models.Utente;
 
 @ManagedBean
 @SessionScoped
@@ -39,39 +35,51 @@ public class RecensioneController {
 
 		return "index.xhtml";
 	}
+	
 	public Integer getStelle() {
 		return stelle;
 	}
+	
 	public void setStelle(Integer stelle) {
 		this.stelle = stelle;
 	}
+	
 	public String getTesto() {
 		return testo;
 	}
+	
 	public void setTesto(String testo) {
 		this.testo = testo;
 	}
+	
 	public String getCodiceProdotto() {
 		return codiceProdotto;
 	}
+	
 	public void setCodiceProdotto(String codiceProdotto) {
 		this.codiceProdotto = codiceProdotto;
 	}
+	
 	public Prodotto getProdotto() {
 		return prodotto;
 	}
+	
 	public void setProdotto(Prodotto prodotto) {
 		this.prodotto = prodotto;
 	}
+	
 	public SessionBean getSession() {
 		return session;
 	}
+	
 	public void setSession(SessionBean session) {
 		this.session = session;
 	}
+	
 	public ProdottoFacade getProdottoFacade() {
 		return prodottoFacade;
 	}
+	
 	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
 		this.prodottoFacade = prodottoFacade;
 	}

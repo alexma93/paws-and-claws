@@ -8,11 +8,12 @@
 		<!-- <non-jta-data-source>PostgreSQL Database</non-jta-data-source> -->
 		<class>model.Prodotto</class>
 		<class>model.Utente</class>
+		<class>model.Fornitore</class>
+		<class>model.Coupon</class>
 		<class>model.Indirizzo</class>
 		<class>model.Amministratore</class>
 		<class>model.Ordine</class>
 		<class>model.RigaOrdine</class>
-		<class>prova.Prova</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>

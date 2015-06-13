@@ -1,9 +1,11 @@
-package models;
+package facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import models.Amministratore;
 
 @Stateless(name="aFacade")
 public class AmministratoreFacade {

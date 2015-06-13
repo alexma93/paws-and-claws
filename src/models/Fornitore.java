@@ -1,21 +1,38 @@
 package models;
 
-import java.util.Map;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Fornitore {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Column
 	private String nome;
+	@Column
 	private String iva;
+	@Column
 	private String telefono;
+	@Column
 	private String email;
+	
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
 	
-	@ManyToMany
-	private Map<String,Prodotto> prodotti;
+	@ManyToMany(mappedBy = "fornitori",fetch=FetchType.EAGER)
+	private List<Prodotto> prodotti;
 	
 	public String getIva() {
 		return iva;
@@ -48,12 +65,12 @@ public class Fornitore {
 	public void setIndirizzo(Indirizzo indirizzo) {
 		this.indirizzo = indirizzo;
 	}
-	
-	public Map<String, Prodotto> getProdotti() {
+
+	public List<Prodotto> getProdotti() {
 		return prodotti;
 	}
-	
-	public void setProdotti(Map<String, Prodotto> prodotti) {
+
+	public void setProdotti(List<Prodotto> prodotti) {
 		this.prodotti = prodotti;
 	}
 

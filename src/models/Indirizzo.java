@@ -12,14 +12,19 @@ public class Indirizzo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	@Column
 	private String stato;
+	
 	@Column
 	private String regione;
+	
 	@Column
 	private String citta;
+	
 	@Column
 	private String strada;
+	
 	@Column
 	private String cap;
 	

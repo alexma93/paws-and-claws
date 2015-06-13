@@ -1,7 +1,6 @@
-package models;
+package facades;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.ejb.Stateless;
 
@@ -9,7 +8,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+
+import models.Ordine;
+import models.Utente;
 
 
 @Stateless(name="uFacade")

@@ -13,31 +13,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQuery(name = "ordine.findNonEvasi", query = "SELECT o FROM Ordine o WHERE o.evaso = false")
 public class Ordine {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	//prezzo senza coupon
+	
+	//prezzoTotale inteso senza coupon
 	@Column
 	private Double prezzoTotale;
+	
 	@Column
 	private Boolean evaso;
+	
 	@Temporal (TemporalType.DATE)
 	private Date dataApertura;
+	
 	@Temporal (TemporalType.DATE)
 	private Date dataChiusura;
+	
 	@Temporal (TemporalType.DATE)
 	private Date dataEvasione;
 	
 	@Column
 	private Integer codice;
+	
 	@ManyToOne
 	private Utente utente;
 	
@@ -186,6 +194,20 @@ public class Ordine {
 		} else if (!codice.equals(other.codice))
 			return false;
 		return true;
+	}
+
+	public boolean evadibile() {
+		for(RigaOrdine r : this.righe)
+			if(!r.evadibile())
+				return false;
+		return true;
+	}
+
+	public void evadi() {
+		this.evaso = true;
+		for(RigaOrdine r: this.righe)
+			r.evadi();
+		
 	}
 
 

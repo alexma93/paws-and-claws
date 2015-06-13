@@ -7,41 +7,34 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import facades.OrdineFacade;
 import models.Ordine;
-import models.OrdineFacade;
 
 @ManagedBean(name="evasione")
 @SessionScoped
 public class EvasioneController {
 	private List<Ordine> ordiniNonEvasi;
+	
+	private String errore;
 
 	@EJB(beanName="oFacade")
 	private OrdineFacade ordineFacade;
 	
-	public OrdineFacade getOrdineFacade() {
-		return ordineFacade;
-	}
-	public void setOrdineFacade(OrdineFacade ordineFacade) {
-		this.ordineFacade = ordineFacade;
-	}
 	
-	//UC6
 	public String getOrdiniNonEvasiDB() {
-		List<Ordine> ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
-		this.setOrdiniNonEvasi(ordiniNonEvasi);
+		this.ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
+		this.errore = null;
 		return "evasioneOrdine.xhtml";
 	}
-	private void setOrdiniNonEvasi() {
-		List<Ordine> ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
-		this.setOrdiniNonEvasi(ordiniNonEvasi);
-	}
+	
 	public String evadiOrdine() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
 		Integer i = Integer.parseInt(codice);
-		ordineFacade.evadiOrdine(i);
-		setOrdiniNonEvasi();
-		
+		if(ordineFacade.evadiOrdine(i))
+			return getOrdiniNonEvasiDB();
+		else this.errore = "Prodotti non disponibili in magazzino!";
+	
 		return "evasioneOrdine.xhtml";
 	}
 	
@@ -52,6 +45,18 @@ public class EvasioneController {
 
 	public void setOrdiniNonEvasi(List<Ordine> ordiniNonEvasi) {
 		this.ordiniNonEvasi = ordiniNonEvasi;
+	}
+	public OrdineFacade getOrdineFacade() {
+		return ordineFacade;
+	}
+	public void setOrdineFacade(OrdineFacade ordineFacade) {
+		this.ordineFacade = ordineFacade;
+	}
+	public String getErrore() {
+		return errore;
+	}
+	public void setErrore(String errore) {
+		this.errore = errore;
 	}
 
 

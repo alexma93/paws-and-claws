@@ -11,8 +11,10 @@ public class Coupon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	@Column(nullable=false)
 	private String codice;
+	
 	@Column
 	private Integer percentuale;
 	

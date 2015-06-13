@@ -7,14 +7,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import facades.ProdottoFacade;
 import models.Prodotto;
-import models.ProdottoFacade;
 
 @ManagedBean
 @SessionScoped
 public class CatalogoController {
+	
+	//indica la grandezza del catalogo e serve per la paginazione
 	private Integer size;
-	private Prodotto prodottoCorrente;
 	private List<Prodotto> catalogo;
 	
 	private String specie;
@@ -22,28 +23,10 @@ public class CatalogoController {
 	private Integer prezzo; 
 	
 	private String parola;
-	
-	public String getParola() {
-		return parola;
-	}
-
-	public void setParola(String parola) {
-		this.parola = parola;
-	}
-
-	public ProdottoFacade getProdottoFacade() {
-		return prodottoFacade;
-	}
-
-	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
-		this.prodottoFacade = prodottoFacade;
-	}
 
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 	
-	public CatalogoController() {
-	}
 	
 	public String inizializza() {
 		FacesContext fc = FacesContext.getCurrentInstance();
@@ -61,6 +44,7 @@ public class CatalogoController {
 
 	public String ordina() {
 		FacesContext fc = FacesContext.getCurrentInstance();
+		//ordine inteso come metodo di ordinamento
 		String ordine = fc.getExternalContext().getRequestParameterMap().get("ordine");
 		this.catalogo = prodottoFacade.ordinaCatalogo(this.catalogo, ordine);
 		return "catalogo.xhtml";
@@ -85,17 +69,6 @@ public class CatalogoController {
 	public void setSize(Integer size) {
 		this.size = size;
 	}
-
-
-	public Prodotto getProdottoCorrente() {
-		return prodottoCorrente;
-	}
-
-
-	public void setProdottoCorrente(Prodotto prodottoCorrente) {
-		this.prodottoCorrente = prodottoCorrente;
-	}
-
 
 	public List<Prodotto> getCatalogo() {
 		return catalogo;
@@ -128,6 +101,23 @@ public class CatalogoController {
 
 	public void setPrezzo(Integer prezzo) {
 		this.prezzo = prezzo;
+	}
+	
+	
+	public String getParola() {
+		return parola;
+	}
+
+	public void setParola(String parola) {
+		this.parola = parola;
+	}
+
+	public ProdottoFacade getProdottoFacade() {
+		return prodottoFacade;
+	}
+
+	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
+		this.prodottoFacade = prodottoFacade;
 	}
 
 

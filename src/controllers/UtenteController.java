@@ -1,7 +1,6 @@
 package controllers;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -9,9 +8,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import models.Ordine;
+import facades.UtenteFacade;
 import models.Utente;
-import models.UtenteFacade;
 
 @ManagedBean
 @RequestScoped
@@ -37,12 +35,10 @@ public class UtenteController {
 	@EJB(beanName="uFacade")
 	private UtenteFacade utenteFacade;
 	
+	//utente visualizzato a partire da un ordine
 	private Utente utenteVisualizzato;
+	
 
-	public UtenteController() {
-	}
-
-	//UC0
 	public String registraUtente() {
 		if(utenteFacade.checkEmail(email)) {
 			session.setUtente(utenteFacade.createUtente(nome,cognome,dataNascita,email,password));
@@ -52,7 +48,6 @@ public class UtenteController {
 			this.setErrore("email già presente");
 			return "registrazione.xhtml";
 		}
-
 	}
 	
 
@@ -71,7 +66,6 @@ public class UtenteController {
 		return "index.xhtml";
 	}
 
-	//UC0BIS
 	public String loginUtente() {
 		Utente u = utenteFacade.getUtente(email);
 		if (u==null) {

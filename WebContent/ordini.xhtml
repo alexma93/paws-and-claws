@@ -48,7 +48,7 @@
 												<label>Codice:</label> <span>${r.prodotto.codice}</span>
 											</div>
 											<div>
-												<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
+												<label>Prezzo:</label> <span>${r.prezzoUnitario}</span>
 											</div>
 											<div>
 												<button type="button" class="btn btn-default"
@@ -70,14 +70,14 @@
 									</div>
 									<div class="col-md-4">
 										<div>
-											<strong>Prezzo</strong> = ${r.prodotto.prezzoDiListino}
+											<strong>Prezzo</strong> = ${r.prezzoUnitario}
 										</div>
 										<div>
 											<strong>Quantità</strong> = ${r.quantita}
 										</div>
 										<div>
 											<strong>Totale</strong> =
-											${r.prodotto.prezzoDiListino*r.quantita}
+											${r.prezzoUnitario*r.quantita}
 										</div>
 									</div>
 								</div>

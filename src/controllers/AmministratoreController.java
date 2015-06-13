@@ -5,8 +5,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import facades.AmministratoreFacade;
 import models.Amministratore;
-import models.AmministratoreFacade;
  
 @ManagedBean
 @RequestScoped
@@ -22,7 +22,6 @@ public class AmministratoreController {
 	@EJB(beanName="aFacade")
 	private AmministratoreFacade amministratoreFacade;
 	
-	//UCOTRIS login amministratore
 	public String loginAmministratore() {
 		Amministratore a = amministratoreFacade.getAmministratore(email);
 		if (a==null) {

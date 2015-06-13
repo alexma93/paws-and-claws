@@ -1,33 +1,21 @@
 package controllers;
 
-import java.awt.Image;
 import java.io.IOException;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 import javax.ejb.EJB;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.servlet.http.Part;
 
 import org.omnifaces.util.Utils;
 
-import models.Fornitore;
+import facades.ProdottoFacade;
 import models.Prodotto;
-import models.ProdottoFacade;
-import models.Store;
 
 @ManagedBean
 @SessionScoped
@@ -39,7 +27,6 @@ public class ProdottoController {
 	private Integer quantita;
 	private String specie;
 	
-	private Store store;
 	private Prodotto prodottoCorrente;
 	private List<Prodotto> prodotti;
 	private Integer size;
@@ -55,11 +42,6 @@ public class ProdottoController {
 	private ProdottoFacade prodottoFacade;
 	
 	//UC4
-	public String provaImmagine() {
-		this.prodottoCorrente = prodottoFacade.getProdotto("000");
-		this.content = this.prodottoCorrente.getFoto();
-		return "index.xhtml";
-	}
 	private String createProduct() {
 		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
 									 prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
@@ -84,7 +66,7 @@ public class ProdottoController {
 		} catch (IOException e) {
 		}
 //		if(this.store.checkCodiceProdotto(codice)) {
-			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, null, null, content);
+			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, 0, content);
 			this.prodotti.add(p);
 			this.size=prodotti.size();
 //		}
@@ -100,59 +82,29 @@ public class ProdottoController {
 	}
 	
 	public void inserisciFornitore(String iva) {
-		Fornitore f = this.store.getFornitore(iva);
-		if(f==null) {
-			//TODO
-		}
-		else {
-			this.prodottoCorrente.addFornitore(f);
-		}
+//		//Fornitore f = this.store.getFornitore(iva);
+//		//if(f==null) {
+//			//TODO
+//		}
+//		else {
+//		//	this.prodottoCorrente.addFornitore(f);
+//		}
 	}
 	
 	public void inserisciFoto(byte[] immagine) {
-		this.prodottoCorrente.setImmagine(immagine);
+		this.prodottoCorrente.setFoto(immagine);
 	}
 	
 	public String fineInserimento() {
-		this.session.getStore().inserisciProdotto(this.prodottoCorrente);
+	//	this.session.getStore().inserisciProdotto(this.prodottoCorrente);
 		this.prodottoCorrente = null;
 		return "index.xhtml";
 	}
-	
-	//UC4 BIS
-	public void selezionaProdotto(String codice) {
-		this.prodottoCorrente = this.store.getProdotto(codice);
-	}
-	
-	public void modificaPrezzo(Float prezzo) {
-		this.prodottoCorrente.setPrezzoDiListino(prezzo);
-	}
-	
-	public void modificaQuantita(Integer quantita) {
-		this.prodottoCorrente.setQuantita(quantita);
-	}
-	
-	public void applicaSconto(String descrizione,Integer percentuale) {
-		this.prodottoCorrente.aggiungiSconto(descrizione,percentuale);
-	}
-	
-	public void eliminaSconto() {
-		this.prodottoCorrente.setSconto(null);
-	}
-	
-	
+
 	//UC7
 	//si ripete selezionaProdotto
 	public void inserisciRecensione(Integer stelle,String testo) {
 		this.prodottoCorrente.inserisciRecensione(stelle,testo,this.session.getUtente());
-	}
-
-	public Store getStore() {
-		return store;
-	}
-
-	public void setStore(Store store) {
-		this.store = store;
 	}
 
 	public Prodotto getProdottoCorrente() {
@@ -242,17 +194,29 @@ public class ProdottoController {
 	public void setSpecie(String specie) {
 		this.specie = specie;
 	}
+	
 	public byte[] getContent() {
 		return content;
 	}
+	
 	public void setContent(byte[] content) {
 		this.content = content;
 	}
+	
 	public Part getFile() {
 		return file;
 	}
+	
 	public void setFile(Part file) {
 		this.file = file;
+	}
+	
+	public ProdottoFacade getProdottoFacade() {
+		return prodottoFacade;
+	}
+	
+	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
+		this.prodottoFacade = prodottoFacade;
 	}
 
 }

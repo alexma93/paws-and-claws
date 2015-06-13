@@ -13,6 +13,8 @@
 		<ui:define name="content">
 
 			<div class="prima-row carrello">
+
+				<h5 style="float: right;">${evasione.errore}</h5>
 				<h2 class="titolo-ordini">Ordini non evasi:</h2>
 				<p:accordionPanel value="#{evasione.ordiniNonEvasi}" var="o">
 					<p:tab>
@@ -28,10 +30,23 @@
 
 							<h:outputText value="Non " style="font-style:italic"
 								rendered="#{not o.evaso}"></h:outputText>
-							<h:outputText value="Evaso" style="font-style:italic"></h:outputText>
-
+							<h:outputText value="Evaso" style="font-style:italic">
+							</h:outputText>
 						</f:facet>
 						<h:panelGrid columns="2" cellpadding="5">
+							<div class="row">
+								<h:form class="form-inline">
+									<label>Ordine di:  </label>
+									<h:commandButton styleClass="btn btn-link"
+										value="#{o.utente.nome} #{o.utente.cognome}"
+										action="#{utenteController.visualizzaUtente}">
+										<f:param name="email" value="#{o.utente.email}"></f:param>
+
+										<hr></hr>
+									</h:commandButton>
+								</h:form>
+							</div>
+
 							<ui:repeat var="r" value="#{o.righe}">
 								<div class="row">
 									<div class="media col-md-8">
@@ -50,7 +65,7 @@
 												<label>Codice:</label> <span>${r.prodotto.codice}</span>
 											</div>
 											<div>
-												<label>Prezzo:</label> <span>${r.prodotto.prezzoDiListino}</span>
+												<label>Prezzo:</label> <span>${r.prezzoUnitario}</span>
 											</div>
 											<div>
 												<button type="button" class="btn btn-default"
@@ -72,14 +87,14 @@
 									</div>
 									<div class="col-md-4">
 										<div>
-											<strong>Prezzo</strong> = ${r.prodotto.prezzoDiListino}
+											<strong>Prezzo</strong> = ${r.prezzoUnitario}
 										</div>
 										<div>
 											<strong>Quantità</strong> = ${r.quantita}
 										</div>
 										<div>
 											<strong>Totale</strong> =
-											${r.prodotto.prezzoDiListino*r.quantita}
+											${r.prezzoUnitario*r.quantita}
 										</div>
 										<div></div>
 										<div></div>
@@ -106,6 +121,7 @@
 									<f:param name="codice" value="#{o.codice}" />
 								</h:commandButton>
 							</h:form>
+
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>

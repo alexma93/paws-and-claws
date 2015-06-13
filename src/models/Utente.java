@@ -2,9 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,14 +25,19 @@ public class Utente {
 	
 	@Column(nullable=false,unique=true)
 	private String email;
+	
 	@Column(nullable=false)
 	private String password;
+	
 	@Column(nullable=false)
 	private String nome;
+	
 	@Column(nullable=false)
 	private String cognome;
+	
 	@Temporal (TemporalType.DATE)
 	private Date dataNascita;
+	
 	@Temporal (TemporalType.DATE)
 	private Date dataRegistrazione;
 	
@@ -59,6 +62,21 @@ public class Utente {
 		this.dataRegistrazione = new Date();
 		this.recensioni = new ArrayList<Recensione>();
 		this.ordini = new ArrayList<Ordine>();
+	}
+	
+	public void aggiungiIndirizzo(String strada, String citta, String stato,
+			String cap, String regione) {
+		this.indirizzo = new Indirizzo(strada,citta,stato,cap,regione);
+		
+	}
+
+	public boolean checkPassword(String password) {
+		return this.password.equals(password);
+	}
+
+	public void aggiungiRecensione(Recensione recensione) {
+		this.recensioni.add(recensione);
+		
 	}
 	
 	public Long getId() {
@@ -135,21 +153,6 @@ public class Utente {
 
 	public void setOrdini(List<Ordine> ordini) {
 		this.ordini = ordini;
-	}
-
-	public void aggiungiIndirizzo(String strada, String citta, String stato,
-			String cap, String regione) {
-		this.indirizzo = new Indirizzo(strada,citta,stato,cap,regione);
-		
-	}
-
-	public boolean checkPassword(String password) {
-		return this.password.equals(password);
-	}
-
-	public void aggiungiRecensione(Recensione recensione) {
-		this.recensioni.add(recensione);
-		
 	}
 
 	public void setId(Long id) {

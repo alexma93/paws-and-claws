@@ -13,10 +13,13 @@ public class RigaOrdine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	@Column
 	private Float prezzoUnitario;
+	
 	@Column
 	private Integer quantita;
+	
 	@OneToOne
 	private Prodotto prodotto;
 	
@@ -62,6 +65,14 @@ public class RigaOrdine {
 
 	public void setProdotto(Prodotto prodotto) {
 		this.prodotto = prodotto;
+	}
+
+	public boolean evadibile() {
+		return this.quantita <= this.prodotto.getQuantita();
+	}
+
+	public void evadi() {
+		this.prodotto.setQuantita(this.prodotto.getQuantita()-this.quantita);
 	}
 
 	
