@@ -49,7 +49,7 @@ public class Prodotto {
 	@Column
 	private String specie;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "prodotti")
 	private Map<String,Fornitore> fornitori;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
