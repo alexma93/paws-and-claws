@@ -41,6 +41,8 @@ public class ProdottoController {
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 	
+	private String errore;
+	
 	//UC4
 	private String createProduct() {
 		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
@@ -65,18 +67,24 @@ public class ProdottoController {
 			content = Utils.toByteArray(file.getInputStream());
 		} catch (IOException e) {
 		}
-//		if(this.store.checkCodiceProdotto(codice)) {
+		if(prodottoFacade.getProdotto(codice)==null) {
 			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, 0, content);
 			this.prodotti.add(p);
 			this.size=prodotti.size();
-//		}
-		this.nome = null;
-		this.prezzoDiListino = null;
-		this.descrizione = null;
-		this.codice = null;
-		this.quantita = null;
-		this.file = null;
-		this.specie = "seleziona";
+			this.nome = null;
+			this.prezzoDiListino = null;
+			this.descrizione = null;
+			this.codice = null;
+			this.quantita = null;
+			this.file = null;
+			this.specie = "seleziona";
+			this.errore = null;
+		} else {
+			this.codice = null;
+			this.errore = "Inserire un codice non presente:";
+			return "aggiungiProdotto.xhtml";
+		}
+
 
 		return "aggiungiProdotto.xhtml";
 	}
@@ -217,6 +225,12 @@ public class ProdottoController {
 	
 	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
 		this.prodottoFacade = prodottoFacade;
+	}
+	public String getErrore() {
+		return errore;
+	}
+	public void setErrore(String errore) {
+		this.errore = errore;
 	}
 
 }
