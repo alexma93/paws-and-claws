@@ -12,7 +12,7 @@
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
 
-			<div class="prima-row ordini">
+			<div class="prima-row carrello">
 				<h2 class="titolo-ordini">Ordini non evasi:</h2>
 				<p:accordionPanel value="#{evasione.ordiniNonEvasi}" var="o">
 					<p:tab>
@@ -21,7 +21,11 @@
 							<h:outputText value="#{o.dataChiusura}">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 							</h:outputText>
-							<h:outputText value=" - €#{o.prezzoTotale}   "></h:outputText>
+							<h:outputText rendered="#{o.coupon==null}"
+								value=" - €#{o.prezzoTotale}  "></h:outputText>
+							<h:outputText rendered="#{o.coupon!=null}"
+								value=" - €#{o.prezzoTotale*(100-o.coupon.percentuale)/100}  "></h:outputText>
+
 							<h:outputText value="Non " style="font-style:italic"
 								rendered="#{not o.evaso}"></h:outputText>
 							<h:outputText value="Evaso" style="font-style:italic"></h:outputText>
@@ -81,13 +85,6 @@
 										<div></div>
 										<div></div>
 										<div></div>
-										<h:form>
-											<h:commandButton class="btn btn-primary" role="button"
-												value="Evadi" action="#{ordineController.evadiOrdine}">
-												<f:param name="codice" value="#{o.codice}" />
-											</h:commandButton>
-											${o.codice}
-										</h:form>
 									</div>
 								</div>
 								<hr></hr>
@@ -100,8 +97,15 @@
 									<div class="col-md-6">
 										<h3>Sconto: %${o.coupon.percentuale}</h3>
 									</div>
+									<hr></hr>
 								</h:outputText>
 							</div>
+							<h:form>
+								<h:commandButton class="btn btn-primary evasione" role="button"
+									value="Evadi" action="#{evasione.evadiOrdine}">
+									<f:param name="codice" value="#{o.codice}" />
+								</h:commandButton>
+							</h:form>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>

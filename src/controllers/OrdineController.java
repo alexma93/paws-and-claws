@@ -29,9 +29,6 @@ public class OrdineController {
 	@ManagedProperty(value = "#{sessione}")
 	private SessionBean session;
 	
-	@ManagedProperty(value = "#{evasione}")
-	private EvasioneController evasione;
-	
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 	
@@ -76,26 +73,6 @@ public class OrdineController {
 		ordineFacade.terminaOrdine(session.getOrdineCorrente());
 		session.terminaOrdine();
 		return "index.xhtml";
-	}
-
-	//UC6
-	public String getOrdiniNonEvasiDB() {
-		List<Ordine> ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
-		this.evasione.setOrdiniNonEvasi(ordiniNonEvasi);
-		return "evasioneOrdine.xhtml";
-	}
-	private void setOrdiniNonEvasi() {
-		List<Ordine> ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
-		this.evasione.setOrdiniNonEvasi(ordiniNonEvasi);
-	}
-	public String evadiOrdine() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		String codice = fc.getExternalContext().getRequestParameterMap().get("codice");
-		Integer i = Integer.parseInt(codice);
-		ordineFacade.evadiOrdine(i);
-		setOrdiniNonEvasi();
-		
-		return "evasioneOrdine.xhtml";
 	}
 
 	public SessionBean getSession() {
@@ -149,13 +126,6 @@ public class OrdineController {
 	public void setCouponFacade(CouponFacade couponFacade) {
 		this.couponFacade = couponFacade;
 	}
-	public EvasioneController getEvasione() {
-		return evasione;
-	}
-	public void setEvasione(EvasioneController evasione) {
-		this.evasione = evasione;
-	}
-	
 
 	
 	

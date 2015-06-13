@@ -29,10 +29,10 @@
 .ui-slider .ui-slider-handle {
 	position: absolute;
 	z-index: 2;
-	width: 5.2em;
+	width: 4.2em;
 	height: 2.2em;
 	cursor: default;
-	margin: 0 -40px auto !important;
+	margin: 0 -30px auto !important;
 	text-align: center;
 	line-height: 30px;
 	color: #FFFFFF;

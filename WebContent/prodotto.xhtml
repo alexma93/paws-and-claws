@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
 <h:head>
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
 
@@ -13,8 +14,11 @@
 <body>
 	<ui:composition>
 		<div class="media">
-			<img class="media-object pull-left img-responsive"
-				src="resources/img/crocchette.jpg" />  
+			<div class="media-object pull-left img-responsive">
+				 
+				<o:graphicImage value="#{prodotto.foto}" dataURI="true" width="100"
+					rendered="#{not empty prodotto.foto}" />
+			</div>
 			<f:param name="codice" value="#{prodotto.codice}" />
 			<div class="media-body">
 				<div class="icona-prodotto">
@@ -58,8 +62,7 @@
 					<f:param name="codice" value="#{prodotto.codice}" />
 				</h:commandButton>
 				<h:commandButton class="btn btn-primary" role="button"
-					value="Ins Rece"
-					action="#{recensioneController.iniziaRecensione}">
+					value="Ins Rece" action="#{recensioneController.iniziaRecensione}">
 					<f:param name="codice" value="#{prodotto.codice}" />
 				</h:commandButton>
 				<p:spinner id="basic" value="#{ordineController.quantita}" min="1"

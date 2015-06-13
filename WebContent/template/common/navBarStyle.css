@@ -7,7 +7,26 @@ body {
 .casella {
 	margin-top: 12px;
 }
-/* serve in una thumbnail a separare le righe con uno spazio
+
+.btn-catalogo {
+	margin-top: 12px;
+	display: inline;
+}
+
+.navbar-colori {
+	background-color: #73D752;
+	border-color: #2CBA0D;
+	border-style: ridge;
+}
+
+.navbar-default
+.navbar-nav>.active>a, .navbar-default
+.navbar-nav>.active>a
+:focus, .navbar-default
+.navbar-nav>.active>a {
+	  background-color: #5AA840;
+}
+:hover /* serve in una thumbnail a separare le righe con uno spazio
 
 .row:not(:first-child){
   margin-top:10px;

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <head>
 <meta charset="ISO-8859-1" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,18 +27,37 @@
 
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li class="btn-group"><a style="display: inline;"
-					href="catalogo.xhtml">Catalogo</a>
+				<li class="btn-group"><h:form class="btn-catalogo">
+						<h:commandButton class="btn-link"
+							action="#{catalogoController.inizializza}" value="Catalogo" />
+					</h:form>
 					<button type="button" class="btn-link dropdown-toggle"
 						style="margin-top: 12px;" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Gatti</a></li>
-						<li><a href="#">Cani</a></li>
-						<li><a href="#">Pesci</a></li>
-						<li><a href="#">Rettili</a></li>
-						<li><a href="#">Uccelli</a></li>
+					<ul class="dropdown-menu" role="menu" style="min-width: 120px">
+						<h:form>
+							<li><h:commandButton class="btn-link" value="Gatti"
+									action="#{catalogoController.inizializza}">
+									<f:param name="specie" value="gatto" />
+								</h:commandButton></li>
+							<li><h:commandButton class="btn-link" value="Cani"
+									action="#{catalogoController.inizializza}">
+									<f:param name="specie" value="cane" />
+								</h:commandButton></li>
+							<li><h:commandButton class="btn-link" value="Pesci"
+									action="#{catalogoController.inizializza}">
+									<f:param name="specie" value="pesce" />
+								</h:commandButton></li>
+							<li><h:commandButton class="btn-link" value="Rettili"
+									action="#{catalogoController.inizializza}">
+									<f:param name="specie" value="rettile" />
+								</h:commandButton></li>
+							<li><h:commandButton class="btn-link" value="Uccelli"
+									action="#{catalogoController.inizializza}">
+									<f:param name="specie" value="uccello" />
+								</h:commandButton></li>
+						</h:form>
 					</ul></li>
 
 				<li><a>${sessione.amministratore.email}</a></li>
