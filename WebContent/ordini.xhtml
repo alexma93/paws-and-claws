@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
 <h:head>
 </h:head>
 <h:body>
@@ -35,8 +36,11 @@
 							<ui:repeat var="r" value="#{o.righe}">
 								<div class="row">
 									<div class="media col-md-8">
-										<img class="media-object pull-left img-responsive"
-											src="resources/img/crocchette.jpg" />
+																			<div class="media-object pull-left img-responsive">
+										 
+										<o:graphicImage value="#{r.prodotto.foto}" dataURI="true"
+											width="100" rendered="#{not empty r.prodotto.foto}" />
+									</div>
 										<div class="media-body prodotto-carrello">
 											<div class="icona-p-carrello">
 												<img class="media-object pull-left img-responsive"

@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
 <h:head>
 
 
@@ -24,9 +25,12 @@
 						</tr>
 						<ui:repeat var="r" value="#{sessione.ordineCorrente.righe}">
 							<tr>
-								<td class="media"><img
-									class="media-object pull-left img-responsive"
-									src="resources/img/crocchette.jpg" />
+								<td class="media">
+									<div class="media-object pull-left img-responsive">
+										 
+										<o:graphicImage value="#{r.prodotto.foto}" dataURI="true"
+											width="100" rendered="#{not empty r.prodotto.foto}" />
+									</div>
 									<div class="media-body prodotto-carrello">
 										<div class="icona-p-carrello">
 											<img class="media-object pull-left img-responsive"
@@ -47,7 +51,8 @@
 											</h:form>
 										</div>
 
-									</div></td>
+									</div>
+								</td>
 								<td>${r.prodotto.prezzoDiListino} X ${r.quantita}</td>
 								<td>${r.prodotto.prezzoDiListino*r.quantita}</td>
 							</tr>
@@ -78,29 +83,29 @@
 						</c:if>
 					</table>
 				</div>
-				
+
 				<c:if test="${sessione.ordineCorrente!=null}">
-				<c:if test="${sessione.ordineCorrente.coupon==null}">
-				<div class="coupon-form">
-					<h:form class="form-inline" role="form">
-						<div class="form-group">
-							<label for="coupon">Coupon: </label>
-							<h:inputText class="form-control"
-								value="#{ordineController.codiceCoupon}" required="true"
-								requiredMessage="  Inserire un codice" id="coupon" />
+					<c:if test="${sessione.ordineCorrente.coupon==null}">
+						<div class="coupon-form">
+							<h:form class="form-inline" role="form">
+								<div class="form-group">
+									<label for="coupon">Coupon: </label>
+									<h:inputText class="form-control"
+										value="#{ordineController.codiceCoupon}" required="true"
+										requiredMessage="  Inserire un codice" id="coupon" />
+								</div>
+								<h:commandButton class="btn btn-success" value="Submit"
+									action="#{ordineController.aggiungiCoupon}" />
+								<h:message for="coupon" />
+							</h:form>
+							<div>#{ordineController.erroreCoupon}</div>
 						</div>
-						<h:commandButton class="btn btn-success" value="Submit"
-							action="#{ordineController.aggiungiCoupon}" />
+					</c:if>
+					<h:form role="form">
+						<h:commandButton class="btn btn-success terminazione-bottone"
+							value="Termina ordine" action="#{ordineController.terminaOrdine}" />
 						<h:message for="coupon" />
 					</h:form>
-					<div>#{ordineController.erroreCoupon}</div>
-				</div>
-				</c:if>
-				<h:form role="form">
-					<h:commandButton class="btn btn-success terminazione-bottone" value="Termina ordine"
-						action="#{ordineController.terminaOrdine}" />
-					<h:message for="coupon" />
-				</h:form>
 				</c:if>
 			</div>
 		</ui:define>
