@@ -6,11 +6,23 @@ Scenario Principale:
 - L’utente si vuole registrare
 - L’utente inserisce nome, cognome, data di nascita, email, password e l’indirizzo
 - Il sistema registra l’utente e gli assegna una data di registrazione
-UC2: Login Utente/amministratore
+UC1bis: Login Utente/amministratore
 Attore primario: utente/amministratore non loggato
 Scenario Principale:
 - L’utente/amministratore effettua il login inserendo email e password
-UC3: Consulta catalogo
+UC2: Effettua ordine
+Attore primario: cliente (utente registrato)
+Scenario principale di successo: 
+- Il cliente consulta il catalogo dei prodotti
+- Il cliente sceglie un prodotto e aggiunge codice e quantità del prodotto scelto all'ordine
+- Il sistema imposta il prezzo unitario del prodotto scelto al prezzo corrente di listino
+- Il sistema registra la riga ordine
+- Il cliente ripete i due passi precedenti finché necessario
+- Il cliente può inserire un coupon
+- Il cliente "chiude" l'ordine
+- Il sistema registra l'ordine impostando il prezzo dell'ordine tenendo conto dell'eventuale coupon inserito
+Precondizioni: il cliente è identificato e autenticato
+UCNostro: Consulta catalogo
 Attore primario: utente non loggato
 Scenario principale:
 - 1) L’utente consulta il catalogo dei prodotti
@@ -20,7 +32,7 @@ Estensioni:
 - 1a) L’utente può scegliere un animale per filtrare il catalogo
 - 1b) L’utente può scegliere di visualizzare i prodotti ordinati per nome,prezzo,data e valutazione media
 - 1c) L’utente può filtrare il catalogo in base a una parola chiave, la specie del prodotto, il prezzo massimo e la valutazione minima
-UC4:  Consulta propri ordini
+UC3:  Consulta propri ordini
 Attore primario: utente loggato
 Scenario principale:
 - Il cliente consulta l’elenco dei propri ordini
@@ -28,7 +40,7 @@ Scenario principale:
 - Il cliente chiede il dettaglio di un ordine
 - Il sistema mostra il dettaglio dell’ordine e dei rispettivi prodotti
 - Il cliente ripete i passi precedenti finchè necessario
-UC5: inserimento prodotti nel catalogo:
+UC4: inserimento prodotti nel catalogo:
 Attore primario: amministratore
 Scenario principale:
 - L’amministratore vuole inserire dei nuovi prodotti
@@ -37,7 +49,7 @@ Scenario principale:
 - L’amministratore ripete il punto precedente finchè necessario
 - L’amministratore termina l’inserimento
 - Il sistema registra i prodotti nel catalogo
-UC6: recupera dati cliente
+UC5: recupera dati cliente
 Attore primario: amministratore
 Scenario principale:
 - L’amministratore vuole recuperare i dati di un cliente a partire da un ordine
@@ -45,7 +57,7 @@ Scenario principale:
 - L’amministratore richiede i dettagli di un ordine
 - L’amministratore chiede di visualizzare l’utente che ha composto l’ordine
 - Il sistema mostra i dati dell’utente
-UC7: evasione ordine
+UC6: evasione ordine
 Attore primario: amministratore
 Scenario principale:
 - Il sistema presenta all’amministratore gli ordini chiusi ma non evasi

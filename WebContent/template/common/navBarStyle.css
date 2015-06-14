@@ -14,16 +14,16 @@ body {
 }
 
 .navbar-colori {
-	background: -webkit-linear-gradient(#73D752 0%, #51be2c 25%, #439f24 50%, #51be2c 75%, #73D752 100%);
-	background: -moz-linear-gradient(#73D752 0%, #51be2c 25%, #439f24 50%, #51be2c 75%, #73D752 100%);
-	border-color: #2CBA0D;
+	background: -webkit-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
+	background: -moz-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
+	border-color: #23355a;
 	border-style: ridge;
 	height: 1px;
 }
 
 .dropdown-menu {
-	background: -webkit-linear-gradient(#73D752 0%, #51be2c 25%, #439f24 50%, #51be2c 75%, #73D752 100%);
-	background: -moz-linear-gradient(#73D752 0%, #51be2c 25%, #439f24 50%, #51be2c 75%, #73D752 100%);
+	background: -webkit-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
+	background: -moz-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
 	position: absolute;
 	top: 130%;
 	left: 0;
@@ -51,7 +51,7 @@ body {
 .navbar-nav>.active>a
 :focus, .navbar-default
 .navbar-nav>.active>a {
-	  background-color: #5AA840;
+	  background-color: #afbdd4;
 }
 :hover /* serve in una thumbnail a separare le righe con uno spazio
 
