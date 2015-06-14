@@ -11,7 +11,8 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default navbar-fixed-top navbar-colori" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top navbar-colori"
+		role="navigation">
 
 		<!-- Logo e pulsante per barra ridimensionata -->
 		<div class="navbar-header">
@@ -59,6 +60,14 @@
 								</h:commandButton></li>
 						</h:form>
 					</ul></li>
+				<li><a><h:form>
+						<h:commandButton class="btn-link" value="Evadi ordine"
+							action="#{evasione.getOrdiniNonEvasiDB}" />
+					</h:form></a></li>
+				<li><a><h:form>
+						<h:commandButton class="btn-link" value="Aggiungi Prodotti"
+							action="#{prodottoController.getFornitoriDB}" />
+					</h:form></a></li>
 
 				<li><a>${sessione.amministratore.email}</a></li>
 				<li style="margin-top: 12px;"><h:form>
