@@ -5,13 +5,28 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 <h:head>
 </h:head>
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<h1>Benvenuto ${sessione.utente.nome}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="prova"><a href="#"><font color="black">Home</font></a></li>
+					<li class="prova"><a href="#">Menu 1</a></li>
+					<li><a href="#">Menu 2</a></li>
+					<li><a href="#">Menu 3</a></li>
+				</ul>
+			</div>
 			<div class="col-md-4"></div>
 			<div class="col-md-3" style="margin-top: 50px;">
 				<c:if test="#{sessione.utente!=null}">
@@ -24,13 +39,11 @@
 				</c:if>
 			</div>
 
+			<o:graphicImage value="#{prodottoController.content}" dataURI="true"
+				width="600" rendered="#{not empty prodottoController.content}" />
 			<h:form>
 				<h:commandButton class="btn btn-success" value="evadi ordinee"
 					action="#{evasione.getOrdiniNonEvasiDB}" />
-			</h:form>
-						<h:form>
-				<h:commandButton class="btn btn-success" value="ordini evasi"
-					action="#{evasione.getOrdiniEvasiDB}" />
 			</h:form>
 			<h:form>
 				<h:commandButton class="btn btn-success" value="aggiungi pro"
@@ -46,3 +59,4 @@
 	</ui:composition>
 </h:body>
 </html>
+
