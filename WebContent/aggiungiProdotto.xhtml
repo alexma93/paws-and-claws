@@ -70,7 +70,8 @@
 								<label for="quantita">Quantità:</label>
 								<h:inputText class="form-control"
 									value="#{prodottoController.quantita}" required="true"
-									requiredMessage="La quantità è obbligatoria" id="quantita" />
+									requiredMessage="La quantità è obbligatoria" 
+									converterMessage="Deve essere un numero!" id="quantita" />
 								<h:message for="quantita" />
 							</div>
 							<div class="form-group">
@@ -84,27 +85,8 @@
 									<f:selectItem itemValue="uccello" itemLabel="Uccello" />
 								</h:selectOneMenu>
 							</div>
-							<!-- 
 							<div class="form-group">
-								<ui:repeat var="f" value="#{prodottoController.fornitori}">
-									<h:selectManyListbox value="#{prodottoController.fornitoriProdotto}">
-										<f:selectItem id="item" itemLabel="News" itemValue="#{f.iva}" />
-									</h:selectManyListbox>
-								</ui:repeat>
-							</div>
-							-->
-							<!-- 
-							<h:dataTable value='#{prodottoController.fornitori}' id="subscriptions" var='fornitore'>
-								<h:column>
-									<h:selectManyListbox value="#{prodottoController.fornitoriProdotto}">
-										<f:selectItem itemLabel="#{fornitore.nome}" itemValue="#{fornitore.codice}" />
-										<f:param name="codice" value="#{fornitore.iva}" />
-									</h:selectManyListbox>
-								</h:column>
-							</h:dataTable>
-							-->
-							<div class="form-group">
-								<label for="quantita">Fornitori:</label>
+								<label for="quantita">Fornitori: (usare ctrl per selezionarne molti)</label>
 								<h:selectManyListbox styleClass="form-control"
 									value="#{prodottoController.fornitoriProdotto}">
 									<f:selectItems value="#{prodottoController.fornitori}" var="f"
@@ -128,20 +110,7 @@
 					<!-- elenco prodotti inseriti -->
 					<div class="col-md-9">
 						<div class="row ">
-							<h3 class="col-md-9">Pagina: ${param.pagina+1}</h3>
-							<div class="ordinamento dropdown pull-right col-md-2">
-								<button class="btn btn-primary dropdown-toggle" type="button"
-									data-toggle="dropdown">
-									Ordina per <span class="caret"></span>
-								</button>
-								<!--  stile inserito in linea, per sovrascrivere tutti gli altri -->
-								<ul class="dropdown-menu" style="right: 42px;">
-									<li><a href="#">nome</a></li>
-									<li><a href="#">prezzo</a></li>
-									<li><a href="#">data</a></li>
-									<li><a href="#">valutazione</a></li>
-								</ul>
-							</div>
+							<h3 class="col-md-9">Prodotti da Inserire:</h3>
 							<div class="col-md-1"></div>
 
 						</div>

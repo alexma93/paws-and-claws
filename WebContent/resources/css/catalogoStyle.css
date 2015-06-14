@@ -16,6 +16,14 @@
 	border-radius: 15px;
 	padding: 10px 15px;
 	border: 2px solid;
+	background-color: white;
+	border-color: #00aa00;
+}
+
+.prodotto-catalogo {
+	background-color: rgb(150, 237, 120);
+	border: 2px rgb(8, 100, 1);
+	border-style: solid;
 }
 
 /* ricerca e filtri */

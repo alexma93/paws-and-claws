@@ -23,14 +23,13 @@ public class FornitoreFacade {
 		return fornitori;
 	}
 	
-	public Fornitore getFornitore(String codice) {
-		Query ricercaFornitore = this.em.createQuery("SELECT f FROM Fornitore f WHERE f.codice = :codice");
-		ricercaFornitore.setParameter("codice", codice);
+	public void addFornitore(Prodotto p,String iva) {
+		Query ricercaFornitore = this.em.createQuery("SELECT f FROM Fornitore f WHERE f.iva = :iva");
+		ricercaFornitore.setParameter("iva", iva);
 		try {
 			Fornitore f = (Fornitore) ricercaFornitore.getSingleResult();
-			return f;
+			p.getFornitori().add(f);
 		} catch (Exception e) {
-			return null;
 		}
 	}
 

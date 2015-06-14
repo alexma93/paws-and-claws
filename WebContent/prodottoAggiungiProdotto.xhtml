@@ -37,9 +37,6 @@
 					<label>Quantità disp.:</label> <span>${prodotto.quantita}</span>
 				</div>
 				<div>
-					<label>Fornitore:</label> <span>${prodotto.fornitori}</span>
-				</div>
-				<div>
 					<button type="button" class="btn btn-default" data-container="body"
 						data-toggle="popover" data-placement="bottom"
 						data-content="${prodotto.descrizione}" data-original-title=""
@@ -47,6 +44,14 @@
 						Descrizione <span class="glyphicon glyphicon-circle-arrow-down"></span>
 					</button>
 				</div>
+				<div>
+					<label>Fornitori:</label> <span></span>
+				</div>
+				<ui:repeat var="f" value="#{prodotto.fornitori}">
+					<div>
+						<label> </label> <span>${f.nome}</span>
+					</div>
+				</ui:repeat>
 			</div>
 		</div>
 

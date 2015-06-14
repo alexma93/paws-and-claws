@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -20,7 +21,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@NamedQuery(name = "ordine.findNonEvasi", query = "SELECT o FROM Ordine o WHERE o.evaso = false")
+@NamedQueries({
+	@NamedQuery(name = "ordine.findNonEvasi", query = "SELECT o FROM Ordine o WHERE o.evaso = false"),
+	@NamedQuery(name = "ordine.findEvasi", query = "SELECT o FROM Ordine o WHERE o.evaso = true"),
+})
 public class Ordine {
 
 	@Id

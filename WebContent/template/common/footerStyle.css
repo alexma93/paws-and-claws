@@ -1,8 +1,21 @@
 .foot {
 	font-size: 10px;
-	color: #7f7f7f;
+	color: #222222;
 	margin: 0px 0px 0px;
 }
+
 .pad {
 	padding-top: 20px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+	background-color: #62CF5F;
+	border-color: rgba(49, 121, 33, 0.36);
+	border-style: solid;
+	border-bottom: hidden;
+	border-width: 2px;
 }

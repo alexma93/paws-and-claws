@@ -44,7 +44,7 @@
 						Descrizione <span class="glyphicon glyphicon-circle-arrow-down"></span>
 					</button>
 				</div>
-				<div>
+				<div style="padding-bottom:20px">
 					<label>Voto medio:</label>
 					<h:form>
 						<p:rating value="#{prodotto.votoMedio}" readonly="true" />
@@ -58,10 +58,6 @@
 				<h:commandButton class="btn btn-primary" role="button"
 					value="Aggiungi al carrello"
 					action="#{ordineController.aggiungiProdottoOrdine}">
-					<f:param name="codice" value="#{prodotto.codice}" />
-				</h:commandButton>
-				<h:commandButton class="btn btn-primary" role="button"
-					value="Ins Rece" action="#{recensioneController.iniziaRecensione}">
 					<f:param name="codice" value="#{prodotto.codice}" />
 				</h:commandButton>
 				<p:spinner id="basic" value="#{ordineController.quantita}" min="1"

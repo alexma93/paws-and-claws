@@ -7,15 +7,3 @@ body {
 	/* Margin bottom by footer height */
 	margin-bottom: 100px;
 }
-
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 100px;
-	background-color: #4F9B4D;
-	border-color: #317921;
-	border-style: solid;
-	border-bottom: hidden;
-	border-width: 2px;
-}

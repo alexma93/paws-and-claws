@@ -74,8 +74,7 @@ public class ProdottoController {
 			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, 0, content);
 			
 			for(String codice : this.fornitoriProdotto) {
-				Fornitore f = fornitoreFacade.getFornitore(codice);
-				p.addFornitore(f);
+				fornitoreFacade.addFornitore(p,codice);
 			}
 			this.prodotti.add(p);
 			this.size=prodotti.size();

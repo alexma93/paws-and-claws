@@ -1,10 +1,12 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+
+
+
 
 
 
@@ -16,7 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -52,8 +53,7 @@ public class Prodotto {
 	private String specie;
 	
 	@ManyToMany
-	@MapKeyJoinColumn(name="iva")
-	private Map<String,Fornitore> fornitori;
+	private List<Fornitore> fornitori;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
 	@JoinColumn(name = "recensione_id")
@@ -79,7 +79,7 @@ public class Prodotto {
 		this.votoMedio = votoMedio;
 		this.foto = foto;
 		this.dataInserimento = new Date();
-		this.fornitori = new HashMap<String,Fornitore>();
+		this.fornitori = new ArrayList<>();
 		this.recensioni = new LinkedList<>();
 		this.votoMedio = votoMedio;
 	}
@@ -92,7 +92,7 @@ public class Prodotto {
 		this.prezzoDiListino = prezzo;
 		this.dataInserimento = new Date();
 		this.quantita = quantita;
-		this.fornitori = new HashMap<String,Fornitore>();
+		this.fornitori = new ArrayList<Fornitore>();
 		this.votoMedio = 0;
 		this.foto = foto;
 	}
@@ -105,7 +105,7 @@ public class Prodotto {
 	}
 	
 	public void addFornitore(Fornitore f) {
-		this.fornitori.put(f.getIva(),f);
+		this.fornitori.add(f);
 	}
 	
 	public Long getId() {
@@ -182,11 +182,11 @@ public class Prodotto {
 		this.specie = specie;
 	}
 
-	public Map<String, Fornitore> getFornitori() {
+	public List<Fornitore> getFornitori() {
 		return fornitori;
 	}
 
-	public void setFornitori(Map<String, Fornitore> fornitori) {
+	public void setFornitori(List<Fornitore> fornitori) {
 		this.fornitori = fornitori;
 	}
 

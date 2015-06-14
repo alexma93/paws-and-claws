@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +32,7 @@ public class Fornitore {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Indirizzo indirizzo;
 	
-	@ManyToMany(mappedBy = "fornitori",fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "fornitori",cascade = CascadeType.ALL)
 	private List<Prodotto> prodotti;
 	
 	public String getIva() {

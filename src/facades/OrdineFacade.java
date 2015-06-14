@@ -75,4 +75,10 @@ public class OrdineFacade {
 		}
 	}
 
+	public List<Ordine> getOrdiniEvasi() {
+		TypedQuery<Ordine> result = this.em.createNamedQuery("ordine.findEvasi",Ordine.class);
+		List<Ordine> ordiniEvasi = result.getResultList();
+		return ordiniEvasi;
+	}
+
 }

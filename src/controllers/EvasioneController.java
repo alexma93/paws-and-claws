@@ -15,6 +15,8 @@ import models.Ordine;
 public class EvasioneController {
 	private List<Ordine> ordiniNonEvasi;
 	
+	private List<Ordine> ordiniEvasi;
+	
 	private String errore;
 
 	@EJB(beanName="oFacade")
@@ -25,6 +27,11 @@ public class EvasioneController {
 		this.ordiniNonEvasi = ordineFacade.getOrdiniNonEvasi();
 		this.errore = null;
 		return "evasioneOrdine.xhtml";
+	}
+	
+	public String getOrdiniEvasiDB() {
+		this.ordiniEvasi = ordineFacade.getOrdiniEvasi();
+		return "ordiniEvasi.xhtml";
 	}
 	
 	public String evadiOrdine() {
@@ -57,6 +64,14 @@ public class EvasioneController {
 	}
 	public void setErrore(String errore) {
 		this.errore = errore;
+	}
+
+	public List<Ordine> getOrdiniEvasi() {
+		return ordiniEvasi;
+	}
+
+	public void setOrdiniEvasi(List<Ordine> ordiniEvasi) {
+		this.ordiniEvasi = ordiniEvasi;
 	}
 
 
