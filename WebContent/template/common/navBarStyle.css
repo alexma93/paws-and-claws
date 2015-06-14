@@ -18,6 +18,7 @@ body {
 	background: -moz-linear-gradient(#73D752 0%, #51be2c 25%, #439f24 50%, #51be2c 75%, #73D752 100%);
 	border-color: #2CBA0D;
 	border-style: ridge;
+	height: 1px;
 }
 
 .dropdown-menu {

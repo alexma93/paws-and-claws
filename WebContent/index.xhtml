@@ -11,50 +11,9 @@
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
+	<img class="logo-photoshop" src="resources/img/logo-photoshop.jpg"></img>
 
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<h1>Benvenuto ${sessione.utente.nome}</h1>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="prova"><a href="#"><font color="black">Home</font></a></li>
-					<li class="prova"><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-				</ul>
-			</div>
-			<div class="col-md-4"></div>
-			<div class="col-md-3" style="margin-top: 50px;">
-				<c:if test="#{sessione.utente!=null}">
-					<h3>${sessione.utente.nome}</h3>
-					<h4>${sessione.utente.ordini==null}</h4>
-					<ui:repeat var="o" value="${sessione.utente.ordini}">
-						<h3>${o}</h3>
-					${sessione.utente.cognome}
-					</ui:repeat>
-				</c:if>
-			</div>
-
-			<o:graphicImage value="#{prodottoController.content}" dataURI="true"
-				width="600" rendered="#{not empty prodottoController.content}" />
-			<h:form>
-				<h:commandButton class="btn btn-success" value="evadi ordinee"
-					action="#{evasione.getOrdiniNonEvasiDB}" />
-			</h:form>
-			<h:form>
-				<h:commandButton class="btn btn-success" value="aggiungi pro"
-					action="#{prodottoController.getFornitoriDB}" />
-			</h:form>
-
-
-
-
-
-
+ 
 		</ui:define>
 	</ui:composition>
 </h:body>

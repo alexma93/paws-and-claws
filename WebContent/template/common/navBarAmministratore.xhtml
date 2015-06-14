@@ -28,6 +28,19 @@
 
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
+				<li><a><h:form>
+							<h:commandButton class="btn-link" value="Aggiungi Prodotti"
+								action="#{prodottoController.getFornitoriDB}" />
+						</h:form></a></li>
+				<li><a><h:form>
+							<h:commandButton class="btn-link" value="Evadi ordine"
+								action="#{evasione.getOrdiniNonEvasiDB}" />
+						</h:form></a></li>
+				<li><a><h:form>
+							<h:commandButton class="btn-link" value="Ordini evasi"
+								action="#{evasione.getOrdiniEvasiDB}" />
+						</h:form></a></li>
+				<li><a>${sessione.amministratore.email}</a></li>
 				<li class="btn-group"><h:form class="btn-catalogo">
 						<h:commandButton class="btn-link"
 							action="#{catalogoController.inizializza}" value="Catalogo" />
@@ -60,16 +73,6 @@
 								</h:commandButton></li>
 						</h:form>
 					</ul></li>
-				<li><a><h:form>
-						<h:commandButton class="btn-link" value="Evadi ordine"
-							action="#{evasione.getOrdiniNonEvasiDB}" />
-					</h:form></a></li>
-				<li><a><h:form>
-						<h:commandButton class="btn-link" value="Aggiungi Prodotti"
-							action="#{prodottoController.getFornitoriDB}" />
-					</h:form></a></li>
-
-				<li><a>${sessione.amministratore.email}</a></li>
 				<li style="margin-top: 12px;"><h:form>
 						<h:commandButton class="btn-link"
 							action="#{sessione.scollegaAmministratore}" value="Esci" />
