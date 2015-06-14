@@ -100,25 +100,10 @@ public class ProdottoController {
 		return "aggiungiProdotto.xhtml";
 	}
 	
-	public void inserisciFornitore(String iva) {
-//		//Fornitore f = this.store.getFornitore(iva);
-//		//if(f==null) {
-//			//TODO
-//		}
-//		else {
-//		//	this.prodottoCorrente.addFornitore(f);
-//		}
-	}
-	
 	public void inserisciFoto(byte[] immagine) {
 		this.prodottoCorrente.setFoto(immagine);
 	}
-	
-	public String fineInserimento() {
-	//	this.session.getStore().inserisciProdotto(this.prodottoCorrente);
-		this.prodottoCorrente = null;
-		return "index.xhtml";
-	}
+
 
 	//UC7
 	//si ripete selezionaProdotto
@@ -173,13 +158,6 @@ public class ProdottoController {
 	public void setPrezzoDiListino(Float prezzoDiListino) {
 		this.prezzoDiListino = prezzoDiListino;
 	}
-//	public Map<String, Prodotto> getProdotti() {
-//		return prodotti;
-//	}
-//
-//	public void setProdotti(Map<String, Prodotto> prodotti) {
-//		this.prodotti = prodotti;
-//	}
 
 	public List<Prodotto> getProdotti() {
 		return prodotti;
