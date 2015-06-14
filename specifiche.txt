@@ -1,8 +1,3 @@
-NOTE PRIMA DI ESEGUIRLO:
-- nell'inserimento dell'immagine di un prodotto, non abbiamo inserito alcuna validazione, quindi bisogna inserire un file immagine.
-- i prodotti hanno un campo “valutazioneMedia” ma non abbiamo fatto in tempo a introdurre un caso d’uso per valutarli.
-- il login per l’amministratore è in basso a destra in piccolo nel footer della pagina.
-- il cliente si può registrare da solo senza che venga accettato da un’amministratore.
 
 CASI D'USO:
 UC1 : Registrazione Utente

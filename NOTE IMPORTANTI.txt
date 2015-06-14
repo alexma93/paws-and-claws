@@ -1,0 +1,6 @@
+NOTE IMPORTANTI DA LEGGERE:
+- su git sembra che abbiamo iniziato tardi, a Giugno, in realtà abbiamo perso i commit precedenti per errore.
+- nell'inserimento dell'immagine di un prodotto, non abbiamo inserito alcuna validazione, quindi bisogna inserire un file immagine.
+- i prodotti hanno un campo “valutazioneMedia” ma non abbiamo fatto in tempo a introdurre un caso d’uso per valutarli.
+- il login per l’amministratore è in basso a destra in piccolo nel footer della pagina.
+- il cliente si può registrare da solo senza che venga accettato da un’amministratore.
