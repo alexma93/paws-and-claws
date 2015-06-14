@@ -74,6 +74,7 @@
 								<h:message for="quantita" />
 							</div>
 							<div class="form-group">
+								<label for="quantita">Specie:</label>
 								<h:selectOneMenu styleClass="form-control" id="specie"
 									accesskey="a" value="#{prodottoController.specie}">
 									<f:selectItem itemValue="gatto" itemLabel="Gatto" />
@@ -83,6 +84,34 @@
 									<f:selectItem itemValue="uccello" itemLabel="Uccello" />
 								</h:selectOneMenu>
 							</div>
+							<!-- 
+							<div class="form-group">
+								<ui:repeat var="f" value="#{prodottoController.fornitori}">
+									<h:selectManyListbox value="#{prodottoController.fornitoriProdotto}">
+										<f:selectItem id="item" itemLabel="News" itemValue="#{f.iva}" />
+									</h:selectManyListbox>
+								</ui:repeat>
+							</div>
+							-->
+							<!-- 
+							<h:dataTable value='#{prodottoController.fornitori}' id="subscriptions" var='fornitore'>
+								<h:column>
+									<h:selectManyListbox value="#{prodottoController.fornitoriProdotto}">
+										<f:selectItem itemLabel="#{fornitore.nome}" itemValue="#{fornitore.codice}" />
+										<f:param name="codice" value="#{fornitore.iva}" />
+									</h:selectManyListbox>
+								</h:column>
+							</h:dataTable>
+							-->
+							<div class="form-group">
+								<label for="quantita">Fornitori:</label>
+								<h:selectManyListbox styleClass="form-control"
+									value="#{prodottoController.fornitoriProdotto}">
+									<f:selectItems value="#{prodottoController.fornitori}" var="f"
+										itemLabel="#{f.nome}" itemValue="#{f.iva}" />
+								</h:selectManyListbox>
+							</div>
+
 							<div class="row">
 								<h:commandButton class="btn btn-success" value="Inserisci"
 									action="#{prodottoController.inserisciNuovoProdotto}" />

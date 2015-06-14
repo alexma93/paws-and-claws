@@ -5,8 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 <h:head>
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
 
@@ -35,7 +34,10 @@
 					<label>Prezzo:</label> <span>${prodotto.prezzoDiListino}</span>
 				</div>
 				<div>
-					<label>Quantità disp. :</label> <span>${prodotto.quantita}</span>
+					<label>Quantità disp.:</label> <span>${prodotto.quantita}</span>
+				</div>
+				<div>
+					<label>Fornitore:</label> <span>${prodotto.fornitori}</span>
 				</div>
 				<div>
 					<button type="button" class="btn btn-default" data-container="body"

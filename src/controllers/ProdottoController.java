@@ -14,7 +14,9 @@ import javax.servlet.http.Part;
 
 import org.omnifaces.util.Utils;
 
+import facades.FornitoreFacade;
 import facades.ProdottoFacade;
+import models.Fornitore;
 import models.Prodotto;
 
 @ManagedBean
@@ -26,6 +28,9 @@ public class ProdottoController {
 	private String codice;
 	private Integer quantita;
 	private String specie;
+	
+	private List<Fornitore> fornitori;
+	private List<String> fornitoriProdotto;
 	
 	private Prodotto prodottoCorrente;
 	private List<Prodotto> prodotti;
@@ -41,14 +46,12 @@ public class ProdottoController {
 	@EJB(beanName="pFacade")
 	private ProdottoFacade prodottoFacade;
 	
-	private String errore;
-	
+	@EJB(beanName="fFacade")
+	private FornitoreFacade fornitoreFacade;
+
 	//UC4
 	private String createProduct() {
-		prodottoFacade.createProduct(prodottoCorrente.getNome(), prodottoCorrente.getPrezzoDiListino(), 
-									 prodottoCorrente.getDescrizione(), prodottoCorrente.getCodice(),
-									 prodottoCorrente.getQuantita(), prodottoCorrente.getSpecie(),
-									 prodottoCorrente.getFoto());
+		prodottoFacade.createProduct(prodottoCorrente);
 		return "aggiungiProdotto.xhtml";
 	}
 	public String confermaProdotti() {
@@ -69,6 +72,11 @@ public class ProdottoController {
 		}
 		if(prodottoFacade.getProdotto(codice)==null) {
 			Prodotto p = new Prodotto(nome, prezzoDiListino, descrizione, codice, quantita, specie, 0, content);
+			
+			for(String codice : this.fornitoriProdotto) {
+				Fornitore f = fornitoreFacade.getFornitore(codice);
+				p.addFornitore(f);
+			}
 			this.prodotti.add(p);
 			this.size=prodotti.size();
 			this.nome = null;
@@ -78,14 +86,18 @@ public class ProdottoController {
 			this.quantita = null;
 			this.file = null;
 			this.specie = "seleziona";
-			this.errore = null;
 		} else {
 			this.codice = null;
-			this.errore = "Inserire un codice non presente:";
 			return "aggiungiProdotto.xhtml";
 		}
-
-
+		this.fornitoriProdotto = null;
+		
+		return "aggiungiProdotto.xhtml";
+	}
+	public String getFornitoriDB() {
+		this.fornitori = fornitoreFacade.getFornitori();
+		this.fornitoriProdotto = null;
+		
 		return "aggiungiProdotto.xhtml";
 	}
 	
@@ -226,11 +238,23 @@ public class ProdottoController {
 	public void setProdottoFacade(ProdottoFacade prodottoFacade) {
 		this.prodottoFacade = prodottoFacade;
 	}
-	public String getErrore() {
-		return errore;
+	public List<Fornitore> getFornitori() {
+		return fornitori;
 	}
-	public void setErrore(String errore) {
-		this.errore = errore;
+	public void setFornitori(List<Fornitore> fornitori) {
+		this.fornitori = fornitori;
+	}
+	public List<String> getFornitoriProdotto() {
+		return fornitoriProdotto;
+	}
+	public void setFornitoriProdotto(List<String> fornitoriProdotti) {
+		this.fornitoriProdotto = fornitoriProdotti;
+	}
+	public FornitoreFacade getFornitoreFacade() {
+		return fornitoreFacade;
+	}
+	public void setFornitoreFacade(FornitoreFacade fornitoreFacade) {
+		this.fornitoreFacade = fornitoreFacade;
 	}
 
 }
