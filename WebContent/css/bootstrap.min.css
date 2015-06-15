@@ -4851,7 +4851,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 }
 
 .navbar-default .btn-link {
-	color: #1a4112
+	color: #000
 }
 
 .navbar-default .btn-link:focus, .navbar-default .btn-link:hover {

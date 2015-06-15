@@ -14,16 +14,21 @@ body {
 }
 
 .navbar-colori {
-	background: -webkit-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
-	background: -moz-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
-	border-color: #23355a;
 	border-style: ridge;
 	height: 1px;
+	background: transparent
+		linear-gradient(#36559C 0%, #4C6EB9 5%, #38599C 50%, #3D5EA4 95%,
+		#4C6CB3 100%) repeat scroll 0% 0%;
+	height: 1px;
+	border-color: #23355a;
+	border: 2px ridge;
 }
 
 .dropdown-menu {
-	background: -webkit-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
-	background: -moz-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%, #3c5a9b 100%);
+	background: -webkit-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%
+		, #3c5a9b 100%);
+	background: -moz-linear-gradient(#3c5a9b 0%, #3b5998 5%, #3b5998 50%, #3b5998 95%,
+		#3c5a9b 100%);
 	position: absolute;
 	top: 130%;
 	left: 0;
@@ -51,7 +56,7 @@ body {
 .navbar-nav>.active>a
 :focus, .navbar-default
 .navbar-nav>.active>a {
-	  background-color: #afbdd4;
+	background-color: #afbdd4;
 }
 :hover /* serve in una thumbnail a separare le righe con uno spazio
 
