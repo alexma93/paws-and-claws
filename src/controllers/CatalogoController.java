@@ -52,12 +52,14 @@ public class CatalogoController {
 
 	public String ricerca() {
 		this.catalogo = prodottoFacade.ricercaCatalogo(this.catalogo,specie,voto,prezzo);
+		this.size = this.catalogo.size();
 		return "catalogo.xhtml";
 	}
 	
 	public String ricercaTestuale() {
 		this.catalogo = prodottoFacade.ricercaTestualeCatalogo(this.catalogo,parola);
 		this.parola = null;
+		this.size = this.catalogo.size();
 		return "catalogo.xhtml";
 	}
 
