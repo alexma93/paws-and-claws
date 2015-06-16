@@ -47,8 +47,6 @@ public class Utente {
 	@OneToMany(mappedBy = "utente",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Ordine> ordini;
 	
-	private List<Recensione> recensioni;
-
 	public Utente() {
 	}
 	
@@ -60,7 +58,6 @@ public class Utente {
 		this.password = password;
 		this.dataNascita = data;
 		this.dataRegistrazione = new Date();
-		this.recensioni = new ArrayList<Recensione>();
 		this.ordini = new ArrayList<Ordine>();
 	}
 	
@@ -74,11 +71,6 @@ public class Utente {
 		return this.password.equals(password);
 	}
 
-	public void aggiungiRecensione(Recensione recensione) {
-		this.recensioni.add(recensione);
-		
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -137,14 +129,6 @@ public class Utente {
 
 	public void setIndirizzo(Indirizzo indirizzo) {
 		this.indirizzo = indirizzo;
-	}
-
-	public List<Recensione> getRecensioni() {
-		return recensioni;
-	}
-
-	public void setRecensioni(List<Recensione> recensioni) {
-		this.recensioni = recensioni;
 	}
 
 	public List<Ordine> getOrdini() {

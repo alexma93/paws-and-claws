@@ -55,10 +55,6 @@ public class Prodotto {
 	@ManyToMany
 	private List<Fornitore> fornitori;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-	@JoinColumn(name = "recensione_id")
-	private List<Recensione> recensioni;
-	
 	@Column
 	private Integer votoMedio;
 	
@@ -80,30 +76,9 @@ public class Prodotto {
 		this.foto = foto;
 		this.dataInserimento = new Date();
 		this.fornitori = new ArrayList<>();
-		this.recensioni = new LinkedList<>();
 		this.votoMedio = votoMedio;
 	}
 
-	public Prodotto(String codice, String descrizione, String nome,
-			Float prezzo, Integer quantita, byte[] foto) {
-		this.codice = codice;
-		this.descrizione = descrizione;
-		this.nome = nome;
-		this.prezzoDiListino = prezzo;
-		this.dataInserimento = new Date();
-		this.quantita = quantita;
-		this.fornitori = new ArrayList<Fornitore>();
-		this.votoMedio = 0;
-		this.foto = foto;
-	}
-
-	public void inserisciRecensione(Integer stelle, String testo,
-			Utente utente) {
-		Recensione r = new Recensione(stelle,testo,utente,this);
-		this.recensioni.add(r);
-		
-	}
-	
 	public void addFornitore(Fornitore f) {
 		this.fornitori.add(f);
 	}
@@ -164,16 +139,6 @@ public class Prodotto {
 		this.quantita = quantita;
 	}
 	
-
-	public List<Recensione> getRecensioni() {
-		return recensioni;
-	}
-
-	public void setRecensioni(List<Recensione> recensioni) {
-		this.recensioni = recensioni;
-	}
-
-
 	public String getSpecie() {
 		return specie;
 	}

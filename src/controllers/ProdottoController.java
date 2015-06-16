@@ -105,12 +105,6 @@ public class ProdottoController {
 	}
 
 
-	//UC7
-	//si ripete selezionaProdotto
-	public void inserisciRecensione(Integer stelle,String testo) {
-		this.prodottoCorrente.inserisciRecensione(stelle,testo,this.session.getUtente());
-	}
-
 	public Prodotto getProdottoCorrente() {
 		return prodottoCorrente;
 	}
