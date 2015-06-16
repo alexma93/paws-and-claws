@@ -14,7 +14,7 @@
 					<h2 class="titolo-carrello col-md-8 col-md-offset-4">Riepilogo</h2>
 					<ui:include src="utente.xhtml">
 						<ui:param name="utente"
-							value="${utenteController.utenteVisualizzato}" />
+							value="${sessione.utente}" />
 							<ui:param name="mostraPassword"
 							value="1" />
 					</ui:include>
