@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
+@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Prodotto p")
 public class Prodotto {
 	 
 	@Id

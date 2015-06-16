@@ -84,7 +84,7 @@ public class ProdottoController {
 			this.codice = null;
 			this.quantita = null;
 			this.file = null;
-			this.specie = "seleziona";
+			this.specie = null;
 		} else {
 			this.codice = null;
 			return "aggiungiProdotto.xhtml";
