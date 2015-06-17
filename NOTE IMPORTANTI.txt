@@ -4,3 +4,14 @@ NOTE IMPORTANTI DA LEGGERE:
 - i prodotti hanno un campo “valutazioneMedia” ma non abbiamo fatto in tempo a introdurre un caso d’uso per valutarli.
 - il login per l’amministratore è in basso a destra in piccolo nel footer della pagina.
 - il cliente si può registrare da solo senza che venga accettato da un’amministratore.
+
+
+- Database AWS
+	nome db: model
+	username: daniele
+	password: 123456
+
+- Database locale
+	nome db: model
+	username: postgres
+	password: 123456
