@@ -6,7 +6,7 @@ NOTE IMPORTANTI DA LEGGERE:
 - il cliente si può registrare da solo senza che venga accettato da un’amministratore.
 
 
-- Database AWS
+- Database AWS (paws-and-claws)
 	nome db: model
 	username: daniele
 	password: 123456

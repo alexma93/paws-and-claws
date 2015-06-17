@@ -31,7 +31,7 @@
 							</tr>
 							<tr>
 								<td>Data di nascita</td>
-								<td><h:outputText value="#{sessione.utente.dataNascita}">
+								<td><h:outputText value="#{utente.dataNascita}">
 										<f:convertDateTime pattern="dd-MM-yyyy" />
 									</h:outputText></td>
 							</tr>
@@ -58,23 +58,23 @@
 							</tr>
 							<tr>
 								<td>Stato</td>
-								<td>${sessione.utente.indirizzo.stato}</td>
+								<td>${utente.indirizzo.stato}</td>
 							</tr>
 							<tr>
 								<td>Regione</td>
-								<td>${sessione.utente.indirizzo.regione}</td>
+								<td>${utente.indirizzo.regione}</td>
 							</tr>
 							<tr>
 								<td>Città</td>
-								<td>${sessione.utente.indirizzo.citta}</td>
+								<td>${utente.indirizzo.citta}</td>
 							</tr>
 							<tr>
 								<td>Strada</td>
-								<td>${sessione.utente.indirizzo.strada}</td>
+								<td>${utente.indirizzo.strada}</td>
 							</tr>
 							<tr>
 								<td>CAP</td>
-								<td>${sessione.utente.indirizzo.cap}</td>
+								<td>${utente.indirizzo.cap}</td>
 							</tr>
 						</tbody>
 					</table>
