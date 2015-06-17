@@ -1,15 +1,27 @@
 
 CASI D'USO:
-UC1 : Registrazione Utente
+UC1: Consulta catalogo
+Attore primario: utente non loggato
+Scenario principale:
+- 1) L’utente consulta il catalogo dei prodotti
+- 2) può scegliere una specie animale per filtrare il catalogo
+- 3) Il sistema visualizza i prodotto con i propri dettagli
+Estensioni:
+- 1a) L’utente può scegliere un animale per filtrare il catalogo
+- 1b) L’utente può scegliere di visualizzare i prodotti ordinati per nome,prezzo,data e valutazione media
+- 1c) L’utente può filtrare il catalogo in base a una parola chiave, la specie del prodotto, il prezzo massimo e la valutazione minima
+
+UC0 : Registrazione Utente
 Attore primario: utente non registrato
 Scenario Principale:
 - L’utente si vuole registrare
 - L’utente inserisce nome, cognome, data di nascita, email, password e l’indirizzo
 - Il sistema registra l’utente e gli assegna una data di registrazione
-UC1bis: Login Utente/amministratore
+UC0bis: Login Utente/amministratore
 Attore primario: utente/amministratore non loggato
 Scenario Principale:
 - L’utente/amministratore effettua il login inserendo email e password
+
 UC2: Effettua ordine
 Attore primario: cliente (utente registrato)
 Scenario principale di successo: 
@@ -22,16 +34,7 @@ Scenario principale di successo:
 - Il cliente "chiude" l'ordine
 - Il sistema registra l'ordine impostando il prezzo dell'ordine tenendo conto dell'eventuale coupon inserito
 Precondizioni: il cliente è identificato e autenticato
-UCNostro: Consulta catalogo
-Attore primario: utente non loggato
-Scenario principale:
-- 1) L’utente consulta il catalogo dei prodotti
-- 2)  può scegliere una specie animale per filtrare il catalogo
-- 3) Il sistema visualizza i prodotto con i propri dettagli
-Estensioni:
-- 1a) L’utente può scegliere un animale per filtrare il catalogo
-- 1b) L’utente può scegliere di visualizzare i prodotti ordinati per nome,prezzo,data e valutazione media
-- 1c) L’utente può filtrare il catalogo in base a una parola chiave, la specie del prodotto, il prezzo massimo e la valutazione minima
+
 UC3:  Consulta propri ordini
 Attore primario: utente loggato
 Scenario principale:
@@ -40,6 +43,7 @@ Scenario principale:
 - Il cliente chiede il dettaglio di un ordine
 - Il sistema mostra il dettaglio dell’ordine e dei rispettivi prodotti
 - Il cliente ripete i passi precedenti finchè necessario
+
 UC4: inserimento prodotti nel catalogo:
 Attore primario: amministratore
 Scenario principale:
@@ -49,6 +53,7 @@ Scenario principale:
 - L’amministratore ripete il punto precedente finchè necessario
 - L’amministratore termina l’inserimento
 - Il sistema registra i prodotti nel catalogo
+
 UC5: recupera dati cliente
 Attore primario: amministratore
 Scenario principale:
@@ -57,11 +62,14 @@ Scenario principale:
 - L’amministratore richiede i dettagli di un ordine
 - L’amministratore chiede di visualizzare l’utente che ha composto l’ordine
 - Il sistema mostra i dati dell’utente
+
 UC6: evasione ordine
 Attore primario: amministratore
 Scenario principale:
 - Il sistema presenta all’amministratore gli ordini chiusi ma non evasi
 - L’amministratore sceglie un ordine da evadere
 - Il sistema evade l’ordine: aggiorna l’ordine inserendo la data di evasione e aggiorna la quantità di prodotti disponibili in magazzino
-
+Eccezioni:
+- alcuni prodotti potrebbero non essere presenti in magazzino nella quantità specificata dall'ordine.
+  In questo caso l'ordine rimane in sospeso
 
